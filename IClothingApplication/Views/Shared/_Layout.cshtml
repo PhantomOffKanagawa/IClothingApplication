@@ -17,8 +17,27 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (Session["UserType"] == "customer")
+                    {
+                        <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+
+                    }
+                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                    <span class="navbar-text mx-2">
+
+                    </span>
+                    @if (Session["UserType"] == "customer")
+                    {
+                        <li>@Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    else if (Session["UserType"] == "admin")
+                    {
+                        <li>@Html.ActionLink("Administrators", "Index", "Administrators", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
                 </ul>
             </div>
             <div class="">
@@ -40,6 +59,11 @@
         @RenderBody()
         <hr />
         <footer>
+            @if (Session["UserType"] == "customer")
+            {
+                @Html.ActionLink("Send a Query", "Create", "UserQueries", new { area = "" }, new { @class = "btn btn-secondary me-1" })
+                @Html.ActionLink("Send a Comment", "Create", "UserComments", new { area = "" }, new { @class = "btn btn-secondary me-1" })
+            }
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>

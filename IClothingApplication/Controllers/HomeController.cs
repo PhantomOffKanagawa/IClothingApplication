@@ -33,6 +33,23 @@ namespace IClothingApplication.Controllers
                 return View(aboutUs.ToList());
             }
 
+            // GET: Dashboard
+            public ActionResult Dashboard()
+            {
+                if (Session["UserType"] == "customer")
+                {
+                    return RedirectToAction("CustomerDashboard");
+                }
+                else if (Session["UserType"] == "admin")
+                {
+                    return RedirectToAction("AdminDashboard");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
             [AllowAnonymous]
             public ActionResult Register()
             {
@@ -145,6 +162,18 @@ namespace IClothingApplication.Controllers
             }
 
             public ActionResult AdminDashboard()
+            {
+                if (Session["UserType"] != null && Session["UserType"] == "admin")
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Login");
+                }
+            }
+
+            public ActionResult AdminManagementDashboard()
             {
                 if (Session["UserType"] != null && Session["UserType"] == "admin")
                 {

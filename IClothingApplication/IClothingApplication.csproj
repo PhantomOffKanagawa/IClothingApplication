@@ -364,6 +364,7 @@
     <Content Include="Views\Home\CustomerDashboard.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\RegisterPassword.cshtml" />
+    <Content Include="Views\Home\AdminManagementDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
