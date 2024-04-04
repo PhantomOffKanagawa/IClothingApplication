@@ -1,0 +1,63 @@
+﻿@model IEnumerable<IClothingApplication.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.productName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.productDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.productPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.productQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand.brandName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.categoryName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.productName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productQty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Brand.brandName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.categoryName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.productID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.productID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.productID })
+        </td>
+    </tr>
+}
+
+</table>

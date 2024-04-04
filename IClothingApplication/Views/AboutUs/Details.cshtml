@@ -1,0 +1,66 @@
+﻿@model IClothingApplication.Models.AboutUs
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AboutUs</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.companyAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.companyAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.companyShippingPolicy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.companyShippingPolicy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.companyReturnPolicy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.companyReturnPolicy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.companyContactInfo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.companyContactInfo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.companyBusinessDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.companyBusinessDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Administrator.adminName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Administrator.adminName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

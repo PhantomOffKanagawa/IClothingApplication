@@ -1,0 +1,59 @@
+﻿@model IEnumerable<IClothingApplication.Models.Product>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>iCLOTHING Application</h1>
+    <p class="lead">iCLOTHING, Inc. is a locally owned fashion store located at @(ViewData["address"]) </p>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.productName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.productDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.productPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.productQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand.brandName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.categoryName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.brandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.categoryName)
+            </td>
+        </tr>
+    }
+
+</table>

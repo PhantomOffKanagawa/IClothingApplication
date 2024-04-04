@@ -1,0 +1,42 @@
+﻿@model IClothingApplication.Models.UserComments
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserComments</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.commentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.commentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.commentDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.commentDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.customerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.customerName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.commentNo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<IClothingApplication.Models.ItemDelivery>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.stickerDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShoppingCart.cartID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.stickerDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShoppingCart.cartID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.stickerID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.stickerID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.stickerID })
+        </td>
+    </tr>
+}
+
+</table>

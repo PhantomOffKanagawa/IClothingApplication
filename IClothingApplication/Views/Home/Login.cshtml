@@ -1,0 +1,77 @@
+﻿@model IClothingApplication.Models.UserPassword
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <div class="jumbotron">
+        <h1>Login</h1>
+
+
+    </div>
+
+    <div class="row">
+        <fieldset>
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            @*@if (ViewBag.Message != null)
+            {
+                <p style="border: 1px solid red">
+                    @ViewBag.Message
+                </p>
+            }*@
+
+            <form class="row g-3">
+                <div class="col-12" style="margin-top: 5px">
+                    @Html.LabelFor(a => a.userAccountName, "Username", new { @class = "form-label", @style = "max-width: none;" })
+                    @Html.TextBoxFor(a => a.userAccountName, new { @class = "form-control", @style = "max-width: none;" })
+                    @Html.ValidationMessageFor(a => a.userAccountName)
+                </div>
+                <div class="col-12" style="margin-top: 5px">
+                    @Html.LabelFor(a => a.userEncryptedPassword, "Password", new { @class = "form-label", @style = "max-width: none;" })
+                    @Html.PasswordFor(a => a.userEncryptedPassword, new { @class = "form-control", @style = "max-width: none;" })
+                    @Html.ValidationMessageFor(a => a.userEncryptedPassword)
+                </div>
+                <div class="col-12" style="margin-top: 15px">
+                    <input type="submit" value="Login" class="btn btn-primary" />
+                    </div>
+            </form>
+        </fieldset>
+
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@if (ViewBag.Message != null)
+{
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@ViewBag.Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @ViewBag.Message
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            $('#staticBackdrop').modal('show');
+        };
+    </script>
+}

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<IClothingApplication.Models.UserComments>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.commentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.commentDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.customerName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.commentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.commentDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.customerName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.commentNo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.commentNo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.commentNo })
+        </td>
+    </tr>
+}
+
+</table>

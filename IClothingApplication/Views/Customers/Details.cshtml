@@ -1,0 +1,66 @@
+﻿@model IClothingApplication.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.customerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customerEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customerEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customerShippingAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customerShippingAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customerBillingAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customerBillingAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customerDOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customerDOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customerGender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customerGender)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.customerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

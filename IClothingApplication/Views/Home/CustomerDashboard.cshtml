@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "CustomerDashboard";
+}
+
+<h2>CustomerDashboard</h2>
+<h4>YOU ARE NOW LOGGED IN AS A CUSTOMER @Session["UserName"]</h4>
+<div class="row">
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Write a Review", "Create", "UserQueries")</h2>
+        <p>Write a Review Basic Information.</p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Brands", "Index", "Brands")</h2>
+        <p>Brands Basic Information.</p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Categories", "Index", "Categories")</h2>
+        <p>Categories Basic Information.</p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Departments", "Index", "Departments")</h2>
+        <p>Departments Basic Information.</p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Emails", "Index", "Emails")</h2>
+        <p>Emails Basic Information.</p>
+    </div>
+</div>

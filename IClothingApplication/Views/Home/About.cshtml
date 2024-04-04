@@ -1,0 +1,28 @@
+﻿@model IEnumerable<IClothingApplication.Models.AboutUs>
+
+@{
+    ViewBag.Title = "About";
+}
+
+@{var item = Model.ElementAt(0); }
+
+<main aria-labelledby="title">
+    <h1>iClothing</h1>
+    <h2 id="title">@ViewBag.Title</h2>
+
+    <p>@item.companyBusinessDescription</p>
+
+    <address>
+        <strong>Address: </strong>   @item.companyAddress<br />
+    </address>
+
+    <address>
+        <strong>Shipping Policy:</strong>   @item.companyShippingPolicy <br />
+        <strong>Return Policy:</strong>    @item.companyReturnPolicy <br />
+    </address>
+
+    <address>
+        <strong>Support:</strong>   <a href="mailto:@item.Administrator.adminEmail">@item.Administrator.adminEmail</a><br />
+        <strong>Contact:</strong>   <a href="mailto:@item.Administrator.adminEmail">@item.companyContactInfo</a><br />
+    </address>
+</main>

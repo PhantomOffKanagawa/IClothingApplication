@@ -1,0 +1,58 @@
+﻿@model IClothingApplication.Models.Email
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Email</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.emailDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailSubject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailSubject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailBody)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailBody)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Administrator.adminName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Administrator.adminName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.customerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.customerName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.emailNo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
