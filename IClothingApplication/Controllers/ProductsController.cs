@@ -13,13 +13,82 @@ namespace IClothingApplication.Controllers
     public class ProductsController : Controller
     {
         private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        
+        // GET: Products
+        // Supports Sorting
+        public ActionResult Index(string sortOrder, string filter, string searchString)
+        {
+            var products = from p in db.Product
+                           select p;
+
+            // Handle Searching
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.productName.Contains(searchString)
+                                       || s.productName.Contains(searchString));
+            }
+
+            // Handle Filtering
+            // ! Get Working with Sorting
+            if (!String.IsNullOrEmpty(filter))
+            {
+                products = products.Where(p => (p.Brand.brandName.Equals(filter)));
+            }
+
+            // Handle Sorting
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "Name";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
+            ViewBag.QuantitySortParm = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
+            ViewBag.BrandSortParm = sortOrder == "Brand" ? "brand_desc" : "Brand";
+            ViewBag.CategorySortParm = sortOrder == "Category" ? "category_desc" : "Category";
+            switch (sortOrder)
+            {
+                case "Name":
+                    products = products.OrderBy(s => s.productName);
+                    break;
+                case "name_desc":
+                    products = products.OrderByDescending(s => s.productName);
+                    break;
+                case "Price":
+                    products = products.OrderBy(s => s.productPrice);
+                    break;
+                case "price_desc":
+                    products = products.OrderByDescending(s => s.productPrice);
+                    break;
+                case "Quantity":
+                    products = products.OrderBy(s => s.productQty);
+                    break;
+                case "quantity_desc":
+                    products = products.OrderByDescending(s => s.productQty);
+                    break;
+                case "Brand":
+                    products = products.OrderBy(s => s.Brand.brandName);
+                    break;
+                case "brand_desc":
+                    products = products.OrderByDescending(s => s.Brand.brandName);
+                    break;
+                case "Category":
+                    products = products.OrderBy(s => s.Category.categoryName);
+                    break;
+                case "category_desc":
+                    products = products.OrderByDescending(s => s.Category.categoryName);
+                    break;
+                default:
+                    products = products.OrderBy(s => s.productName);
+                    break;
+            }
+            return View(products.ToList());
+        }
 
         // GET: Products
-        public ActionResult Index()
-        {
-            var product = db.Product.Include(p => p.Brand).Include(p => p.Category);
-            return View(product.ToList());
-        }
+        //public ActionResult Index()
+        //{
+        //    var brands = db.Brand.ToList();
+        //    ViewBag.Brands = new SelectList(brands, "brandID", "brandName"); // Pass the brands to the view
+        //    //return View();
+        //    var product = db.Product.Include(p => p.Brand).Include(p => p.Category);
+        //    return View(product.ToList());
+        //}
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
