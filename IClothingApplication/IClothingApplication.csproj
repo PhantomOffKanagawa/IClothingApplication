@@ -365,6 +365,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\RegisterPassword.cshtml" />
     <Content Include="Views\Home\AdminManagementDashboard.cshtml" />
+    <Content Include="Views\ShoppingCarts\ViewCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

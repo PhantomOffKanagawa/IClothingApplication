@@ -132,5 +132,36 @@ namespace IClothingApplication.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Products/Add/5
+        // Working need to add error handling
+        public ActionResult Add(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Product.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Product didn't have an issue
+            // Write to DB
+            if (ModelState.IsValid)
+            {
+                var wrapper = new ItemWrapper();
+                wrapper.productID = (int) id;
+                wrapper.productQty = 1; //Hard-Coded
+                var userID = (int)Session["UserID"];
+                var shoppingCart = db.ShoppingCart.Include(s => s.Customer).Where(s => s.customerID.Equals(userID)).First();
+                wrapper.cartID = shoppingCart.cartID;
+                db.ItemWrapper.Add(wrapper);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(product);
+        }
     }
 }

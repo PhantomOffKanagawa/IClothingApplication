@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -19,6 +20,21 @@ namespace IClothingApplication.Controllers
         {
             var shoppingCart = db.ShoppingCart.Include(s => s.Customer);
             return View(shoppingCart.ToList());
+        }
+
+        // GET: View
+        public ActionResult ViewCart()
+        {
+            if (Session["UserType"] != "customer")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var userID = (int) Session["UserID"];
+            var shoppingCart = db.ShoppingCart.Include(s => s.Customer).Where(s => (s.customerID.Equals(userID))).ToList().ElementAt(0);
+            Debug.WriteLine("The found shopping id: " + shoppingCart.cartID);
+            IQueryable<ItemWrapper> itemWrapper = db.ItemWrapper.Include(p => p.Product).Where(s => (s.cartID.Equals(shoppingCart.cartID)));
+            Debug.WriteLine("The found item wrapper count: " + itemWrapper.Count());
+            return View(itemWrapper.ToList());
         }
 
         // GET: ShoppingCarts/Details/5

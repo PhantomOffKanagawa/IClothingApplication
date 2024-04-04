@@ -1,0 +1,40 @@
+﻿@model IEnumerable<IClothingApplication.Models.ItemWrapper>
+
+@{
+    ViewBag.Title = "View Cart";
+}
+
+<h2>Viewing Cart for @Session["UserName"]</h2>
+
+<div>
+    <h4>Your Cart</h4>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.productName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productQty)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.productName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productQty)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.productID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.productID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.productID })
+                </td>
+            </tr>
+        }
+        </table>
+</div>
