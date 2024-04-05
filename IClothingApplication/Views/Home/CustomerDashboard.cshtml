@@ -7,11 +7,13 @@
 <h4>YOU ARE NOW LOGGED IN AS A CUSTOMER @Session["UserName"]</h4>
 <div class="row">
     <div class="col-md-4">
+        <img src="~/Images/pencil.png" width="120" height="120" alt="Pencil Photo" />
         <h2>@Html.ActionLink("Write a Review", "Create", "UserQueries")</h2>
         <p>Write a Review Basic Information.</p>
     </div>
 
     <div class="col-md-4">
+        <img src="~/Images/brands.jpg" width="220" height="120" alt="Shopping Cart Photo" />
         <h2>@Html.ActionLink("Brands", "Index", "Brands")</h2>
         <p>Brands Basic Information.</p>
     </div>
@@ -27,7 +29,13 @@
     </div>
 
     <div class="col-md-4">
+        <img src="~/Images/mail.jpg" width="120" height="120" alt="Mail Photo" />
         <h2>@Html.ActionLink("Emails", "Index", "Emails")</h2>
         <p>Emails Basic Information.</p>
+    </div>
+    <div class="col-md-4">
+        <img src="~/Images/cart.jpg" width="150" height="120" alt="Shopping Cart Photo" />
+        <h2>@Html.ActionLink("View Shopping Cart", "Index", "ShoppingCarts")</h2>
+        <p>View Shopping Cart.</p>
     </div>
 </div>

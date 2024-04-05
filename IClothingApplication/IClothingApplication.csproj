@@ -235,6 +235,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\brands.jpg" />
+    <Content Include="Images\cart.jpg" />
+    <Content Include="Images\iclothingLogo.png" />
+    <Content Include="Images\kids.jpg" />
+    <Content Include="Images\mail.jpg" />
+    <Content Include="Images\man.png" />
+    <Content Include="Images\pencil.png" />
+    <Content Include="Images\women.jpg" />
+    <Content Include="Images\women1.jpg" />
     <Content Include="Models\ICLOTHINGModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ICLOTHINGModel.Context.cs</LastGenOutput>

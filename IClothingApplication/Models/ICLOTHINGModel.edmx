@@ -221,7 +221,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ItemWrapp__cartI__0880433F">
           <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="1" />
           <End Role="ItemWrapper" Type="Self.ItemWrapper" Multiplicity="*" />
           <ReferentialConstraint>
