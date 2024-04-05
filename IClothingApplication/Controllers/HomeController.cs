@@ -24,6 +24,10 @@ namespace IClothingApplication.Controllers
                 var aboutUs = db.AboutUs.Include(a => a.Administrator);
                 ViewData["address"] = aboutUs.ToList().ElementAt(0).companyAddress;
                 var product = db.Product.Include(p => p.Brand).Include(p => p.Category);
+
+                // Pass Departments to Temp Data for Nav Bar
+                Session["departments"] = db.Department.ToList();
+
                 return View(product.ToList());
             }
 
@@ -46,6 +50,23 @@ namespace IClothingApplication.Controllers
             {
                 var aboutUs = db.AboutUs.Include(a => a.Administrator);
                 return View(aboutUs.ToList());
+            }
+
+            // GET: Dashboard
+            public ActionResult Dashboard()
+            {
+                if (Session["UserType"] == "customer")
+                {
+                    return RedirectToAction("CustomerDashboard");
+                }
+                else if (Session["UserType"] == "admin")
+                {
+                    return RedirectToAction("AdminDashboard");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
 
             [AllowAnonymous]
@@ -98,6 +119,17 @@ namespace IClothingApplication.Controllers
                         Debug.WriteLine(model.customerID);
                         db.UserPassword.Add(model);
                         db.SaveChanges();
+
+                        // Give User Shopping Cart
+                        var cart = new ShoppingCart
+                        {
+                            customerID = (int)TempData["userID"]
+                        };
+                        Debug.WriteLine("The id was: " + cart.customerID);
+                        db.ShoppingCart.Add(cart);
+                        db.SaveChanges();
+
+                        // Write Message to User
                         ViewBag.Message = "Successful Registration";
                         return View("Login");
                     } catch (Exception ex)
@@ -160,6 +192,18 @@ namespace IClothingApplication.Controllers
             }
 
             public ActionResult AdminDashboard()
+            {
+                if (Session["UserType"] != null && Session["UserType"] == "admin")
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Login");
+                }
+            }
+
+            public ActionResult AdminManagementDashboard()
             {
                 if (Session["UserType"] != null && Session["UserType"] == "admin")
                 {

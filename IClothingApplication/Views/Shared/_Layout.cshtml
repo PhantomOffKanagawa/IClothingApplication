@@ -6,6 +6,8 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+    <script src="https://unpkg.com/@("@")popperjs/core@2"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
@@ -17,12 +19,50 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    @if (Session["UserType"] == "customer")
+                    {
+                    <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                    }
+                    else
+                    {
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+
+                    }
+                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                    <span class="navbar-text mx-2">
+
+                    </span>
+                    @if (Session["UserType"] == "customer")
+                    {
+                        if (Session["departments"] != null)
+                        {
+                    <li class="dropdown show">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Departments
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            @foreach (var department in (IEnumerable<IClothingApplication.Models.Department>)Session["departments"])
+                                    {
+                            @Html.ActionLink(department.departmentName, "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = department.departmentName, filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { @class="dropdown-item" })
+                                    }
+                        </div>
+                    </li>
+                        }
+                    <li>@Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    else if (Session["UserType"] == "admin")
+                    {
+                    <li>@Html.ActionLink("Administrators", "Index", "Administrators", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+
+                    @*<li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Departments", "Departments", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Categories", "Categories", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("All Products", "All Products", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-
+                    <li>@Html.ActionLink("All Products", "All Products", "Home", new { area = "" }, new { @class = "nav-link" })</li>*@
+              
                 </ul>
             </div>
             <div class="">
@@ -38,12 +78,13 @@
                     </div>
                     @if (Session["UserID"] != null)
                     {
+                        <li>@Html.ActionLink("Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "nav-link text-info" })</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                     else
                     {
                         <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li class="btn-danger">@Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                 </ul>
             </div>
@@ -53,6 +94,11 @@
         @RenderBody()
         <hr />
         <footer>
+            @if (Session["UserType"] == "customer")
+            {
+                @Html.ActionLink("Send a Query", "Create", "UserQueries", new { area = "" }, new { @class = "btn btn-secondary me-1" })
+                @Html.ActionLink("Send a Comment", "Create", "UserComments", new { area = "" }, new { @class = "btn btn-secondary me-1" })
+            }
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>

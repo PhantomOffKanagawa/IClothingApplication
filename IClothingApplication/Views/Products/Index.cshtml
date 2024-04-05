@@ -4,42 +4,55 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Products</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
+
+@*<p>
+    @ViewBag.filter
+    @ViewBag.searchString
+</p>*@
+
+@if (ViewBag.filter != null)
+{
+<h4>
+Filtering by @ViewBag.filterType: @ViewBag.filter  
+</h4>
+}
 
 @using (Html.BeginForm())
 {
-    <p>
-        Find by name: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
-    </p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        Find by name: @Html.TextBox("SearchString", "", new { @class = "form-control mr-sm-2", @placeholder = "Search Items"})
+        <input type="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0" />
+    </nav>
 }
 
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, filter = ViewBag.filter, searchString = ViewBag.searchString, changeSort = true })
+
         </th>
         <th>
             @Html.DisplayNameFor(model => model.productDescription)
         </th>
         <th>
-            @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm })
+            @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, filter = ViewBag.filter, searchString = ViewBag.searchString, changeSort = true })
         </th>
         <th>
-            @Html.ActionLink("Quantity", "Index", new { sortOrder = ViewBag.QuantitySortParm })
+            @Html.ActionLink("Quantity", "Index", new { sortOrder = ViewBag.QuantitySortParm, filter = ViewBag.filter, searchString = ViewBag.searchString, changeSort = true })
         </th>
         <th>
-            @Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm })
+            @Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm, filter = ViewBag.filter, searchString = ViewBag.searchString, changeSort = true })
         </th>
         <th>
-            @Html.ActionLink("Category", "Index", new { sortOrder = ViewBag.CategorySortParm })
+            @Html.ActionLink("Category", "Index", new { sortOrder = ViewBag.CategorySortParm, filter = ViewBag.filter, searchString = ViewBag.searchString, changeSort = true })
         </th>
         <th>
-            @Html.ActionLink("Only Versace", "Index", new { filter = "Versace" })
+            @Html.ActionLink("Mens", "Index", new { sortOrder = ViewBag.CategorySortParm, filter = "Mens", filterType = "Department", searchString = ViewBag.searchString, changeSort = false })
         </th>
     </tr>
 
