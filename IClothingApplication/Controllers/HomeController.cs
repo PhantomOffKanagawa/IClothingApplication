@@ -24,7 +24,7 @@ namespace IClothingApplication.Controllers
                 var product = db.Product.Include(p => p.Brand).Include(p => p.Category);
 
                 // Pass Departments to Temp Data for Nav Bar
-                TempData["departments"] = db.Department.ToList();
+                Session["departments"] = db.Department.ToList();
 
                 return View(product.ToList());
             }

@@ -21,26 +21,11 @@
                 <ul class="navbar-nav flex-grow-1">
                     @if (Session["UserType"] == "customer")
                     {
-                        <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
-                        if (TempData["departments"] != null)
-                        {
-                            <div class="dropdown show">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Dropdown link
-                                </a>
-
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    @foreach (var department in (IEnumerable<IClothingApplication.Models.Department>)TempData["departments"])
-                                    {
-                                        @Html.ActionLink(department.departmentName, "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = department.departmentName, filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { })
-                                    }
-                                </div>
-                            </div>
-                        }
+                    <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
 
                     }
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
@@ -49,11 +34,26 @@
                     </span>
                     @if (Session["UserType"] == "customer")
                     {
-                        <li>@Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
+                        if (Session["departments"] != null)
+                        {
+                    <li class="dropdown show">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Departments
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            @foreach (var department in (IEnumerable<IClothingApplication.Models.Department>)Session["departments"])
+                                    {
+                            @Html.ActionLink(department.departmentName, "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = department.departmentName, filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { @class="dropdown-item" })
+                                    }
+                        </div>
+                    </li>
+                        }
+                    <li>@Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                     else if (Session["UserType"] == "admin")
                     {
-                        <li>@Html.ActionLink("Administrators", "Index", "Administrators", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Administrators", "Index", "Administrators", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                 </ul>
             </div>
