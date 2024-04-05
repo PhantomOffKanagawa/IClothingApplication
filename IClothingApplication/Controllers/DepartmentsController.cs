@@ -20,6 +20,13 @@ namespace IClothingApplication.Controllers
             return View(db.Department.ToList());
         }
 
+        // Filter departments by women, men, or kids depending on user button press
+        public ActionResult FilteredDepartments(int departmentId)
+        {
+            //var filteredDepartments = // Logic to get filtered departments based on departmentId
+            return View();
+        }
+
         // GET: Departments/Details/5
         public ActionResult Details(int? id)
         {

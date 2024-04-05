@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using IClothingApplication.Models;
+using Newtonsoft.Json.Linq;
 
 namespace IClothingApplication.Controllers
 {
@@ -17,8 +19,9 @@ namespace IClothingApplication.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            var product = db.Product.Include(p => p.Brand).Include(p => p.Category);
-            return View(product.ToList());
+            var brands = db.Brand.ToList();
+            ViewBag.Brands = new SelectList(brands, "brandID", "brandName"); // Pass the brands to the view
+            return View();
         }
 
         // GET: Products/Details/5
