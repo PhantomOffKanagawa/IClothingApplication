@@ -43,7 +43,7 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             @foreach (var department in (IEnumerable<IClothingApplication.Models.Department>)Session["departments"])
                                     {
-                            @Html.ActionLink(department.departmentName, "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = department.departmentName, filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { @class="dropdown-item" })
+                            @Html.ActionLink(department.departmentName, "Index", "Products", new { sortOrder = ViewBag.sortOrder, filter = department.departmentName, filterType = "Department", searchString = ViewBag.searchString, changeSort = false, }, new { @class="dropdown-item" })
                                     }
                         </div>
                     </li>
@@ -95,7 +95,7 @@
                 @Html.ActionLink("Send a Query", "Create", "UserQueries", new { area = "" }, new { @class = "btn btn-secondary me-1" })
                 @Html.ActionLink("Send a Comment", "Create", "UserComments", new { area = "" }, new { @class = "btn btn-secondary me-1" })
             }
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - iClothing</p>
         </footer>
     </div>
 
