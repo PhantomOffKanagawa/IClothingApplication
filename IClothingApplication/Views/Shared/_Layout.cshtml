@@ -27,6 +27,15 @@
             </div>
             <div class="">
                 <ul class="nav navbar-nav navbar-right">
+                    <div style="margin-top: 5px; margin-right: 5px;">
+                        @using(Html.BeginForm("Index", "Products"))
+                        {
+                            <p >
+                                Title: <input type="text" name="searchString" />
+                                <input type="submit" value="Search" />
+                            </p>
+                        }
+                    </div>
                     @if (Session["UserID"] != null)
                     {
                         <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link" })</li>
