@@ -149,7 +149,7 @@
           <Property Name="queryDescription" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="customerID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__AboutUs__manager__6FB49575">
+        <Association Name="FK__AboutUs__manager__46F27704">
           <End Role="Administrator" Type="Self.Administrator" Multiplicity="0..1" />
           <End Role="AboutUs" Type="Self.AboutUs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -161,7 +161,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Category__parent__7849DB76">
+        <Association Name="FK__Category__parent__4F87BD05">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Category1" Type="Self.Category" Multiplicity="*" />
           <ReferentialConstraint>
@@ -173,7 +173,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Category__parent__793DFFAF">
+        <Association Name="FK__Category__parent__507BE13E">
           <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
           <End Role="Category" Type="Self.Category" Multiplicity="*" />
           <ReferentialConstraint>
@@ -185,7 +185,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Email__adminID__0F2D40CE">
+        <Association Name="FK__Email__adminID__666B225D">
           <End Role="Administrator" Type="Self.Administrator" Multiplicity="1" />
           <End Role="Email" Type="Self.Email" Multiplicity="*" />
           <ReferentialConstraint>
@@ -197,7 +197,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Email__customerI__0E391C95">
+        <Association Name="FK__Email__customerI__6576FE24">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="Email" Type="Self.Email" Multiplicity="*" />
           <ReferentialConstraint>
@@ -209,7 +209,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ItemDeliv__cartI__1209AD79">
+        <Association Name="FK__ItemDeliv__cartI__69478F08">
           <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="1" />
           <End Role="ItemDelivery" Type="Self.ItemDelivery" Multiplicity="*" />
           <ReferentialConstraint>
@@ -221,6 +221,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ItemWrapp__cartI__5FBE24CE">
           <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="1" />
           <End Role="ItemWrapper" Type="Self.ItemWrapper" Multiplicity="*" />
           <ReferentialConstraint>
@@ -232,7 +233,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ItemWrapp__produ__078C1F06">
+        <Association Name="FK__ItemWrapp__produ__5ECA0095">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="ItemWrapper" Type="Self.ItemWrapper" Multiplicity="*" />
           <ReferentialConstraint>
@@ -244,7 +245,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderStat__cartI__0B5CAFEA">
+        <Association Name="FK__OrderStat__cartI__629A9179">
           <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="1" />
           <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="*" />
           <ReferentialConstraint>
@@ -256,7 +257,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__brandID__7EF6D905">
+        <Association Name="FK__Product__brandID__5634BA94">
           <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -268,7 +269,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__categor__7E02B4CC">
+        <Association Name="FK__Product__categor__5540965B">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -280,7 +281,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ShoppingC__custo__04AFB25B">
+        <Association Name="FK__ShoppingC__custo__5BED93EA">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
           <ReferentialConstraint>
@@ -292,7 +293,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserComme__custo__01D345B0">
+        <Association Name="FK__UserComme__custo__5911273F">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="UserComments" Type="Self.UserComments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -304,7 +305,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserPassw__admin__6CD828CA">
+        <Association Name="FK__UserPassw__admin__44160A59">
           <End Role="Administrator" Type="Self.Administrator" Multiplicity="0..1" />
           <End Role="UserPassword" Type="Self.UserPassword" Multiplicity="*" />
           <ReferentialConstraint>
@@ -316,7 +317,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserPassw__custo__6BE40491">
+        <Association Name="FK__UserPassw__custo__4321E620">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="UserPassword" Type="Self.UserPassword" Multiplicity="*" />
           <ReferentialConstraint>
@@ -328,7 +329,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserQuery__custo__72910220">
+        <Association Name="FK__UserQuery__custo__49CEE3AF">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="UserQuery" Type="Self.UserQuery" Multiplicity="*" />
           <ReferentialConstraint>
@@ -356,67 +357,67 @@
           <EntitySet Name="UserComments" EntityType="Self.UserComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPassword" EntityType="Self.UserPassword" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserQuery" EntityType="Self.UserQuery" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__AboutUs__manager__6FB49575" Association="Self.FK__AboutUs__manager__6FB49575">
+          <AssociationSet Name="FK__AboutUs__manager__46F27704" Association="Self.FK__AboutUs__manager__46F27704">
             <End Role="Administrator" EntitySet="Administrator" />
             <End Role="AboutUs" EntitySet="AboutUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Category__parent__7849DB76" Association="Self.FK__Category__parent__7849DB76">
+          <AssociationSet Name="FK__Category__parent__4F87BD05" Association="Self.FK__Category__parent__4F87BD05">
             <End Role="Category" EntitySet="Category" />
             <End Role="Category1" EntitySet="Category" />
           </AssociationSet>
-          <AssociationSet Name="FK__Category__parent__793DFFAF" Association="Self.FK__Category__parent__793DFFAF">
+          <AssociationSet Name="FK__Category__parent__507BE13E" Association="Self.FK__Category__parent__507BE13E">
             <End Role="Department" EntitySet="Department" />
             <End Role="Category" EntitySet="Category" />
           </AssociationSet>
-          <AssociationSet Name="FK__Email__adminID__0F2D40CE" Association="Self.FK__Email__adminID__0F2D40CE">
+          <AssociationSet Name="FK__Email__adminID__666B225D" Association="Self.FK__Email__adminID__666B225D">
             <End Role="Administrator" EntitySet="Administrator" />
             <End Role="Email" EntitySet="Email" />
           </AssociationSet>
-          <AssociationSet Name="FK__Email__customerI__0E391C95" Association="Self.FK__Email__customerI__0E391C95">
+          <AssociationSet Name="FK__Email__customerI__6576FE24" Association="Self.FK__Email__customerI__6576FE24">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Email" EntitySet="Email" />
           </AssociationSet>
-          <AssociationSet Name="FK__ItemDeliv__cartI__1209AD79" Association="Self.FK__ItemDeliv__cartI__1209AD79">
+          <AssociationSet Name="FK__ItemDeliv__cartI__69478F08" Association="Self.FK__ItemDeliv__cartI__69478F08">
             <End Role="ShoppingCart" EntitySet="ShoppingCart" />
             <End Role="ItemDelivery" EntitySet="ItemDelivery" />
           </AssociationSet>
-          <AssociationSet Name="FK__ItemWrapp__cartI__0880433F" Association="Self.FK__ItemWrapp__cartI__0880433F">
+          <AssociationSet Name="FK__ItemWrapp__cartI__5FBE24CE" Association="Self.FK__ItemWrapp__cartI__5FBE24CE">
             <End Role="ShoppingCart" EntitySet="ShoppingCart" />
             <End Role="ItemWrapper" EntitySet="ItemWrapper" />
           </AssociationSet>
-          <AssociationSet Name="FK__ItemWrapp__produ__078C1F06" Association="Self.FK__ItemWrapp__produ__078C1F06">
+          <AssociationSet Name="FK__ItemWrapp__produ__5ECA0095" Association="Self.FK__ItemWrapp__produ__5ECA0095">
             <End Role="Product" EntitySet="Product" />
             <End Role="ItemWrapper" EntitySet="ItemWrapper" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderStat__cartI__0B5CAFEA" Association="Self.FK__OrderStat__cartI__0B5CAFEA">
+          <AssociationSet Name="FK__OrderStat__cartI__629A9179" Association="Self.FK__OrderStat__cartI__629A9179">
             <End Role="ShoppingCart" EntitySet="ShoppingCart" />
             <End Role="OrderStatus" EntitySet="OrderStatus" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__brandID__7EF6D905" Association="Self.FK__Product__brandID__7EF6D905">
+          <AssociationSet Name="FK__Product__brandID__5634BA94" Association="Self.FK__Product__brandID__5634BA94">
             <End Role="Brand" EntitySet="Brand" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__categor__7E02B4CC" Association="Self.FK__Product__categor__7E02B4CC">
+          <AssociationSet Name="FK__Product__categor__5540965B" Association="Self.FK__Product__categor__5540965B">
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__ShoppingC__custo__04AFB25B" Association="Self.FK__ShoppingC__custo__04AFB25B">
+          <AssociationSet Name="FK__ShoppingC__custo__5BED93EA" Association="Self.FK__ShoppingC__custo__5BED93EA">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="ShoppingCart" EntitySet="ShoppingCart" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserComme__custo__01D345B0" Association="Self.FK__UserComme__custo__01D345B0">
+          <AssociationSet Name="FK__UserComme__custo__5911273F" Association="Self.FK__UserComme__custo__5911273F">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="UserComments" EntitySet="UserComments" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserPassw__admin__6CD828CA" Association="Self.FK__UserPassw__admin__6CD828CA">
+          <AssociationSet Name="FK__UserPassw__admin__44160A59" Association="Self.FK__UserPassw__admin__44160A59">
             <End Role="Administrator" EntitySet="Administrator" />
             <End Role="UserPassword" EntitySet="UserPassword" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserPassw__custo__6BE40491" Association="Self.FK__UserPassw__custo__6BE40491">
+          <AssociationSet Name="FK__UserPassw__custo__4321E620" Association="Self.FK__UserPassw__custo__4321E620">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="UserPassword" EntitySet="UserPassword" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserQuery__custo__72910220" Association="Self.FK__UserQuery__custo__72910220">
+          <AssociationSet Name="FK__UserQuery__custo__49CEE3AF" Association="Self.FK__UserQuery__custo__49CEE3AF">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="UserQuery" EntitySet="UserQuery" />
           </AssociationSet>
