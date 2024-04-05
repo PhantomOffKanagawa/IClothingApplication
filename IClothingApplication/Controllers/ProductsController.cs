@@ -17,7 +17,7 @@ namespace IClothingApplication.Controllers
         
         // GET: Products
         // Supports Sorting
-        public ActionResult Index(string sortOrder, string filter, string searchString, bool? changeFilter)
+        public ActionResult Index(string sortOrder, string filter, string filterType, string searchString, bool? changeSort)
         {
             Debug.WriteLine(searchString);
             var products = from p in db.Product
@@ -35,12 +35,27 @@ namespace IClothingApplication.Controllers
             // ! Get Working with Sorting
             if (!String.IsNullOrEmpty(filter))
             {
-                products = products.Where(p => (p.Brand.brandName.Equals(filter)));
+                switch(filterType)
+                {
+                    case "Department":
+                        //private ICLOTHINGEntities cDB = new ICLOTHINGEntities();
+                        //var categories = from p in cDB.Product
+                        //               select p;
+                        //products = products.Where(p => (p.brandName.Equals(filter)));
+                        //break;
+                    case "Category":
+                        products = products.Where(p => (p.Category.categoryName.Equals(filter)));
+                        break;
+                    case "Brand":
+                        products = products.Where(p => (p.Brand.brandName.Equals(filter)));
+                        break;
+                }
             }
             ViewBag.filter = filter;
+            ViewBag.filterType = filterType;
 
             // Handle Sorting
-            if (changeFilter != null && (bool) changeFilter)
+            if (changeSort == null || (bool) changeSort)
             {
                 ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
                 ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
@@ -85,16 +100,6 @@ namespace IClothingApplication.Controllers
             }
             return View(products.ToList());
         }
-
-        // GET: Products
-        //public ActionResult Index()
-        //{
-        //    var brands = db.Brand.ToList();
-        //    ViewBag.Brands = new SelectList(brands, "brandID", "brandName"); // Pass the brands to the view
-        //    //return View();
-        //    var product = db.Product.Include(p => p.Brand).Include(p => p.Category);
-        //    return View(product.ToList());
-        //}
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)

@@ -25,15 +25,17 @@ namespace IClothingApplication.Controllers
         // GET: View
         public ActionResult ViewCart()
         {
+            // If user isn't customer return to home
             if (Session["UserType"] != "customer")
             {
                 return RedirectToAction("Index", "Home");
             }
+
+            // Get user ID
             var userID = (int) Session["UserID"];
-            var shoppingCart = db.ShoppingCart.Include(s => s.Customer).Where(s => (s.customerID.Equals(userID))).ToList().ElementAt(0);
-            Debug.WriteLine("The found shopping id: " + shoppingCart.cartID);
+            // Get Shopping Cart 
+            var shoppingCart = db.ShoppingCart.Include(s => s.Customer).Include(s => s.OrderStatus).Where(s => (s.customerID.Equals(userID))).Where(s => (s.customerID.Equals(userID))).ToList().ElementAt(0);
             IQueryable<ItemWrapper> itemWrapper = db.ItemWrapper.Include(p => p.Product).Where(s => (s.cartID.Equals(shoppingCart.cartID)));
-            Debug.WriteLine("The found item wrapper count: " + itemWrapper.Count());
             return View(itemWrapper.ToList());
         }
 

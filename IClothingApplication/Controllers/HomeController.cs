@@ -100,6 +100,17 @@ namespace IClothingApplication.Controllers
                         Debug.WriteLine(model.customerID);
                         db.UserPassword.Add(model);
                         db.SaveChanges();
+
+                        // Give User Shopping Cart
+                        var cart = new ShoppingCart
+                        {
+                            customerID = (int)TempData["userID"]
+                        };
+                        Debug.WriteLine("The id was: " + cart.customerID);
+                        db.ShoppingCart.Add(cart);
+                        db.SaveChanges();
+
+                        // Write Message to User
                         ViewBag.Message = "Successful Registration";
                         return View("Login");
                     } catch (Exception ex)
