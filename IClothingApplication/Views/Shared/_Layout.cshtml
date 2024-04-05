@@ -30,15 +30,13 @@
 
                     }
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
-                    <span class="navbar-text mx-2">
-
-                    </span>
+                    @*<span class="navbar-text mx-2"></span>*@
                     @if (Session["UserType"] == "customer")
                     {
                         if (Session["departments"] != null)
                         {
                     <li class="dropdown show">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Departments
                         </a>
 
@@ -50,11 +48,11 @@
                         </div>
                     </li>
                         }
-                    <li>@Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
                     else if (Session["UserType"] == "admin")
                     {
-                    <li>@Html.ActionLink("Administrators", "Index", "Administrators", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Administrators", "Index", "Administrators", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
 
                     @*<li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
@@ -68,10 +66,10 @@
             <div class="">
                 <ul class="nav navbar-nav navbar-right">
                     <div style="margin-top: 5px; margin-right: 5px;">
-                        @using(Html.BeginForm("Index", "Products"))
+                        @using(Html.BeginForm("Index", "Products", null, new {@class = "form-inline my-2 my-lg-0" }))
                         {
                             <p >
-                                Title: <input type="text" name="searchString" />
+                                Title: <input type="text" name="searchString" class="" />
                                 <input type="submit" value="Search" />
                             </p>
                         }
@@ -79,12 +77,12 @@
                     @if (Session["UserID"] != null)
                     {
                         <li>@Html.ActionLink("Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "nav-link text-info" })</li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
                 </ul>
             </div>
