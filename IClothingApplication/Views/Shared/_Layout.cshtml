@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
-            @Html.ActionLink("iClothing", "Index", "Home", "Departments", "Categories", "All Products", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("iClothing", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -56,33 +56,31 @@
                     }
 
                     @*<li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Departments", "Departments", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Categories", "Categories", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("All Products", "All Products", "Home", new { area = "" }, new { @class = "nav-link" })</li>*@
-              
+                <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Departments", "Departments", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Categories", "Categories", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("All Products", "All Products", "Home", new { area = "" }, new { @class = "nav-link" })</li>*@
+
                 </ul>
             </div>
             <div class="">
                 <ul class="nav navbar-nav navbar-right">
-                    <div style="margin-top: 5px; margin-right: 5px;">
-                        @using(Html.BeginForm("Index", "Products", null, new {@class = "form-inline my-2 my-lg-0" }))
+                    <li>
+                        @using(Html.BeginForm("Index", "Products", FormMethod.Post, new { @class = "form-inline me-2" }))
                         {
-                            <p >
-                                Title: <input type="text" name="searchString" class="" />
-                                <input type="submit" value="Search" />
-                            </p>
+                        <input type="text" name="searchString" placeholder="Search Items" class="form-control" style="background: rgba(150,150,150,0.1); border: none; color: white;" />
+                        @*<input type="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0" />*@
                         }
-                    </div>
+                    </li>
                     @if (Session["UserID"] != null)
                     {
-                        <li>@Html.ActionLink("Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "nav-link text-info" })</li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                    <li>@Html.ActionLink("Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "nav-link text-info" })</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
-                        <li>@Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                    <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                    <li>@Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
                 </ul>
             </div>
