@@ -5,37 +5,37 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5efdfa0e0e954bcfa44fe389811374b5" Name="Diagram1" ZoomLevel="127">
-        <EntityTypeShape EntityType="ICLOTHINGModel.AboutUs" Width="1.5" PointX="3" PointY="2.125" />
-        <EntityTypeShape EntityType="ICLOTHINGModel.Administrator" Width="1.5" PointX="0.75" PointY="6.125" />
-        <EntityTypeShape EntityType="ICLOTHINGModel.Brand" Width="1.5" PointX="0.75" PointY="31.5" />
-        <EntityTypeShape EntityType="ICLOTHINGModel.Category" Width="1.5" PointX="0.75" PointY="23" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.AboutUs" Width="1.5" PointX="8" PointY="17.125" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.Administrator" Width="1.5" PointX="5.75" PointY="17.125" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.Brand" Width="1.5" PointX="3.75" PointY="14.625" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.Category" Width="1.5" PointX="3.75" PointY="2.125" />
         <EntityTypeShape EntityType="ICLOTHINGModel.Customer" Width="1.5" PointX="0.75" PointY="9.625" />
-        <EntityTypeShape EntityType="ICLOTHINGModel.Department" Width="1.5" PointX="1.5" PointY="28.5" />
-        <EntityTypeShape EntityType="ICLOTHINGModel.Email" Width="1.5" PointX="3" PointY="6.125" />
-        <EntityTypeShape EntityType="ICLOTHINGModel.ItemDelivery" Width="1.5" PointX="5.25" PointY="23.75" />
-        <EntityTypeShape EntityType="ICLOTHINGModel.ItemWrapper" Width="1.5" PointX="5.25" PointY="17.75" />
-        <EntityTypeShape EntityType="ICLOTHINGModel.OrderStatus" Width="1.5" PointX="5.25" PointY="21.25" />
-        <EntityTypeShape EntityType="ICLOTHINGModel.Product" Width="1.5" PointX="3" PointY="24.25" />
-        <EntityTypeShape EntityType="ICLOTHINGModel.ShoppingCart" Width="1.5" PointX="3" PointY="19.625" />
-        <EntityTypeShape EntityType="ICLOTHINGModel.UserComments" Width="1.5" PointX="3" PointY="15.75" />
-        <EntityTypeShape EntityType="ICLOTHINGModel.UserPassword" Width="1.5" PointX="6" PointY="10.125" />
-        <EntityTypeShape EntityType="ICLOTHINGModel.UserQuery" Width="1.5" PointX="3" PointY="9.75" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__AboutUs__manager__4F52B2DB" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__Email__adminID__6ECB5E34" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__UserPassw__admin__4C764630" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__Product__brandID__5E94F66B" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__Category__parent__57E7F8DC" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__Category__parent__58DC1D15" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__Product__categor__5DA0D232" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__Email__customerI__6DD739FB" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__ShoppingC__custo__644DCFC1" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__UserComme__custo__61716316" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__UserPassw__custo__4B8221F7" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__UserQuery__custo__522F1F86" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__ItemDeliv__cartI__71A7CADF" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__ItemWrapp__cartI__681E60A5" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__ItemWrapp__produ__672A3C6C" />
-        <AssociationConnector Association="ICLOTHINGModel.FK__OrderStat__cartI__6AFACD50" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.Department" Width="1.5" PointX="1.5" PointY="2.625" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.Email" Width="1.5" PointX="8" PointY="11.125" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.ItemDelivery" Width="1.5" PointX="5.25" PointY="6.5" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.ItemWrapper" Width="1.5" PointX="8.25" PointY="7.625" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.OrderStatus" Width="1.5" PointX="5.25" PointY="11.75" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.Product" Width="1.5" PointX="6" PointY="1.125" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.ShoppingCart" Width="1.5" PointX="3" PointY="7.5" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.UserComments" Width="1.5" PointX="3" PointY="18.125" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.UserPassword" Width="1.5" PointX="3" PointY="11.125" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.UserQuery" Width="1.5" PointX="3" PointY="20.875" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__AboutUs__manager__2077C861" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__Email__adminID__3FF073BA" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__UserPassw__admin__1D9B5BB6" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__Product__brandID__2FBA0BF1" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__Category__parent__290D0E62" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__Category__parent__2A01329B" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__Product__categor__2EC5E7B8" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__Email__customerI__3EFC4F81" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__ShoppingC__custo__3572E547" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__UserComme__custo__3296789C" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__UserPassw__custo__1CA7377D" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__UserQuery__custo__2354350C" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__ItemDeliv__cartI__42CCE065" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__ItemWrapp__cartI__3943762B" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__ItemWrapp__produ__384F51F2" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__OrderStat__cartI__3C1FE2D6" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

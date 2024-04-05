@@ -22,7 +22,7 @@ namespace IClothingApplication.Models
         }
     
         public int cartID { get; set; }
-        public int customerID { get; set; }
+        public Nullable<int> customerID { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

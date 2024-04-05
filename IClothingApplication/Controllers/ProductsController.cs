@@ -260,6 +260,7 @@ namespace IClothingApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Product product = db.Product.Find(id);
             if (product == null)
             {
@@ -270,15 +271,30 @@ namespace IClothingApplication.Controllers
             // Write to DB
             if (ModelState.IsValid)
             {
-                var wrapper = new ItemWrapper();
-                wrapper.productID = (int) id;
-                wrapper.productQty = 1; //Hard-Coded
-                var userID = (int)Session["UserID"];
-                var shoppingCart = db.ShoppingCart.Include(s => s.Customer).Where(s => s.customerID.Equals(userID)).Where(s => s.OrderStatus.status.Equals("none")).First();
-                wrapper.cartID = shoppingCart.cartID;
-                db.ItemWrapper.Add(wrapper);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                // Try for already in cart error
+                try
+                {
+                    var wrapper = new ItemWrapper();
+                    wrapper.productID = (int)id;
+                    wrapper.productQty = 1; //Hard-Coded
+
+                    // Get cart for id
+                    ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
+                    wrapper.cartID = shoppingCart.cartID;
+
+                    // Add Wrapper
+                    db.ItemWrapper.Add(wrapper);
+                    db.SaveChanges();
+
+                    Debug.WriteLine(wrapper.Product.productName + " Added To Cart");
+                    //ViewBag.Message = wrapper.Product.productName + " Added To Cart";
+                    return RedirectToAction("Index");
+                } catch (Exception ex)
+                {
+                    Debug.WriteLine("Item in cart");
+                    //ViewBag.Message = "Item Already In Cart";
+                    return RedirectToAction("Index");
+                }
             }
             return View(product);
         }
