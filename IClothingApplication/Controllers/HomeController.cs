@@ -22,6 +22,10 @@ namespace IClothingApplication.Controllers
                 var aboutUs = db.AboutUs.Include(a => a.Administrator);
                 ViewData["address"] = aboutUs.ToList().ElementAt(0).companyAddress;
                 var product = db.Product.Include(p => p.Brand).Include(p => p.Category);
+
+                // Pass Departments to Temp Data for Nav Bar
+                TempData["departments"] = db.Department.ToList();
+
                 return View(product.ToList());
             }
 

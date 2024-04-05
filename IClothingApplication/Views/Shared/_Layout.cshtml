@@ -6,6 +6,8 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+    <script src="https://unpkg.com/@("@")popperjs/core@2"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
@@ -20,6 +22,21 @@
                     @if (Session["UserType"] == "customer")
                     {
                         <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        if (TempData["departments"] != null)
+                        {
+                            <div class="dropdown show">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown link
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    @foreach (var department in (IEnumerable<IClothingApplication.Models.Department>)TempData["departments"])
+                                    {
+                                        @Html.ActionLink(department.departmentName, "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = department.departmentName, filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { })
+                                    }
+                                </div>
+                            </div>
+                        }
                     }
                     else
                     {
@@ -44,13 +61,13 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (Session["UserID"] != null)
                     {
-                    <li>@Html.ActionLink("Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "nav-link text-info" })</li>
-                    <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "nav-link text-info" })</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                     else
                     {
-                    <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                 </ul>
             </div>
