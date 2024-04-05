@@ -223,21 +223,15 @@ namespace IClothingApplication.Controllers
         // GET: ShoppingCarts/Checkout
         public ActionResult Checkout()
         {
-            //ShoppingCart shoppingCart = db.ShoppingCart.Find(id);
-            //if (shoppingCart == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View();
+            ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
 
             // If user isn't customer return to home
-            if (Session["UserType"] != "customer")
+            if (Session["UserType"] == null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Register", "Home", new { Message = "You need to register to check out" });
             }
 
-            // Get Shopping Cart
-            ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
+            // Handle Shopping Cart
             if (shoppingCart == null)
                 return View();
             IQueryable<ItemWrapper> itemWrapper = db.ItemWrapper.Where(s => (s.cartID.Equals(shoppingCart.cartID))).Include(p => p.Product);

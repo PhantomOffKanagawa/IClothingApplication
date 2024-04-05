@@ -22,13 +22,20 @@ namespace IClothingApplication.Controllers
         {
             // Initialize Variables
             ICLOTHINGEntities db = new ICLOTHINGEntities();
+            return getCart(Session, db);
+        }
 
+        public static ShoppingCart getCart(HttpSessionStateBase Session, ICLOTHINGEntities db)
+        {
             // Check if logged in
             if (!loggedIn(Session))
             {
+                Debug.WriteLine("Not Logged In");
                 // Check if not logged in but have cart
                 if (Session == null || Session["CartID"] == null)
                 {
+                    Debug.WriteLine("Making Cart");
+
                     // Give User Shopping Cart
                     var shoppingCart = new ShoppingCart { };
                     db.ShoppingCart.Add(shoppingCart);
@@ -51,14 +58,16 @@ namespace IClothingApplication.Controllers
                 }
                 else
                 {
+                    Debug.WriteLine("Returning Cart By ID");
                     ShoppingCart shoppingCart = db.ShoppingCart.Find((int)Session["CartID"]);
                     return shoppingCart;
                 }
             }
             else
             {
-                int userID = (int) Session["UserID"];
-                ShoppingCart shoppingCart = db.ShoppingCart.Where(s => s.customerID != null && s.customerID ==  userID).Where(c => c.OrderStatus.status.Equals("none")).FirstOrDefault();
+                Debug.WriteLine("Returning Cart By UserID");
+                int userID = (int)Session["UserID"];
+                ShoppingCart shoppingCart = db.ShoppingCart.Where(s => s.customerID != null && s.customerID == userID).Where(c => c.OrderStatus.status.Equals("none")).FirstOrDefault();
 
                 return shoppingCart;
             }
