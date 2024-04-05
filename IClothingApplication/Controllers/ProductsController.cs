@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -16,8 +17,9 @@ namespace IClothingApplication.Controllers
         
         // GET: Products
         // Supports Sorting
-        public ActionResult Index(string sortOrder, string filter, string searchString)
+        public ActionResult Index(string sortOrder, string filter, string searchString, bool? changeFilter)
         {
+            Debug.WriteLine(searchString);
             var products = from p in db.Product
                            select p;
 
@@ -27,6 +29,7 @@ namespace IClothingApplication.Controllers
                 products = products.Where(s => s.productName.Contains(searchString)
                                        || s.productName.Contains(searchString));
             }
+            ViewBag.searchString = searchString;
 
             // Handle Filtering
             // ! Get Working with Sorting
@@ -34,18 +37,21 @@ namespace IClothingApplication.Controllers
             {
                 products = products.Where(p => (p.Brand.brandName.Equals(filter)));
             }
+            ViewBag.filter = filter;
 
             // Handle Sorting
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "Name";
-            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
-            ViewBag.QuantitySortParm = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
-            ViewBag.BrandSortParm = sortOrder == "Brand" ? "brand_desc" : "Brand";
-            ViewBag.CategorySortParm = sortOrder == "Category" ? "category_desc" : "Category";
+            if (changeFilter != null && (bool) changeFilter)
+            {
+                ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
+                ViewBag.QuantitySortParm = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
+                ViewBag.BrandSortParm = sortOrder == "Brand" ? "brand_desc" : "Brand";
+                ViewBag.CategorySortParm = sortOrder == "Category" ? "category_desc" : "Category";
+            }
+            ViewBag.sortOrder = sortOrder;
+
             switch (sortOrder)
             {
-                case "Name":
-                    products = products.OrderBy(s => s.productName);
-                    break;
                 case "name_desc":
                     products = products.OrderByDescending(s => s.productName);
                     break;

@@ -10,6 +10,11 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+<p>
+    @ViewBag.filter
+    @ViewBag.searchString
+</p>
+
 @using (Html.BeginForm())
 {
     <p>
@@ -21,25 +26,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, filter = ViewBag.filter, searchString = ViewBag.searchString, changeFilter = true })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.productDescription)
         </th>
         <th>
-            @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm })
+            @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, filter = ViewBag.filter, searchString = ViewBag.searchString, changeFilter = true })
         </th>
         <th>
-            @Html.ActionLink("Quantity", "Index", new { sortOrder = ViewBag.QuantitySortParm })
+            @Html.ActionLink("Quantity", "Index", new { sortOrder = ViewBag.QuantitySortParm, filter = ViewBag.filter, searchString = ViewBag.searchString, changeFilter = true })
         </th>
         <th>
-            @Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm })
+            @Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm, filter = ViewBag.filter, searchString = ViewBag.searchString, changeFilter = true })
         </th>
         <th>
-            @Html.ActionLink("Category", "Index", new { sortOrder = ViewBag.CategorySortParm })
+            @Html.ActionLink("Category", "Index", new { sortOrder = ViewBag.CategorySortParm, filter = ViewBag.filter, searchString = ViewBag.searchString, changeFilter = true })
         </th>
         <th>
-            @Html.ActionLink("Only Versace", "Index", new { filter = "Versace" })
+            @Html.ActionLink("Only Versace", "Index", new { sortOrder = ViewBag.sortOrder, filter = "Versace", searchString = ViewBag.searchString })
         </th>
     </tr>
 
