@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 IClothingApplication/Web.config
 IClothingApplication/Models/ICLOTHINGModel.Designer.cs
+IClothingApplication/Models/ICLOTHINGModel.edmx
