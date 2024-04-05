@@ -14,7 +14,26 @@ namespace IClothingApplication.Controllers
     public class ProductsController : Controller
     {
         private ICLOTHINGEntities db = new ICLOTHINGEntities();
-        
+        private bool IsChildOfDepartment(Category category, int departmentID)
+        {
+            if (category.parentDepartmentID == departmentID)
+            {
+                Debug.WriteLine(category.categoryName + " was under department");
+                return true;
+            }
+            else if (category.parentCategoryID != null)
+            {
+                var parentCategory = db.Category.FirstOrDefault(c => c.categoryID == category.parentCategoryID);
+                if (parentCategory != null)
+                {
+                    return IsChildOfDepartment(parentCategory, departmentID);
+                }
+            }
+
+            Debug.WriteLine(category.categoryName + " was not under department");
+            return false;
+        }
+
         // GET: Products
         // Supports Sorting
         public ActionResult Index(string sortOrder, string filter, string filterType, string searchString, bool? changeSort)
@@ -31,6 +50,7 @@ namespace IClothingApplication.Controllers
             }
             ViewBag.searchString = searchString;
 
+
             // Handle Filtering
             // ! Get Working with Sorting
             if (!String.IsNullOrEmpty(filter))
@@ -38,11 +58,16 @@ namespace IClothingApplication.Controllers
                 switch(filterType)
                 {
                     case "Department":
-                        //private ICLOTHINGEntities cDB = new ICLOTHINGEntities();
-                        //var categories = from p in cDB.Product
-                        //               select p;
-                        //products = products.Where(p => (p.brandName.Equals(filter)));
-                        //break;
+                        Debug.WriteLine(filter + " current looking for");
+                        var department = db.Department.FirstOrDefault(d => d.departmentName.Equals(filter));
+
+                        if (department != null)
+                        {
+                            var categories = db.Category.ToList().Where(c => IsChildOfDepartment(c, department.departmentID)).ToList();
+                            var categoryIds = categories.Select(c => c.categoryID).ToList();
+                            products = products.Where(p => categoryIds.Any(c => p.categoryID.Equals(c)));
+                        }
+                        break;
                     case "Category":
                         products = products.Where(p => (p.Category.categoryName.Equals(filter)));
                         break;
