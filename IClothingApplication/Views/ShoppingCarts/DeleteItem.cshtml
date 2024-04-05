@@ -1,0 +1,45 @@
+﻿@model IClothingApplication.Models.ItemWrapper
+
+@{
+    ViewBag.Title = "Remove Item From Cart";
+}
+
+    <div class="container mt-5">
+        @*<h2>@ViewBag.Title</h2>*@
+
+        <h3>Are you sure you want to remove this?</h3>
+        <div>
+            @*<h4>ItemWrapper</h4>*@
+            <hr />
+
+            <div style="height: 5vh">
+
+            </div>
+
+            <dl class="dl-horizontal text-sm-center">
+                <h3>
+                    @Html.DisplayFor(model => model.Product.productName)
+                </h3>
+                <dd>
+                    Quantity: @Html.DisplayFor(model => model.productQty)
+                </dd>
+            </dl>
+
+            <div style="height: 30vh">
+
+            </div>
+
+            <!-- Delete confirmation form -->
+            <div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-outline-danger" /> |
+                        @Html.ActionLink("Back to Cart", "ViewCart", new { }, new { @class = "text-dark" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>

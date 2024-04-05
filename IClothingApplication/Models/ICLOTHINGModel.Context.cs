@@ -25,6 +25,7 @@ namespace IClothingApplication.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AboutUs> AboutUs { get; set; }
         public virtual DbSet<Administrator> Administrator { get; set; }
         public virtual DbSet<Brand> Brand { get; set; }
         public virtual DbSet<Category> Category { get; set; }
@@ -39,6 +40,5 @@ namespace IClothingApplication.Models
         public virtual DbSet<UserComments> UserComments { get; set; }
         public virtual DbSet<UserPassword> UserPassword { get; set; }
         public virtual DbSet<UserQuery> UserQuery { get; set; }
-        public virtual DbSet<AboutUs> AboutUs { get; set; }
     }
 }

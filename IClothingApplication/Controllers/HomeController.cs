@@ -129,6 +129,16 @@ namespace IClothingApplication.Controllers
                         db.ShoppingCart.Add(cart);
                         db.SaveChanges();
 
+                        // Give User Order Status
+                        var orderStatus = new OrderStatus
+                        {
+                            cartID = (int)cart.cartID,
+                            status = "none",
+                            statusDate = new DateTime()
+                        };
+                        db.OrderStatus.Add(orderStatus);
+                        db.SaveChanges();
+
                         // Write Message to User
                         ViewBag.Message = "Successful Registration";
                         return View("Login");

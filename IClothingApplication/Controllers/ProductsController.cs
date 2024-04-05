@@ -40,7 +40,16 @@ namespace IClothingApplication.Controllers
         // Supports Sorting
         public ActionResult Index(string sortOrder, string filter, string filterType, string searchString, bool? changeSort)
         {
-            Debug.WriteLine(searchString);
+            // Pass DB items for drop-downs
+            var brands = db.Brand.ToList().OrderBy(s => s.brandName);
+            ViewBag.Collections_Brands = new SelectList(brands, "brandName", "brandName");
+            var departments = db.Department.ToList().OrderBy(s => s.departmentName);
+            ViewBag.Collections_Departments = new SelectList(departments, "departmentName", "departmentName");
+            var categories = db.Category.ToList().OrderBy(s => s.categoryName);
+            ViewBag.Collections_Categories = new SelectList(categories, "categoryName", "categoryName");
+
+
+            // Get products
             var products = from p in db.Product
                            select p;
 
@@ -59,13 +68,14 @@ namespace IClothingApplication.Controllers
                 switch(filterType)
                 {
                     case "Department":
+                        // If department get all category ID's under said department recursively
                         Debug.WriteLine(filter + " current looking for");
                         var department = db.Department.FirstOrDefault(d => d.departmentName.Equals(filter));
 
                         if (department != null)
                         {
-                            var categories = db.Category.ToList().Where(c => IsChildOfDepartment(c, department.departmentID)).ToList();
-                            var categoryIds = categories.Select(c => c.categoryID).ToList();
+                            var childCategories = db.Category.ToList().Where(c => IsChildOfDepartment(c, department.departmentID)).ToList();
+                            var categoryIds = childCategories.Select(c => c.categoryID).ToList();
                             products = products.Where(p => categoryIds.Any(c => p.categoryID.Equals(c)));
                         }
                         break;
@@ -83,6 +93,7 @@ namespace IClothingApplication.Controllers
             // Handle Sorting
             if (changeSort == null || (bool) changeSort)
             {
+                // Toggle sort order as held in memory
                 ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
                 ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
                 ViewBag.QuantitySortParm = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
@@ -91,6 +102,7 @@ namespace IClothingApplication.Controllers
             }
             ViewBag.sortOrder = sortOrder;
 
+            // Switch to decide what sort to do
             switch (sortOrder)
             {
                 case "name_desc":
@@ -262,7 +274,7 @@ namespace IClothingApplication.Controllers
                 wrapper.productID = (int) id;
                 wrapper.productQty = 1; //Hard-Coded
                 var userID = (int)Session["UserID"];
-                var shoppingCart = db.ShoppingCart.Include(s => s.Customer).Where(s => s.customerID.Equals(userID)).First();
+                var shoppingCart = db.ShoppingCart.Include(s => s.Customer).Where(s => s.customerID.Equals(userID)).Where(s => s.OrderStatus.status.Equals("none")).First();
                 wrapper.cartID = shoppingCart.cartID;
                 db.ItemWrapper.Add(wrapper);
                 db.SaveChanges();

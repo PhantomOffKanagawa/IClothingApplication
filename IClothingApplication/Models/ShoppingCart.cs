@@ -18,7 +18,6 @@ namespace IClothingApplication.Models
         public ShoppingCart()
         {
             this.ItemDelivery = new HashSet<ItemDelivery>();
-            this.OrderStatus = new HashSet<OrderStatus>();
             this.ItemWrapper = new HashSet<ItemWrapper>();
         }
     
@@ -29,8 +28,7 @@ namespace IClothingApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemDelivery> ItemDelivery { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderStatus> OrderStatus { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemWrapper> ItemWrapper { get; set; }
+        public virtual OrderStatus OrderStatus { get; set; }
     }
 }
