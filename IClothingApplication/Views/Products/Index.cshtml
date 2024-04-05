@@ -34,6 +34,7 @@ Filtering by @ViewBag.filterType: @ViewBag.filter
     <tr>
         <th>
             @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, filter = ViewBag.filter, searchString = ViewBag.searchString, changeSort = true })
+
         </th>
         <th>
             @Html.DisplayNameFor(model => model.productDescription)

@@ -16,7 +16,9 @@ namespace IClothingApplication.Controllers
     namespace IClothingApplication.Models
     {
         public class HomeController : Controller
-        { 
+        {
+            private ICLOTHINGEntities db = new ICLOTHINGEntities();
+
             public ActionResult Index()
             {
                 var aboutUs = db.AboutUs.Include(a => a.Administrator);
@@ -29,7 +31,20 @@ namespace IClothingApplication.Controllers
                 return View(product.ToList());
             }
 
-            private ICLOTHINGEntities db = new ICLOTHINGEntities();
+            public ActionResult Search(string searchString)
+            {
+                // Query brand based on the search string
+                var product = from p in db.Product
+                             select p;
+
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    product = product.Where(s => s.productName.Contains(searchString));
+                }
+
+                return View(product.ToList());
+            }
+
             // GET: AboutUs
             public ActionResult About()
             {

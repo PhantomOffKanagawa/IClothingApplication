@@ -4,56 +4,27 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>iCLOTHING Application</h1>
-    <p class="lead">iCLOTHING, Inc. is a locally owned fashion store located at @(ViewData["address"]) </p>
+<div style="background-color:#cccccc;">
+    <div class="jumbotron">
+        <div style="width: 100%; height: 180px; background-color: #383636; font-size:100px; font-family:'Baskerville Old Face'; text-align:center; color: white;">
+            iclothing inc.
+
+            <p class="lead">iCLOTHING, Inc. is a locally owned fashion store located at @(ViewData["address"])</p>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h2>@Html.ActionLink("Shop Women's", "FilteredDepartments", "Department", new { departmentId = 1 }, null)</h2>
+            <img src="~/Images/women1.jpg" width="250" height="400" border="2px" alt="Woman Photo" />
+        </div>
+        <div class="col-md-4">
+            <h2>@Html.ActionLink("Shop Men's", "Index", "Departments")</h2>
+            <img src="~/Images/man.png" width="250" height="400" border="2px" alt="Man Photo" />
+        </div>
+        <div class="col-md-4">
+            <h2>@Html.ActionLink("Shop Kid's", "Index", "Departments")</h2>
+            <img src="~/Images/kids.jpg" width="250" height="400" border="2px" alt="Kids Photo" />
+        </div>
+    </div>
 </div>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.productName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.productDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.productPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.productQty)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Brand.brandName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.categoryName)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.productName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.productDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.productPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.productQty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand.brandName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.categoryName)
-            </td>
-        </tr>
-    }
-
-</table>

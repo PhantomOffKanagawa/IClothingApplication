@@ -7,7 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using IClothingApplication.Models;
+using Newtonsoft.Json.Linq;
 
 namespace IClothingApplication.Controllers
 {
@@ -49,7 +51,6 @@ namespace IClothingApplication.Controllers
                                        || s.productName.Contains(searchString));
             }
             ViewBag.searchString = searchString;
-
 
             // Handle Filtering
             // ! Get Working with Sorting
@@ -125,6 +126,7 @@ namespace IClothingApplication.Controllers
             }
             return View(products.ToList());
         }
+
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
