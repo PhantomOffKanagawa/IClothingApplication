@@ -274,7 +274,7 @@ namespace IClothingApplication.Controllers
                 wrapper.productID = (int) id;
                 wrapper.productQty = 1; //Hard-Coded
                 var userID = (int)Session["UserID"];
-                var shoppingCart = db.ShoppingCart.Include(s => s.Customer).Where(s => s.customerID.Equals(userID)).First();
+                var shoppingCart = db.ShoppingCart.Include(s => s.Customer).Where(s => s.customerID.Equals(userID)).Where(s => s.OrderStatus.status.Equals("none")).First();
                 wrapper.cartID = shoppingCart.cartID;
                 db.ItemWrapper.Add(wrapper);
                 db.SaveChanges();

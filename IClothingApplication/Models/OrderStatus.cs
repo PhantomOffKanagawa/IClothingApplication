@@ -14,10 +14,9 @@ namespace IClothingApplication.Models
     
     public partial class OrderStatus
     {
-        public int statusID { get; set; }
+        public int cartID { get; set; }
         public string status { get; set; }
         public System.DateTime statusDate { get; set; }
-        public int cartID { get; set; }
     
         public virtual ShoppingCart ShoppingCart { get; set; }
     }

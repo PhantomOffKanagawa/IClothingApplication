@@ -17,9 +17,9 @@ namespace IClothingApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Administrator()
         {
+            this.AboutUs = new HashSet<AboutUs>();
             this.Email = new HashSet<Email>();
             this.UserPassword = new HashSet<UserPassword>();
-            this.AboutUs1 = new HashSet<AboutUs>();
         }
     
         public int adminID { get; set; }
@@ -28,10 +28,10 @@ namespace IClothingApplication.Models
         public System.DateTime dateHired { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AboutUs> AboutUs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Email> Email { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserPassword> UserPassword { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AboutUs> AboutUs1 { get; set; }
     }
 }

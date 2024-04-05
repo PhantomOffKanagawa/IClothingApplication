@@ -387,6 +387,9 @@
     <Content Include="Views\Home\RegisterPassword.cshtml" />
     <Content Include="Views\Home\AdminManagementDashboard.cshtml" />
     <Content Include="Views\ShoppingCarts\ViewCart.cshtml" />
+    <Content Include="Views\ShoppingCarts\EditItem.cshtml" />
+    <Content Include="Views\ShoppingCarts\DeleteItem.cshtml" />
+    <Content Include="Views\ShoppingCarts\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,7 +9,7 @@
     @Styles.Render("~/Content/css")
     <script src="https://unpkg.com/@("@")popperjs/core@2"></script>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
             @Html.ActionLink("iClothing", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
@@ -22,11 +22,11 @@
 
                     @if (Session["UserType"] == "customer")
                     {
-                    <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
                     else
                     {
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
 
                     }
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
@@ -35,72 +35,122 @@
                     {
                         if (Session["departments"] != null)
                         {
-                    <li class="dropdown show">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Departments
-                        </a>
+                            <li class="dropdown show">
+                                <a class="nav-link dropdown-toggle text-light" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Departments
+                                </a>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            @foreach (var department in (IEnumerable<IClothingApplication.Models.Department>)Session["departments"])
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    @foreach (var department in (IEnumerable<IClothingApplication.Models.Department>)Session["departments"])
                                     {
-                            @Html.ActionLink(department.departmentName, "Index", "Products", new { sortOrder = ViewBag.sortOrder, filter = department.departmentName, filterType = "Department", searchString = ViewBag.searchString, changeSort = false, }, new { @class="dropdown-item" })
+                                        @Html.ActionLink(department.departmentName, "Index", "Products", new { sortOrder = ViewBag.sortOrder, filter = department.departmentName, filterType = "Department", searchString = ViewBag.searchString, changeSort = false, }, new { @class = "dropdown-item" })
                                     }
-                        </div>
-                    </li>
+                                </div>
+                            </li>
                         }
-                    <li>@Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
                     else if (Session["UserType"] == "admin")
                     {
-                    <li>@Html.ActionLink("Administrators", "Index", "Administrators", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Administrators", "Index", "Administrators", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
 
                     @*<li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Departments", "Departments", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Categories", "Categories", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("All Products", "All Products", "Home", new { area = "" }, new { @class = "nav-link" })</li>*@
+                        <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Departments", "Departments", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Categories", "Categories", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("All Products", "All Products", "Home", new { area = "" }, new { @class = "nav-link" })</li>*@
 
                 </ul>
             </div>
             <div class="">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        @using(Html.BeginForm("Index", "Products", FormMethod.Post, new { @class = "form-inline me-2" }))
+                        @using (Html.BeginForm("Index", "Products", FormMethod.Post, new { @class = "form-inline me-2" }))
                         {
-                        <input type="text" name="searchString" placeholder="Search Items" class="form-control" style="background: rgba(150,150,150,0.1); border: none; color: white;" />
-                        @*<input type="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0" />*@
+                            <input type="text" name="searchString" placeholder="Search Items" class="form-control" style="background: rgba(150,150,150,0.1); border: none; color: white;" />
+                            @*<input type="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0" />*@
                         }
                     </li>
                     @if (Session["UserID"] != null)
                     {
-                    <li>@Html.ActionLink("Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "nav-link text-info" })</li>
-                    <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "nav-link text-info" })</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
                     else
                     {
-                    <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
-                    <li>@Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+
+    <div class="container body-content flex-grow-1" ">
         @RenderBody()
         <hr />
-        <footer>
-            @if (Session["UserType"] == "customer")
-            {
-                @Html.ActionLink("Send a Query", "Create", "UserQueries", new { area = "" }, new { @class = "btn btn-secondary me-1" })
-                @Html.ActionLink("Send a Comment", "Create", "UserComments", new { area = "" }, new { @class = "btn btn-secondary me-1" })
-            }
-            <p>&copy; @DateTime.Now.Year - iClothing</p>
-        </footer>
     </div>
+
+    <section class="">
+        <!-- Footer -->
+        <footer class="footer mt-auto text-center text-white" style="background-color: rgb(33, 37, 41, 0.8);">
+            <!-- Grid container -->
+            <div class="container p-4 pb-0">
+                <!-- Section: CTA -->
+                <section class="">
+                    <p class="d-flex justify-content-center align-items-center">
+                        @Html.ActionLink("Send a Query", "Create", "UserQueries", new { area = "" }, new { @class = "btn btn-outline-light btn-rounded me-2" })
+                        @Html.ActionLink("Send a Comment", "Create", "UserComments", new { area = "" }, new { @class = "btn btn-outline-light btn-rounded ms-2" })
+                    </p>
+                </section>
+            </div>
+            <!-- Grid container -->
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                @DateTime.Now.Year - iClothing
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+    </section>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+    @if (ViewBag.Message != null)
+    {
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">@ViewBag.Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @ViewBag.Message
+                    </div>
+                    <div class="modal-footer">
+                        <button id="modal-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            window.onload = function () {
+                $('#staticBackdrop').modal('show');
+                //document.getElementById("modal-close").focus();
+            };
+        </script>
+    }
+
 </body>
 </html>

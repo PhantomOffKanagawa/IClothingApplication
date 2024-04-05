@@ -14,9 +14,9 @@ namespace IClothingApplication.Models
     
     public partial class UserPassword
     {
+        public string userAccountName { get; set; }
         public Nullable<int> customerID { get; set; }
         public Nullable<int> adminID { get; set; }
-        public string userAccountName { get; set; }
         public string userEncryptedPassword { get; set; }
         public int passwordExpiryTime { get; set; }
         public System.DateTime userAccountExpiryDate { get; set; }

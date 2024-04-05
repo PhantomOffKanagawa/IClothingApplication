@@ -1,0 +1,64 @@
+﻿@model IEnumerable<IClothingApplication.Models.ItemWrapper>
+
+@{
+    ViewBag.Title = "Change Item Quantity";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container mt-5">
+        <h2>Sure You Want To Check Out?</h2>
+        <br />
+        <h4>Your Cart:</h4>
+        <hr />
+        <br />
+        <table class="table">
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.Product.productName)*@
+                    Product Name
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.productQty)*@
+                    Product Quantity
+                </th>
+                <th></th>
+            </tr>
+
+            @if (Model != null)
+            {
+
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.productName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.productQty)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditItem", new { id = item.productID }, new { @class = "text-dark" })
+                            @*@Html.ActionLink("Details", "ItemDetails", new { id = item.productID }) |*@
+                            @Html.ActionLink("Delete", "DeleteItem", new { id = item.productID }, new { @class = "text-dark" })
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+
+        <br />
+        <br />
+        <div>
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Confirm" class="btn btn-outline-success" /> |
+                @Html.ActionLink("Back to Cart", "ViewCart", new { }, new { @class = "text-dark" })
+            </div>
+        </div>
+    </div>
+
+}
