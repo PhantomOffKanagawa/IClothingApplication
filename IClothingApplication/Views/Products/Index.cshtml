@@ -9,55 +9,68 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.productName)
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.productDescription)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.productPrice)
+            @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.productQty)
+            @Html.ActionLink("Quantity", "Index", new { sortOrder = ViewBag.QuantitySortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Brand.brandName)
+            @Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category.categoryName)
+            @Html.ActionLink("Category", "Index", new { sortOrder = ViewBag.CategorySortParm })
         </th>
-        <th></th>
+        <th>
+            @Html.ActionLink("Only Versace", "Index", new { filter = "Versace" })
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.productName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.productDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.productPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.productQty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Brand.brandName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.categoryName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.productID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.productID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.productID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.brandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.categoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.productID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.productID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.productID }) |
+                @Html.ActionLink("Add To Cart", "Add", new { id = item.productID })
+            </td>
+        </tr>
+    }
 
 </table>
