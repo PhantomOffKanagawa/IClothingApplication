@@ -153,7 +153,7 @@ CREATE TABLE Email (
     emailNo  INT PRIMARY KEY IDENTITY(1,1),
     emailDate DATE NOT NULL,
     emailSubject VARCHAR(255) NOT NULL,
-    emailBody VARCHAR(255) NOT NULL,
+    emailBody TEXT NOT NULL,
     customerID INT NOT NULL,
     adminID INT NOT NULL,
     FOREIGN KEY (customerID) REFERENCES Customer(customerID),
@@ -162,9 +162,9 @@ CREATE TABLE Email (
 
 -- ItemDelivery Table
 CREATE TABLE ItemDelivery (
-    stickerID  INT PRIMARY KEY IDENTITY(1,1),
+    cartID INT PRIMARY KEY,
+    stickerID  INT IDENTITY(1,1),
     stickerDate DATE NOT NULL,
-    cartID INT NOT NULL,
     FOREIGN KEY (cartID) REFERENCES ShoppingCart(cartID)
 );
 

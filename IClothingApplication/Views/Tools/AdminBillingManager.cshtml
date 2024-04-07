@@ -1,0 +1,54 @@
+﻿@model IEnumerable<IClothingApplication.Models.ShoppingCart>
+
+@{
+    ViewBag.Title = "AdminBillingManager";
+}
+
+<h2>AdminBillingManager</h2>
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.customerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderStatus.statusDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderStatus.status)
+        </th>
+        <th>
+            Price
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var cart in Model)
+    {
+        Decimal sum = 0;
+        foreach (var item in cart.ItemWrapper) {
+            sum += item.productQty * item.Product.productPrice;
+        }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => cart.Customer.customerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cart.OrderStatus.statusDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cart.OrderStatus.status)
+            </td>
+            <td>
+                $@sum
+            </td>
+            <td>
+                @Html.ActionLink("Verify", "BillingDetails", new { id = cart.cartID })
+            </td>
+        </tr>
+    }
+
+</table>
