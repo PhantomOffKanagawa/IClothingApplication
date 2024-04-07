@@ -12,6 +12,11 @@
     white-space: normal;
 }
 
+.btn {
+    background-color: #383636;
+    color: #fff;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
