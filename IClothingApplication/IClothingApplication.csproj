@@ -210,6 +210,7 @@
     <Compile Include="Models\UserQuery.cs">
       <DependentUpon>ICLOTHINGModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ModelValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -252,10 +253,20 @@
     <Content Include="Images\pencil.png" />
     <Content Include="Images\placeholder.jpg" />
     <Content Include="Images\Products\AeroSwift Dri-FIT ADV Running Pants.jpg" />
+    <Content Include="Images\Products\Children%27s Wool Sweater With GG.jpg" />
     <Content Include="Images\Products\Crochet Crop Top.jpg" />
     <Content Include="Images\Products\Denim and Silk Banana Tree Print Jeans.jpg" />
+    <Content Include="Images\Products\Faded Monogram Logo Crewneck T-Shirt.jpg" />
+    <Content Include="Images\Products\GG Polyester Tailored Pant.jpg" />
+    <Content Include="Images\Products\GG Stretch Jersey Swimsuit.jpg" />
+    <Content Include="Images\Products\Medusa %2795 Flared Pants.jpg" />
+    <Content Include="Images\Products\Medusa Baby Sleepsuit.jpg" />
     <Content Include="Images\Products\MedusaFlaredPants.jpg" />
     <Content Include="Images\Products\Medusa_baby_sleepsuit.jpg" />
+    <Content Include="Images\Products\Peter Rabbit X Gucci T-Shirt.jpg" />
+    <Content Include="Images\Products\Swim Retro Flow Girls T-Back One-Piece Swimsuit.png" />
+    <Content Include="Images\Products\Wool Twill Formal Pants.jpg" />
+    <Content Include="Images\Products\Year of the Dragon T-Shirt.jpg" />
     <Content Include="Images\women.jpg" />
     <Content Include="Images\women1.jpg" />
     <Content Include="Models\ICLOTHINGModel.Context.tt">
