@@ -362,6 +362,30 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-IClothingApplication/Web.config
-IClothingApplication/Models/ICLOTHINGModel.*
-
+/IClothingApplication/Web.config
+/IClothingApplication/Models/ICLOTHINGModel.*
+/IClothingApplication/Web.config
+/IClothingApplication/Web.Debug.config
+/IClothingApplication/Web.Release.config
+/IClothingApplication/Models/AboutUs.cs
+/IClothingApplication/Models/Administrator.cs
+/IClothingApplication/Models/Brand.cs
+/IClothingApplication/Models/Category.cs
+/IClothingApplication/Models/Customer.cs
+/IClothingApplication/Models/Department.cs
+/IClothingApplication/Models/Email.cs
+/IClothingApplication/Models/ICLOTHINGModel.Context.cs
+/IClothingApplication/Models/ICLOTHINGModel.Context.tt
+/IClothingApplication/Models/ICLOTHINGModel.cs
+/IClothingApplication/Models/ICLOTHINGModel.Designer.cs
+/IClothingApplication/Models/ICLOTHINGModel.edmx
+/IClothingApplication/Models/ICLOTHINGModel.edmx.diagram
+/IClothingApplication/Models/ICLOTHINGModel.tt
+/IClothingApplication/Models/ItemDelivery.cs
+/IClothingApplication/Models/ItemWrapper.cs
+/IClothingApplication/Models/OrderStatus.cs
+/IClothingApplication/Models/Product.cs
+/IClothingApplication/Models/ShoppingCart.cs
+/IClothingApplication/Models/UserComments.cs
+/IClothingApplication/Models/UserPassword.cs
+/IClothingApplication/Models/UserQuery.cs
