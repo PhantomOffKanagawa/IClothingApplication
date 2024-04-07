@@ -146,20 +146,42 @@ namespace IClothingApplication.Controllers
             return View(products.ToList());
         }
 
+        // New method to handle Ajax request
+        [HttpPost]
+        public JsonResult DetailsAjax(int? id)
+        {
+            Debug.WriteLine("Ajax Inside with " + id);
+            Product product = db.Product.Find(id);
+            Debug.WriteLine("Ajax Inside with " + product.productName);
+            string imageSrc = System.IO.File.Exists(Server.MapPath("~/Images/Products/" + product.productName + ".jpg")) ? "Products/" + product.productName + ".jpg" : "placeholder.jpg";
+
+            return Json(new { imageSrc = imageSrc, id = product.productID, name = product.productName, description = product.productDescription, price = product.productPrice, qty = product.productQty, brand = product.Brand.brandName, category = product.Category.categoryName });
+        }
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            Debug.WriteLine("Hit Details");
+            if (Request.IsAjaxRequest())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Debug.WriteLine("Ajax");
+                // Call the new method if this is an Ajax request
+                return DetailsAjax(id);
             }
-            Product product = db.Product.Find(id);
-            if (product == null)
+            else
             {
-                return HttpNotFound();
+                Debug.WriteLine("Normal");
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Product product = db.Product.Find(id);
+                if (product == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(product);
             }
-            return View(product);
         }
 
         // GET: Products/Create
