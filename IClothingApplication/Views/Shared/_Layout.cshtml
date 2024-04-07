@@ -74,8 +74,27 @@
                     </li>
                     @if (Session["UserID"] != null)
                     {
-                        <li>@Html.ActionLink("Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "nav-link text-info" })</li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        string username = @Session["UserName"].ToString();
+                        <li class="dropdown show">
+                            <a class="nav-link dropdown-toggle text-light" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Welcome @username
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                @if(Session["UserType"] == "customer") 
+                                {
+                                    @Html.ActionLink("My Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "dropdown-item", style ="color: #007bff" })
+                                    @Html.ActionLink("Emails", "Index", "Emails", new {area = "" }, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Write a Query", "Create", "UserQueries", new {area = "" }, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Send a Comment", "Create", "UserComments", new {area = "" }, new { @class = "dropdown-item" })
+                                }
+                                else 
+                                {
+
+                                }
+                                @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "dropdown-item" })
+                            </div>
+                        </li>
                     }
                     else
                     {
