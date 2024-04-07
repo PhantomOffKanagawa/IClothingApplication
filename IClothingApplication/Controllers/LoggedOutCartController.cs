@@ -69,6 +69,25 @@ namespace IClothingApplication.Controllers
                 int userID = (int)Session["UserID"];
                 ShoppingCart shoppingCart = db.ShoppingCart.Where(s => s.customerID != null && s.customerID == userID).Where(c => c.OrderStatus.status.Equals("none")).FirstOrDefault();
 
+                if (shoppingCart == null)
+                {
+                    shoppingCart = new ShoppingCart { };
+                    db.ShoppingCart.Add(shoppingCart);
+                    db.SaveChanges();
+
+                    Session["CartID"] = shoppingCart.cartID;
+
+                    // Give User Order Status
+                    var orderStatus = new OrderStatus
+                    {
+                        cartID = (int)shoppingCart.cartID,
+                        status = "unattached",
+                        statusDate = new DateTime()
+                    };
+                    db.OrderStatus.Add(orderStatus);
+                    db.SaveChanges();
+                }
+
                 return shoppingCart;
             }
         }

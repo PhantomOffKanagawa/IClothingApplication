@@ -7,7 +7,7 @@
 <div class="container mt-4">
     @*<h2 class="text-center mb-3">Product Details</h2>*@
     <div class="card w-50 mx-auto my-auto">
-        <img src="~/Images/placeholder.jpg" class="card-img-top" alt="Placeholder Image">
+        <img src="~/Images/@(System.IO.File.Exists(Server.MapPath("~/Images/Products/" + Model.productName + ".jpg")) ? "Products/" + Model.productName + ".jpg" : "placeholder.jpg")" class="card-img-top" alt="Card Image">
         <div class="card-body">
             <h4 class="card-title text-center">@Html.DisplayFor(model => model.productName)</h4>
             <hr />
