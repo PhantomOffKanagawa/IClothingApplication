@@ -13,14 +13,14 @@
         </div>
 
     </div>
-    <div class="row" align="center">
+    <div class="row p-3" align="center">
         <div class="col-md-4">
             <h2>@Html.ActionLink("Shop Women's", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Women's", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { @class = "btn btn-secondary me-1" })</h2>
-            <img src="~/Images/women1.jpg" width="250" height="400" border="2px" alt="Woman Photo" style="object-fit: cover;" />
+            <img src="~/Images/women1.jpg" width="250" height="400" border="2px" alt="Woman Photo" style="object-fit: cover;"/>
         </div>
         <div class="col-md-4">
             <h2>@Html.ActionLink("Shop Men's", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Mens", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { @class = "btn btn-secondary me-1" })</h2>
-            <img src="~/Images/man.png" width="250" height="400" border="2px" alt="Man Photo" style="object-fit: cover;" />
+            <img src="~/Images/man.png" width="250" height="400" border="2px" alt="Man Photo" style="object-fit: cover;"/>
         </div>
         <div class="col-md-4">
             <h2>@Html.ActionLink("Shop Kid's", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Kids", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { @class = "btn btn-secondary me-1" })</h2>

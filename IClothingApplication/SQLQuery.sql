@@ -86,7 +86,7 @@ CREATE TABLE Category (
     -- # Assign parentCategoryID or parentDepartmentID
     categoryID INT PRIMARY KEY IDENTITY(1,1),
     categoryName VARCHAR(255) NOT NULL,
-    categoryDescription VARCHAR(255) NOT NULL,
+    categoryDescription VARCHAR(255),
     parentCategoryID INT,
     parentDepartmentID INT,
     CHECK ((parentCategoryID IS NULL AND parentDepartmentID IS NOT NULL) OR (parentCategoryID IS NOT NULL AND parentDepartmentID IS NULL)),

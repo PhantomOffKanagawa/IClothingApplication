@@ -71,7 +71,10 @@ namespace IClothingApplication.Controllers
 
                 if (shoppingCart == null)
                 {
-                    shoppingCart = new ShoppingCart { };
+                    shoppingCart = new ShoppingCart { 
+                        customerID = userID
+                    };
+
                     db.ShoppingCart.Add(shoppingCart);
                     db.SaveChanges();
 
@@ -81,7 +84,7 @@ namespace IClothingApplication.Controllers
                     var orderStatus = new OrderStatus
                     {
                         cartID = (int)shoppingCart.cartID,
-                        status = "unattached",
+                        status = "none",
                         statusDate = new DateTime()
                     };
                     db.OrderStatus.Add(orderStatus);

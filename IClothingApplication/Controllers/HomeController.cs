@@ -91,10 +91,10 @@ namespace IClothingApplication.Controllers
                     db.SaveChanges();
                     TempData["userType"] = "customer";
                     TempData["userID"] = customer.customerID;
-                    return View("RegisterPassword");
+                    return RedirectToAction("RegisterPassword");
                 }
 
-                //ViewBag.Message = "Error";
+                ViewBag.Message = "Error";
                 return View("Register");
 
             }
@@ -102,7 +102,7 @@ namespace IClothingApplication.Controllers
             [AllowAnonymous]
             public ActionResult RegisterPassword()
             {
-                return RedirectToAction("Register");
+                return View();
             }
 
             [HttpPost]
@@ -124,6 +124,7 @@ namespace IClothingApplication.Controllers
                         Debug.WriteLine(model.customerID);
                         db.UserPassword.Add(model);
                         db.SaveChanges();
+                        Debug.WriteLine("Saved User Password");
 
                         // Attach Shopping Cart
                         ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session, db);
@@ -133,6 +134,7 @@ namespace IClothingApplication.Controllers
                         //db.ShoppingCart.Add(shoppingCart);
                         db.Entry(shoppingCart).State = EntityState.Modified;
                         db.SaveChanges();
+                        Debug.WriteLine("Saved Shopping Cart");
 
                         // Update OrderStatus to be attached
                         shoppingCart.OrderStatus.status = "none";
@@ -141,6 +143,7 @@ namespace IClothingApplication.Controllers
 
                         //db.Entry(shoppingCart.OrderStatus).State = EntityState.Modified;
                         db.SaveChanges();
+                        Debug.WriteLine("Saved Changed Shopping Cart");
 
 
                         // Write Message to User
@@ -157,8 +160,8 @@ namespace IClothingApplication.Controllers
                     }
                 }
 
-                ViewBag.Message = "Error";
-                return View("Register");
+                //ViewBag.Message = "Error";
+                return View();
 
             }
 
