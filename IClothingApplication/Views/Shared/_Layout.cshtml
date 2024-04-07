@@ -148,9 +148,14 @@
         <script>
             window.onload = function () {
                 $('#staticBackdrop').modal('show');
-                //document.getElementById("modal-close").focus();
             };
+            window.onkeydown = function (event) {
+                if (event.keyCode === 27 || event.keyCode === 13 || event.keyCode === 32) {
+                    $('#staticBackdrop').modal('hide');
+                }
+            }
         </script>
+        @(ViewBag.Message = null)
     }
 
 </body>
