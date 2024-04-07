@@ -249,6 +249,7 @@
     <Content Include="Images\mail.jpg" />
     <Content Include="Images\man.png" />
     <Content Include="Images\pencil.png" />
+    <Content Include="Images\placeholder.jpg" />
     <Content Include="Images\women.jpg" />
     <Content Include="Images\women1.jpg" />
     <Content Include="Models\ICLOTHINGModel.Context.tt">
