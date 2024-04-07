@@ -251,6 +251,11 @@
     <Content Include="Images\man.png" />
     <Content Include="Images\pencil.png" />
     <Content Include="Images\placeholder.jpg" />
+    <Content Include="Images\Products\AeroSwift Dri-FIT ADV Running Pants.jpg" />
+    <Content Include="Images\Products\Crochet Crop Top.jpg" />
+    <Content Include="Images\Products\Denim and Silk Banana Tree Print Jeans.jpg" />
+    <Content Include="Images\Products\MedusaFlaredPants.jpg" />
+    <Content Include="Images\Products\Medusa_baby_sleepsuit.jpg" />
     <Content Include="Images\women.jpg" />
     <Content Include="Images\women1.jpg" />
     <Content Include="Models\ICLOTHINGModel.Context.tt">
