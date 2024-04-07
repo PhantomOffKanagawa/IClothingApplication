@@ -52,7 +52,7 @@
                     }
                     else if (Session["UserType"] == "admin")
                     {
-                        <li>@Html.ActionLink("Administrators", "Index", "Administrators", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                        <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
 
                     @*<li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
@@ -79,6 +79,7 @@
                     }
                     else
                     {
+                        <li>@Html.ActionLink("Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "nav-link text-info" })</li>
                         <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                         <li>@Html.ActionLink("Register", "Register", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }

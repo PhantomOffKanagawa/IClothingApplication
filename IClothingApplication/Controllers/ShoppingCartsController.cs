@@ -272,10 +272,21 @@ namespace IClothingApplication.Controllers
             // Handle Low Stock
             if (itemWrapper.Any(i => i.Product.productQty < i.productQty))
             {
-                // Send Admin Email
                 return RedirectToAction("ViewCart", new { Message = "A Product Is Too Low On Stock" });
             }
 
+            // Update Product Stock
+            foreach (var itemW in itemWrapper)
+            {
+                itemW.Product.productQty -= itemW.productQty;
+                db.SaveChanges();
+                if (itemW.Product.productQty <= 0)
+                {
+                    // ! Send Admin Email
+                }
+            }
+
+            // Update Order Status
             OrderStatus orderStatus = db.OrderStatus.Find(shoppingCart.cartID);
             orderStatus.status = "paid"; // Maybe "confirmed" ??
             db.SaveChanges();

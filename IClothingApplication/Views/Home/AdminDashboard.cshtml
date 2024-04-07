@@ -7,14 +7,21 @@
 <h4>YOU ARE NOW LOGGED IN AS AN ADMIN @Session["UserName"] w/ ID: @Session["UserID"]</h4>
 <div class="row">
     <div class="col-md-4">
-        <h2>@Html.ActionLink("CustomerQueries", "Index", "UserQueries")</h2>
-        <p>Review Queries</p>
+        <h2>@Html.ActionLink("Manage Billing", "AdminBillingManager", "Tools")</h2>
+        <p>Manage the billing of orders</p>
     </div>
 
     <div class="col-md-4">
         <h2>@Html.ActionLink("Manage Database", "AdminManagementDashboard", "Home")</h2>
         <p>Links to Manage the Database Tables</p>
-  
+    </div>
+
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Customer Queries", "Index", "UserQueries")</h2>
+        <p>Review Queries</p>
+    </div>
+
+    <div class="col-md-4">
         <h2>@Html.ActionLink("Administrators", "Index", "Administrators")</h2>
         <p>Administrators Basic Information.</p>
     </div>

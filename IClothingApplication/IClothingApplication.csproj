@@ -143,6 +143,7 @@
     <Compile Include="Controllers\OrderStatusController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartsController.cs" />
+    <Compile Include="Controllers\ToolsController.cs" />
     <Compile Include="Controllers\UserCommentsController.cs" />
     <Compile Include="Controllers\UserPasswordsController.cs" />
     <Compile Include="Controllers\UserQueriesController.cs" />
@@ -393,10 +394,11 @@
     <Content Include="Views\ShoppingCarts\EditItem.cshtml" />
     <Content Include="Views\ShoppingCarts\DeleteItem.cshtml" />
     <Content Include="Views\ShoppingCarts\Checkout.cshtml" />
+    <Content Include="Views\Tools\AdminBillingManager.cshtml" />
+    <Content Include="Views\Tools\BillingDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\LoggedOutCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
