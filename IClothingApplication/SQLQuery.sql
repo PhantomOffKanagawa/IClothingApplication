@@ -238,7 +238,7 @@ VALUES(1, null, 'Rusty.Romaguera', 'qmJrzCKwNUzH8h_', 100, '2024-12-10'),
 
 -- Insert Statements for AboutUs
 insert into AboutUs (companyAddress, companyShippingPolicy, companyReturnPolicy, companyContactInfo, companyBusinessDescription, managerID)
-VALUES('93854 Lenore Springs', 'We ship things', 'We accept them', 'Contact Us @ Info', 'This is the description of iClothing', 2);
+VALUES('93854 Lenore Springs', 'At iClothing, we strive to deliver your order swiftly and efficiently. We offer worldwide shipping options to ensure that our customers can enjoy our curated selection of luxury fashion wherever they are. Shipping costs and delivery times may vary depending on your location and the selected shipping method. For more details, please contact our customer service team for assistance.', 'Your satisfaction is our priority at iClothing. If for any reason you are not completely satisfied with your purchase, you may return it within 30 days of receipt for a full refund or exchange. Items must be returned in their original condition, unworn, with tags attached, and in their original packaging. ', 'Contact Us @ Info', 'Welcome to iClothing, your premier destination for luxury fashion from the world''s most renowned brands. At iClothing, we believe that fashion is not just about clothing; it''s a statement, an expression of individuality, and a reflection of personal style. We strive to curate a diverse selection of high-quality apparel for women, men, and kids, ensuring that everyone can find something that resonates with their unique tastes.', 2);
 
 
 -- Insert Statements for UserQuery
