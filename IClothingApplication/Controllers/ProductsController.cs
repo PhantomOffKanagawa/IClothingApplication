@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -258,20 +259,11 @@ namespace IClothingApplication.Controllers
             base.Dispose(disposing);
         }
 
-        // GET: Products/Add/5
-        // Working need to add error handling
-        public ActionResult Add(int? id, string sortOrder, string filter, string filterType, string searchString, bool? changeSort)
+        // New method to handle Ajax request
+        [HttpPost]
+        public JsonResult AddToCartAjax(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
             Product product = db.Product.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
 
             // Product didn't have an issue
             // Write to DB
@@ -294,16 +286,75 @@ namespace IClothingApplication.Controllers
 
                     Debug.WriteLine(wrapper.Product.productName + " Added To Cart");
                     //ViewBag.Message = wrapper.Product.productName + " Added To Cart";
-                    return RedirectToAction("Index", "Products", new {Message = wrapper.Product.productName + " Added To Cart", sortOrder = sortOrder, filter = filter, filterType = filterType, searchString = searchString, changeSort = changeSort });
-                } catch (Exception ex)
+                    return Json(new { Message = wrapper.Product.productName + " Added To Cart" });
+                }
+                catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message + "\n" + ex.ToString());
                     Debug.WriteLine("Item in cart");
                     //ViewBag.Message = "Item Already In Cart";
-                    return RedirectToAction("Index", "Products", new { Message = "Item Already In Cart", sortOrder = sortOrder, filter = filter, filterType = filterType, searchString = searchString, changeSort = changeSort });
+                    return Json(new { Message = "Item Already In Cart" });
                 }
             }
-            return View(product);
+            return Json(new { Message = "Error" });
+        }
+
+
+        // GET: Products/Add/5
+        // Working need to add error handling
+        public ActionResult Add(int? id, string sortOrder, string filter, string filterType, string searchString, bool? changeSort)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                // Call the new method if this is an Ajax request
+                return AddToCartAjax(id);
+            }
+            else
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                Product product = db.Product.Find(id);
+                if (product == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Product didn't have an issue
+                // Write to DB
+                if (ModelState.IsValid)
+                {
+                    // Try for already in cart error
+                    try
+                    {
+                        var wrapper = new ItemWrapper();
+                        wrapper.productID = (int)id;
+                        wrapper.productQty = 1; //Hard-Coded
+
+                        // Get cart for id
+                        ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
+                        wrapper.cartID = shoppingCart.cartID;
+
+                        // Add Wrapper
+                        db.ItemWrapper.Add(wrapper);
+                        db.SaveChanges();
+
+                        Debug.WriteLine(wrapper.Product.productName + " Added To Cart");
+                        //ViewBag.Message = wrapper.Product.productName + " Added To Cart";
+                        return RedirectToAction("Index", "Products", new { Message = wrapper.Product.productName + " Added To Cart", sortOrder = sortOrder, filter = filter, filterType = filterType, searchString = searchString, changeSort = changeSort });
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message + "\n" + ex.ToString());
+                        Debug.WriteLine("Item in cart");
+                        //ViewBag.Message = "Item Already In Cart";
+                        return RedirectToAction("Index", "Products", new { Message = "Item Already In Cart", sortOrder = sortOrder, filter = filter, filterType = filterType, searchString = searchString, changeSort = changeSort });
+                    }
+                }
+                return View(product);
+            }
         }
     }
 }

@@ -136,7 +136,8 @@
                             @*@Html.ActionLink("Details", "Details", new { id = item.productID }, new { @class = "text-dark" })*@
                             @if (Session["UserType"] != "admin")
                             {
-                                @Html.ActionLink("Add To Cart", "Add", new { id = item.productID, sortOrder = ViewBag.sortOrder, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = false }, new { @class = "btn btn-primary mt-2" })
+                                <button class="addToCartButton btn btn-primary mt-2" data-id=@item.productID>Add To Cart</button>
+                                @*@Html.ActionLink("Add To Cart", "Add", new { id = item.productID, sortOrder = ViewBag.sortOrder, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = false }, new { @class = "btn btn-primary mt-2" })*@
                             }
                         </div>
                     </div>
@@ -145,3 +146,19 @@
         }
     </div>
 </div>
+
+<script>
+    window.onload = function () {
+        $('.addToCartButton').click(function () {
+            $.ajax({
+                url: '@Url.Action("Add", "Products")',
+                type: 'POST',
+                data: { id: $(this).data("id") },
+                success: function (result) {
+                    $('#modal-body').html(result.Message);
+                    $('#staticBackdrop').modal('show');
+                }
+            });
+        });
+    };
+</script>
