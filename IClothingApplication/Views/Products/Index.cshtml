@@ -127,8 +127,8 @@
                     @Html.ActionLink("Edit", "Edit", new { id = item.productID }, new { @class = "text-dark" })
                     @Html.ActionLink("Delete", "Delete", new { id = item.productID }, new { @class = "text-dark" })
                 }
-                @Html.ActionLink("Details", "Details", new { id = item.productID }, new { @class = "text-dark" })
-                @if (Session["UserType"] == "customer")
+                @*@Html.ActionLink("Details", "Details", new { id = item.productID }, new { @class = "text-dark" })*@
+                @if (Session["UserType"] != "admin")
                 {
                     @Html.ActionLink("Add To Cart", "Add", new { id = item.productID }, new { @class = "text-dark" })
                 }

@@ -70,8 +70,13 @@ namespace IClothingApplication.Controllers
             }
 
             [AllowAnonymous]
-            public ActionResult Register()
+            public ActionResult Register(string Message)
             {
+                if (Message != null)
+                {
+                    ViewBag.Message = Message;
+                }
+
                 return View();
             }
 
@@ -120,24 +125,23 @@ namespace IClothingApplication.Controllers
                         db.UserPassword.Add(model);
                         db.SaveChanges();
 
-                        // Give User Shopping Cart
-                        var cart = new ShoppingCart
-                        {
-                            customerID = (int)TempData["userID"]
-                        };
-                        Debug.WriteLine("The id was: " + cart.customerID);
-                        db.ShoppingCart.Add(cart);
+                        // Attach Shopping Cart
+                        ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session, db);
+                        shoppingCart.customerID = (int)TempData["userID"];
+
+                        //Debug.WriteLine("The id was: " + cart.customerID);
+                        //db.ShoppingCart.Add(shoppingCart);
+                        db.Entry(shoppingCart).State = EntityState.Modified;
                         db.SaveChanges();
 
-                        // Give User Order Status
-                        var orderStatus = new OrderStatus
-                        {
-                            cartID = (int)cart.cartID,
-                            status = "none",
-                            statusDate = new DateTime()
-                        };
-                        db.OrderStatus.Add(orderStatus);
+                        // Update OrderStatus to be attached
+                        shoppingCart.OrderStatus.status = "none";
+                        shoppingCart.OrderStatus.statusDate = new DateTime();
+                        db.Entry(shoppingCart.OrderStatus).State = EntityState.Modified;
+
+                        //db.Entry(shoppingCart.OrderStatus).State = EntityState.Modified;
                         db.SaveChanges();
+
 
                         // Write Message to User
                         ViewBag.Message = "Successful Registration";

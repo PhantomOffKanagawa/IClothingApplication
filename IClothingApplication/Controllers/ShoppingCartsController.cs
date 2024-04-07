@@ -27,97 +27,19 @@ namespace IClothingApplication.Controllers
         {
             ViewBag.Message = Message;
 
-            // If user isn't customer return to home
-            if (Session["UserType"] != "customer")
+            // If user isn an admin return to home
+            if (Session["UserType"] == "admin")
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            // Get user ID
-            var userID = (int) Session["UserID"];
-            // Get Shopping Cart
-            var shoppingCart = db.ShoppingCart.Where(s => (s.customerID.Equals(userID))).Where(c => c.OrderStatus.status.Equals("none")).FirstOrDefault();
-            if (shoppingCart == null)
-                return View();
-                IQueryable<ItemWrapper> itemWrapper = db.ItemWrapper.Where(s => (s.cartID.Equals(shoppingCart.cartID))).Include(p => p.Product);
-                return View(itemWrapper.ToList());
-        }
+            // Get Cart
+            ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
 
-        // GET: ShoppingCarts/Checkout
-        public ActionResult Checkout()
-        {
-            //ShoppingCart shoppingCart = db.ShoppingCart.Find(id);
-            //if (shoppingCart == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View();
-
-            // If user isn't customer return to home
-            if (Session["UserType"] != "customer")
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            // Get user ID
-            var userID = (int)Session["UserID"];
-            // Get Shopping Cart
-            var shoppingCart = db.ShoppingCart.Where(s => (s.customerID.Equals(userID))).Where(c => c.OrderStatus.status.Equals("none")).FirstOrDefault();
             if (shoppingCart == null)
                 return View();
             IQueryable<ItemWrapper> itemWrapper = db.ItemWrapper.Where(s => (s.cartID.Equals(shoppingCart.cartID))).Include(p => p.Product);
             return View(itemWrapper.ToList());
-        }
-
-        // POST: ShoppingCarts/Checkout
-        [HttpPost, ActionName("Checkout")]
-        [ValidateAntiForgeryToken]
-        public ActionResult CheckoutConfirmed()
-        {
-            // Get user ID
-            var userID = (int)Session["UserID"];
-            // Get Shopping Cart
-            var shoppingCart = db.ShoppingCart.Where(s => (s.customerID.Equals(userID))).Where(c => c.OrderStatus.status.Equals("none")).FirstOrDefault();
-            if (shoppingCart == null)
-                return View();
-
-            // Handle 0 Items
-            IQueryable<ItemWrapper> itemWrapper = db.ItemWrapper.Where(s => (s.cartID.Equals(shoppingCart.cartID)));
-            if (itemWrapper.Count() == 0)
-            {
-                return RedirectToAction("ViewCart", new { Message = "You Had Nothing In Your Cart!" });
-            }
-            
-            // Handle Low Stock
-            if (itemWrapper.Any(i => i.Product.productQty < i.productQty))
-            {
-                // Send Admin Email
-                return RedirectToAction("ViewCart", new { Message = "A Product Is Too Low On Stock" });
-            }
-
-            OrderStatus orderStatus = db.OrderStatus.Find(shoppingCart.cartID);
-            orderStatus.status = "paid"; // Maybe "confirmed" ??
-            db.SaveChanges();
-
-            // Replace Shopping Cart
-            var newShoppingCart = new ShoppingCart
-            {
-                customerID = userID
-            };
-            db.ShoppingCart.Add(newShoppingCart);
-            db.SaveChanges();
-
-            // Assign Order Status
-            var newOrderStatus = new OrderStatus
-            {
-                cartID = (int)newShoppingCart.cartID,
-                status = "none",
-                statusDate = new DateTime()
-            };
-            db.OrderStatus.Add(newOrderStatus);
-            db.SaveChanges();
-
-            return RedirectToAction("Index", "Home");
         }
 
         // GET: ShoppingCarts/Details/5
@@ -228,12 +150,11 @@ namespace IClothingApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            // Get Cart ID
-            var userID = (int)Session["userID"];
-            var cartID = (int)db.ShoppingCart.Where(s => (s.customerID.Equals(userID))).Where(c => c.OrderStatus.status.Equals("none")).FirstOrDefault().cartID;
+            // Get Shopping Cart
+            ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
 
             // Find itemWrapper from IDs
-            ItemWrapper itemWrapper = db.ItemWrapper.Find(id, cartID);
+            ItemWrapper itemWrapper = db.ItemWrapper.Find(id, shoppingCart.cartID);
             if (itemWrapper == null)
             {
                 return HttpNotFound();
@@ -265,18 +186,17 @@ namespace IClothingApplication.Controllers
             Debug.WriteLine("ID is " + id);
             Debug.WriteLine("UserType is " + (string)Session["UserType"]);
 
-            if (id == null || (string)Session["UserType"] != "customer")
+            if (id == null || (string)Session["UserType"] == "admin")
             {
                 Debug.WriteLine("Did land in 404 tho");
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            // Get Cart ID
-            var userID = (int) Session["userID"];
-            var cartID = (int)db.ShoppingCart.Where(s => (s.customerID.Equals(userID))).Where(c => c.OrderStatus.status.Equals("none")).FirstOrDefault().cartID;
+            // Get Cart
+            ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
 
             // Find itemWrapper from IDs
-            ItemWrapper itemWrapper = db.ItemWrapper.Find(id, cartID);
+            ItemWrapper itemWrapper = db.ItemWrapper.Find(id, shoppingCart.cartID);
             if (itemWrapper == null)
             {
                 return HttpNotFound();
@@ -290,15 +210,81 @@ namespace IClothingApplication.Controllers
         public ActionResult DeleteItemConfirmed(int id)
         {
             // Get Cart ID
-            var userID = (int)Session["userID"];
-            var cartID = db.ShoppingCart.Where(s => (s.customerID.Equals(userID))).Where(c => c.OrderStatus.status.Equals("none")).FirstOrDefault().cartID;
+            ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
 
             // Find itemWrapper from IDs
-            ItemWrapper itemWrapper = db.ItemWrapper.Find(id, cartID);
+            ItemWrapper itemWrapper = db.ItemWrapper.Find(id, shoppingCart.cartID);
 
             db.ItemWrapper.Remove(itemWrapper);
             db.SaveChanges();
             return RedirectToAction("ViewCart");
+        }
+
+        // GET: ShoppingCarts/Checkout
+        public ActionResult Checkout()
+        {
+            ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
+
+            // If user isn't customer return to home
+            if (Session["UserType"] == null)
+            {
+                return RedirectToAction("Register", "Home", new { Message = "You need to register to check out" });
+            }
+
+            // Handle Shopping Cart
+            if (shoppingCart == null)
+                return View();
+            IQueryable<ItemWrapper> itemWrapper = db.ItemWrapper.Where(s => (s.cartID.Equals(shoppingCart.cartID))).Include(p => p.Product);
+            return View(itemWrapper.ToList());
+        }
+
+        // POST: ShoppingCarts/Checkout
+        [HttpPost, ActionName("Checkout")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckoutConfirmed()
+        {
+            // Get Shopping Cart
+            ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
+            if (shoppingCart == null)
+                return View();
+
+            // Handle 0 Items
+            IQueryable<ItemWrapper> itemWrapper = db.ItemWrapper.Where(s => (s.cartID.Equals(shoppingCart.cartID)));
+            if (itemWrapper.Count() == 0)
+            {
+                return RedirectToAction("ViewCart", new { Message = "You Had Nothing In Your Cart!" });
+            }
+
+            // Handle Low Stock
+            if (itemWrapper.Any(i => i.Product.productQty < i.productQty))
+            {
+                // Send Admin Email
+                return RedirectToAction("ViewCart", new { Message = "A Product Is Too Low On Stock" });
+            }
+
+            OrderStatus orderStatus = db.OrderStatus.Find(shoppingCart.cartID);
+            orderStatus.status = "paid"; // Maybe "confirmed" ??
+            db.SaveChanges();
+
+            // Replace Shopping Cart
+            var newShoppingCart = new ShoppingCart();
+            if (Session["UserID"] != null)
+                newShoppingCart.customerID = (int)Session["UserID"];
+
+            db.ShoppingCart.Add(newShoppingCart);
+            db.SaveChanges();
+
+            // Assign Order Status
+            var newOrderStatus = new OrderStatus
+            {
+                cartID = (int)newShoppingCart.cartID,
+                status = "none",
+                statusDate = new DateTime()
+            };
+            db.OrderStatus.Add(newOrderStatus);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)
