@@ -183,12 +183,14 @@ namespace IClothingApplication.Controllers
                             {
                                 Session["UserType"] = "admin";
                                 Session["UserID"] = obj.adminID;
+                                ViewBag.Message = "Welcome Admin!";
                                 return RedirectToAction("AdminDashboard");
                             } else if (obj.customerID != null)
                             {
                                 Session["UserType"] = "customer";
                                 Session["UserID"] = obj.customerID;
-                                return RedirectToAction("CustomerDashboard");
+                                ViewBag.Message = "Welcome Valued Customer!";
+                                return View("Index");
                             }
                         }
                     }
