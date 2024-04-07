@@ -23,8 +23,8 @@ CREATE TABLE Customer (
     customerID INT PRIMARY KEY IDENTITY(1,1),
     customerName VARCHAR(255) NOT NULL,
     customerEmail VARCHAR(255) NOT NULL,
-    customerShippingAddress VARCHAR(255),
-    customerBillingAddress VARCHAR(255),
+    customerShippingAddress VARCHAR(255) NOT NULL,
+    customerBillingAddress VARCHAR(255) NOT NULL,
     customerDOB DATE,
     customerGender VARCHAR(10),
 );
@@ -55,11 +55,11 @@ CREATE TABLE UserPassword (
 -- AboutUs Table
 CREATE TABLE AboutUs (
     id INT PRIMARY KEY IDENTITY(1,1),
-    companyAddress VARCHAR(255),
-    companyShippingPolicy VARCHAR(255),
-    companyReturnPolicy VARCHAR(255),
-    companyContactInfo VARCHAR(255),
-    companyBusinessDescription VARCHAR(255),
+    companyAddress VARCHAR(255) NOT NULL,
+    companyShippingPolicy VARCHAR(255) NOT NULL,
+    companyReturnPolicy VARCHAR(255) NOT NULL,
+    companyContactInfo VARCHAR(255) NOT NULL,
+    companyBusinessDescription VARCHAR(255) NOT NULL,
     managerID INT,
     FOREIGN KEY (managerID) REFERENCES Administrator(adminID)
 );

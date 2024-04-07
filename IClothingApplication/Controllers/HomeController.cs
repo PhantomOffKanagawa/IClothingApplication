@@ -94,7 +94,7 @@ namespace IClothingApplication.Controllers
                     return View("RegisterPassword");
                 }
 
-                ViewBag.Message = "Error";
+                //ViewBag.Message = "Error";
                 return View("Register");
 
             }

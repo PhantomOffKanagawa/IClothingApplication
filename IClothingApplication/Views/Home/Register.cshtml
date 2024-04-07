@@ -14,44 +14,54 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <form class="row g-3">
-            <div class="col-12" style="margin-top: 5px">
-                @Html.LabelFor(a => a.customerName, "Name", new { @class = "form-label", @style = "max-width: none;" })
-                @Html.TextBoxFor(a => a.customerName, new { @class = "form-control", @style = "max-width: none;" })
-                @Html.ValidationMessageFor(a => a.customerName)
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    @Html.LabelFor(a => a.customerName, "Name", new { @class = "form-label" })
+                    @Html.TextBoxFor(a => a.customerName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.customerName, "", new { @class = "text-danger" })
+                </div>
             </div>
-            <div class="col-12" style="margin-top: 5px">
-                @Html.LabelFor(a => a.customerEmail, "Email", new { @class = "form-label", @style = "max-width: none;" })
-                @Html.TextBoxFor(a => a.customerEmail, new { @class = "form-control", @style = "max-width: none;" })
-                @Html.ValidationMessageFor(a => a.customerEmail)
+            <div class="col-md-6">
+                <div class="mb-3">
+                    @Html.LabelFor(a => a.customerEmail, "Email", new { @class = "form-label" })
+                    @Html.TextBoxFor(a => a.customerEmail, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.customerEmail, "", new { @class = "text-danger" })
+                </div>
             </div>
-            <div class="col-12" style="margin-top: 5px">
-                @Html.LabelFor(a => a.customerShippingAddress, "Shipping Address", new { @class = "form-label", @style = "max-width: none;" })
-                @Html.TextBoxFor(a => a.customerShippingAddress, new { @class = "form-control", @style = "max-width: none;" })
-                @Html.ValidationMessageFor(a => a.customerShippingAddress)
+            <div class="col-md-12">
+                <div class="mb-3">
+                    @Html.LabelFor(a => a.customerShippingAddress, "Shipping Address", new { @class = "form-label" })
+                    @Html.TextBoxFor(a => a.customerShippingAddress, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.customerShippingAddress, "", new { @class = "text-danger" })
+                </div>
             </div>
-            <div class="col-12" style="margin-top: 5px">
-                @Html.LabelFor(a => a.customerBillingAddress, "Billing Address", new { @class = "form-label", @style = "max-width: none;" })
-                @Html.TextBoxFor(a => a.customerBillingAddress, new { @class = "form-control", @style = "max-width: none;" })
-                @Html.ValidationMessageFor(a => a.customerBillingAddress)
+            <div class="col-md-12">
+                <div class="mb-3">
+                    @Html.LabelFor(a => a.customerBillingAddress, "Billing Address", new { @class = "form-label" })
+                    @Html.TextBoxFor(a => a.customerBillingAddress, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.customerBillingAddress, "", new { @class = "text-danger" })
+                </div>
             </div>
-            <div class="col-12" style="margin-top: 5px">
-                @Html.LabelFor(a => a.customerDOB, "Date of Birth", new { @class = "form-label", @style = "max-width: none;" })
-                @Html.TextBoxFor(a => a.customerDOB, new { @class = "form-control", @style = "max-width: none;" })
-                @Html.ValidationMessageFor(a => a.customerDOB)
+            <div class="col-md-6">
+                <div class="mb-3">
+                    @Html.LabelFor(a => a.customerDOB, "Date of Birth", new { @class = "form-label" })
+                    @Html.TextBoxFor(a => a.customerDOB, new { @class = "form-control", type = "date" })
+                    @Html.ValidationMessageFor(a => a.customerDOB, "", new { @class = "text-danger" })
+                </div>
             </div>
-            <div class="col-12" style="margin-top: 5px">
-                @Html.LabelFor(a => a.customerGender, "Gender", new { @class = "form-label", @style = "max-width: none;" })
-                @Html.TextBoxFor(a => a.customerGender, new { @class = "form-control", @style = "max-width: none;" })
-                @Html.ValidationMessageFor(a => a.customerGender)
+            <div class="col-md-6">
+                <div class="mb-3">
+                    @Html.LabelFor(a => a.customerGender, "Gender", new { @class = "form-label" })
+                    @Html.TextBoxFor(a => a.customerGender, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.customerGender, "", new { @class = "text-danger" })
+                </div>
             </div>
-            <div class="col-12" style="margin-top: 15px">
-                <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+        <div class="col-12">
+            <div class="mb-5 mt-3">
+                <input type="submit" value="Create Account" class="btn btn-primary" />
             </div>
-        </form>
+        </div>
     }
 </main>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

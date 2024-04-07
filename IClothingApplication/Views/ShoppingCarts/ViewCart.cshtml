@@ -33,9 +33,9 @@
                     </td>
                     @if (item.productQty > item.Product.productQty)
                     {
-                        <td class="bg-danger bg-opacity-25 position-relative" title="Product Stock Lower Than Cart Quantity" >
+                        <td class="bg-danger bg-opacity-25 position-relative" title="Product Stock Currently Only @(item.Product.productQty)" >
                             <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-                                <span class="visually-hidden">New alerts</span>
+                                <span class="visually-hidden">Cart Issue</span>
                             </span>
                             @Html.DisplayFor(modelItem => item.productQty)
                         </td>
