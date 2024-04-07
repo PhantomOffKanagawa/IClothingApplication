@@ -171,8 +171,22 @@ namespace IClothingApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(itemWrapper).State = EntityState.Modified;
-                db.SaveChanges();
+                // If Quantity now 0 remove
+                if (itemWrapper.productQty <= 0)
+                {
+                    var entry = db.Entry(itemWrapper);
+                    if (entry.State == EntityState.Detached)
+                        db.ItemWrapper.Attach(itemWrapper);
+                    db.ItemWrapper.Remove(itemWrapper);
+                    db.SaveChanges();
+
+                }
+                else
+                {
+                    // Else update
+                    db.Entry(itemWrapper).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
                 return RedirectToAction("ViewCart");
             }
             return View(itemWrapper);
