@@ -92,7 +92,8 @@
                                 <span class="badge rounded-pill bg-secondary">@item.Category.categoryName</span>
                                 <span class="badge rounded-pill bg-secondary">@item.Brand.brandName</span>
                             </div>
-                            <div class="d-flex justify-content-between align-items-end flex-row-reverse p-1" style="height:min-content">
+                            <div class="d-flex justify-content-between align-items-end p-1" style="height:min-content">
+                                <span class="badge rounded-pill bg-success">$@item.productPrice</span>
                                 @if (item.productQty != 0)
                                 {
                                     <span class="badge rounded-pill bg-primary">@item.productQty In Stock</span>
@@ -104,8 +105,8 @@
                             </div>
                             @if (Session["UserType"] == "admin")
                             {
-                                @Html.ActionLink("Edit", "Edit", new { id = item.productID }, new { @class = "text-dark" })
-                                @Html.ActionLink("Delete", "Delete", new { id = item.productID }, new { @class = "text-dark" })
+                                @Html.ActionLink("Edit", "Edit", new { id = item.productID }, new { @class = "btn btn-secondary mt-2" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.productID }, new { @class = "btn btn-secondary mt-2" })
                             }
                             @*@Html.ActionLink("Details", "Details", new { id = item.productID }, new { @class = "text-dark" })*@
                             @if (Session["UserType"] != "admin")
