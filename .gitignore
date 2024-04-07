@@ -363,5 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 IClothingApplication/Web.config
-IClothingApplication/Models/
+IClothingApplication/Models/ICLOTHINGModel.*
 
