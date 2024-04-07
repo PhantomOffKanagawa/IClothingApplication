@@ -4,54 +4,107 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<style>
+    /* CSS styles for table */
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.emailDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.emailSubject)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.emailBody)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Administrator.adminName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Customer.customerName)
-        </th>
-        <th></th>
-    </tr>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.emailDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.emailSubject)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.emailBody)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Administrator.adminName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Customer.customerName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.emailNo }) |
-            @Html.ActionLink("Details", "Details", new { id=item.emailNo }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.emailNo })
-        </td>
-    </tr>
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .actions {
+        white-space: nowrap; /* Prevent line breaks */
+    }
+</style>
+
+<h2>My Emails</h2>
+
+@if (Session["UserType"] == "admin")
+{ 
+    <p>
+        @Html.ActionLink("Create New", "Create", null,  new { @class = "btn btn-secondary me-1" })
+    </p>
 }
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Subject</th>
+                <th>Body</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int userType;
+                if (Session["UserType"] == "customer")
+                {
+                    userType = 2;
+                }
+                else
+                {
+                    userType = 1;
+                }
+                int currentUser = Convert.ToInt32(Session["UserID"]);
+            }
 
-</table>
+            @if (userType == 2)
+            {
+                foreach (var item in Model.Where(m => m.Customer.customerID == (int)currentUser))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.emailDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.emailSubject)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.emailBody)
+                        </td>
+                        <td class="actions">
+                            @Html.ActionLink("Details", "Details", new { id = item.emailNo }, new { @class = "btn btn-secondary me-1"})
+                        </td>
+                    </tr>
+                }
+            }
+            else if (userType == 1)
+            {
+                foreach (var item in Model.Where(m => m.Administrator.adminID == (int)currentUser))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.emailDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.emailSubject)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.emailBody)
+                        </td>
+                        <td class="actions">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.emailNo }, new { @class = "btn btn-secondary me-1"})
+                            @Html.ActionLink("Details", "Details", new { id = item.emailNo }, new { @class = "btn btn-secondary me-1" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.emailNo }, new { @class = "btn btn-secondary me-1"})
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
