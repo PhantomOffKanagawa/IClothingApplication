@@ -191,7 +191,8 @@ VALUES('Cornell Hoeger', 'Cornell_Hoeger75@hotmail.com', '38404 Deshawn Union', 
       ('Chester Kshlerin', 'Chester.Kshlerin@hotmail.com', '3129 Lavon Junctions', '3129 Lavon Junctions', '2003-11-08', 'female'),
       ('Joshua Torphy', 'Joshua.Torphy@hotmail.com', '2920 Steuber Lakes', '2920 Steuber Lakes', '1979-08-18', 'male'),
       ('Kelly Kilback', 'Kelly_Kilback33@yahoo.com', '1527 Willms Square', '1527 Willms Square', '2021-05-09', 'male'),
-      ('Delpha Berge-Bernhard', 'Delpha.Berge-Bernhard@hotmail.com', '361 N 4th Street', '361 N 4th Street', '1990-11-03', 'male');
+      ('Delpha Berge-Bernhard', 'Delpha.Berge-Bernhard@hotmail.com', '361 N 4th Street', '361 N 4th Street', '1990-11-03', 'male'),
+	('Customer Customer', 'Kelly_Kilback33@yahoo.com', '1527 Willms Square', '1527 Willms Square', '2021-05-09', 'male');
 
 
 -- Insert Statements for Administrator
@@ -226,6 +227,7 @@ VALUES(1, null, 'Rusty.Romaguera', 'qmJrzCKwNUzH8h_', 100, '2024-12-10'),
       (18, null, 'Judge46', '13ZZ50ehSLw88kv', 100, '2025-01-06'),
       (19, null, 'King_Legros', 'TUqKDVll7FIo7J6', 100, '2025-01-13'),
       (20, null, 'Yoshiko_Baumbach', 'YB9LMKRK9PpQsmX', 100, '2024-05-07'),
+	(21, null, 'customer', 'customer', 100, '2024-12-10'),
       (null, 1, 'admin', 'admin', 100, '2024-10-24'),
       (null, 2, 'Haley_Koch6', '0bOcGEVNwNgKqhs', 100, '2024-11-02'),
       (null, 3, 'Melvin.Gerlach', '6pVr_nlEQykO5wf', 100, '2024-12-25'),
@@ -296,15 +298,26 @@ VALUES('Dolce & Gabbana', null),
 
 -- Insert Statements for Product
 insert into Product (productName, productDescription, productPrice, productQty, categoryID, brandID)
-VALUES('Crochet Crop Top', 'Lilac crochet crop top handmade in Italy. ', 1325, 2, 19, 1),
+VALUES('Crochet Crop Top', 'Lilac crochet crop top handmade in Italy. ', 1325, 2, 16, 1),
       ('Denim and Silk Banana Tree Print Jeans', 'Loose fit, multi-colored, made in Italy', 1925, 5, 8, 1),
-      ('Medusa Baby Sleepsuit', 'This lovely piece for the littles ones features lace trims and a check print enhanced with a reimagined Medusa logo which appears in a repeated motif.', 205, 8, 3, 2),
+	  ('5-Pocket Denim Jeans', 'Children''s 5-pocket cotton denim jeans with logo tag.', 355, 5, 9, 1),
+      ('Medusa Baby Sleepsuit', 'This lovely piece for the littles ones features lace trims and a check print enhanced with a reimagined Medusa logo which appears in a repeated motif.', 205, 8, 18, 2),
       ('Medusa ''95 Flared Pants', 'These formal pants are made from a stretch wool blend in a flared silhouette.', 950, 3, 13, 2),
       ('Year of the Dragon T-Shirt', 'An oversized short-sleeved jersey T-shirt featuring a graphic embroidery and logo design for the Year of the Dragon.', 950, 2, 19, 2),
       ('Wool Twill Formal Pants', 'These wide-leg formal pants are crafted from virgin wool and are detailed with a tonal tailoring label at the back and welt pockets.', 1225, 3, 14, 2),
 	  ('Faded Monogram Logo Crewneck T-Shirt', 'Made from 100% cotton, this slim fit t-shirt is designed for comfortable wear.', 39, 2, 20, 4),
-	  ('Stretch Cotton Slim Fit Short Sleeve Shirt', 'A refined silhouette with considered detailing, this short sleeve woven shirt is cut in a slim fit with an extra soft cotton stretch blend.', 75, 4, 2, 4);
-
+	  ('Sportswear Club Fleece Cargo Shorts', 'Made with lightweight fleece that''s smooth on the outside and brushed soft on the inside, they''re an easy pick when you want a little extra warmth.', 40, 6, 15, 5),
+	  ('Dri-FIT Legend T-Shirt', 'Nike''s Legend tee is made for all athletes from all-day play to gearing up for practice.', 25, 10, 6, 5),
+	  ('Light-Support Non-Padded Longline Sports Bra', 'Lightweight, ribbed InfinaSoft fabric offers an irresistible softness that you can feel with every bend, stretch and shift so you can stay comfortable from morning to night.', 60, 9, 4, 5),
+	  ('AeroSwift Dri-FIT ADV Running Pants', 'Designed for racing, the slim fit design uses our most innovative technologies to help you reach your goals.', 125, 7, 5, 5),
+	  ('Swim Retro Flow Girls T-Back One-Piece Swimsuit', 'With bold colors and heritage Nike style, you’re sure to make a splash when rocking this swimsuit to the beach or pool. Designed specifically for young athletes, it features a T-back design that allows for easy movement.', 46, 4, 12, 5),
+	  ('GG Polyester Tailored Pant', 'Double-breasted suits outline a classic silhouette in the men''s Spring Summer 2024 collection.', 1350, 3, 14, 3),
+	  ('Peter Rabbit X Gucci T-Shirt', 'A playful print decorates this 100% cotton jersey T-shirt.', 240, 7, 21, 3),
+	  ('Children''s Wool Sweater With GG', 'Crafted from blue felted wool, this bold sweater reveals a tonal stitched GG motif.', 480, 8, 18, 3),
+	  ('GG Stretch Jersey Swimsuit', 'Inspired by the summer spirit and beach clubs on the Italian coast, this item is part of Gucci Lido. Asymmetric cut-out details make this perfect for warm-weather destinations.', 790, 5, 10, 3),
+	  ('Nike Swim Men''s 7in Volley Shorts', 'Get ready for your ultimate day at the pool. They feature a stretchy waistband with an exterior drawcord to help you stay comfortable all day long.', 66, 6, 11, 5),
+	  ('90s Loose Fit Jeans', 'Cut in a loose fit, these jeans are a relaxed style perfect for casual outfits. Fitted with a high rise waist and made with classic 5-pocket styling.', 89, 4, 7, 4),
+	  ('Tech Knit Quarter Zip Sweater', 'Woven with a half milano knit, this Calvin Klein pullover sweater features a standout rib-knit neck and a smooth body.', 149, 5, 17, 4);
 
 -- Insert Statements for UserComments
 insert into UserComments (commentDate, commentDescription, customerID)
