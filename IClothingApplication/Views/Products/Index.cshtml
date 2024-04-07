@@ -99,15 +99,15 @@
 
 <br />
 
-@{const int maxLength = 90;}
+@{const int maxLength = 60;}
 
 <div class="container">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
         @foreach (var item in Model)
         {
             <div class="col mb-4">
-                <div class="card" style="min-height: 500px">
-                    <img src="~/Images/@(System.IO.File.Exists(Server.MapPath("~/Images/Products/" + item.productName + ".jpg")) ? "Products/" + item.productName + ".jpg" : "placeholder.jpg")" class="card-img-top" alt="Card Image">
+                <div class="card" style="height: 700px">
+                    <img style="height: 450px; object-fit: cover" src="~/Images/@(System.IO.File.Exists(Server.MapPath("~/Images/Products/" + item.productName + ".jpg")) ? "Products/" + item.productName + ".jpg" : "placeholder.jpg")" class="card-img-top" alt="Card Image">
                     <div class="card-body d-grid">
                         <h5 class="card-title">@Html.ActionLink(item.productName, "Details", new { id = item.productID }, new { @class = "text-dark" })</h5>
                         <p class="card-text">@(item.productDescription.Length > maxLength ? item.productDescription.Substring(0, maxLength) + "..." : item.productDescription)</p>
