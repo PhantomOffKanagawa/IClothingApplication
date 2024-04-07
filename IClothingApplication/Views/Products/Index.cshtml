@@ -25,7 +25,7 @@
 
 <br />
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Products", new { sortOrder = ViewBag.sortOrder, filter = ViewBag.filter, filterType = ViewBag.filterType, changeSort = false }))
 {
     <nav class="navbar navbar-expand-lg navbar-light p-2 mb-1">
         @Html.TextBox("SearchString", "", new { @class = "form-control me-sm-2", @placeholder = "Search Items By Name" })
@@ -72,6 +72,31 @@
     </div>
 }
 
+<table class="table">
+    <tr class="text-center">
+        <th style="width: 20%">
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = true }, new { @class = "text-dark" })
+            @(ViewBag.sortOrder == null ? "▼" : ViewBag.sortOrder == "name_desc" ? "▲" : "")
+        </th>
+        <th style="width: 20%">
+            @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = true }, new { @class = "text-dark" })
+            @(ViewBag.sortOrder == "Price" ? "▲" : ViewBag.sortOrder == "price_desc" ? "▼" : "")
+        </th>
+        <th style="width: 20%">
+            @Html.ActionLink("Quantity", "Index", new { sortOrder = ViewBag.QuantitySortParm, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = true }, new { @class = "text-dark" })
+            @(ViewBag.sortOrder == "Quantity" ? "▲" : ViewBag.sortOrder == "quantity_desc" ? "▼" : "")
+        </th>
+        <th style="width: 20%">
+            @Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = true }, new { @class = "text-dark" })
+            @(ViewBag.sortOrder == "Brand" ? "▲" : ViewBag.sortOrder == "brand_desc" ? "▼" : "")
+        </th>
+        <th style="width: 20%">
+            @Html.ActionLink("Category", "Index", new { sortOrder = ViewBag.CategorySortParm, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = true }, new { @class = "text-dark" })
+            @(ViewBag.sortOrder == "Category" ? "▲" : ViewBag.sortOrder == "category_desc" ? "▼" : "")
+        </th>
+    </tr>
+</table>
+
 <br />
 
 @{const int maxLength = 90;}
@@ -111,7 +136,7 @@
                             @*@Html.ActionLink("Details", "Details", new { id = item.productID }, new { @class = "text-dark" })*@
                             @if (Session["UserType"] != "admin")
                             {
-                                @Html.ActionLink("Add To Cart", "Add", new { id = item.productID }, new { @class = "btn btn-primary mt-2" })
+                                @Html.ActionLink("Add To Cart", "Add", new { id = item.productID, sortOrder = ViewBag.sortOrder, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = false }, new { @class = "btn btn-primary mt-2" })
                             }
                         </div>
                     </div>

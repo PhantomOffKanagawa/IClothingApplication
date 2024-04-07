@@ -38,8 +38,14 @@ namespace IClothingApplication.Controllers
 
         // GET: Products
         // Supports Sorting
-        public ActionResult Index(string sortOrder, string filter, string filterType, string searchString, bool? changeSort)
+        public ActionResult Index(string sortOrder, string filter, string filterType, string searchString, bool? changeSort, string Message)
         {
+            // Pass on Message if exists
+            if (Message != null)
+            {
+                ViewBag.Message = Message;
+            }
+
             // Pass DB items for drop-downs
             var brands = db.Brand.ToList().OrderBy(s => s.brandName);
             ViewBag.Collections_Brands = new SelectList(brands, "brandName", "brandName");
@@ -254,7 +260,7 @@ namespace IClothingApplication.Controllers
 
         // GET: Products/Add/5
         // Working need to add error handling
-        public ActionResult Add(int? id)
+        public ActionResult Add(int? id, string sortOrder, string filter, string filterType, string searchString, bool? changeSort)
         {
             if (id == null)
             {
@@ -288,12 +294,13 @@ namespace IClothingApplication.Controllers
 
                     Debug.WriteLine(wrapper.Product.productName + " Added To Cart");
                     //ViewBag.Message = wrapper.Product.productName + " Added To Cart";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Products", new {Message = wrapper.Product.productName + " Added To Cart", sortOrder = sortOrder, filter = filter, filterType = filterType, searchString = searchString, changeSort = changeSort });
                 } catch (Exception ex)
                 {
+                    Debug.WriteLine(ex.Message + "\n" + ex.ToString());
                     Debug.WriteLine("Item in cart");
                     //ViewBag.Message = "Item Already In Cart";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Products", new { Message = "Item Already In Cart", sortOrder = sortOrder, filter = filter, filterType = filterType, searchString = searchString, changeSort = changeSort });
                 }
             }
             return View(product);
