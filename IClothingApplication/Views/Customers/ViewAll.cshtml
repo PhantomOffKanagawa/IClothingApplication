@@ -1,0 +1,109 @@
+﻿@model IClothingApplication.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    .details-container {
+        max-width: 600px;
+        margin: auto;
+    }
+
+        .details-container h2 {
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .details-container dl {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+            .details-container dl dt {
+                font-weight: bold;
+            }
+
+            .details-container dl dd {
+                margin-left: 0;
+            }
+
+    .actions {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="details-container">
+    <h2 class="text-center mb-4">Customer Details</h2>
+
+    <div>
+        <dl>
+            <dt>@Html.DisplayName("Name")</dt>
+            <dd>@Html.DisplayFor(model => model.customerName)</dd>
+
+            <dt>@Html.DisplayName("Email")</dt>
+            <dd>@Html.DisplayFor(model => model.customerEmail)</dd>
+
+            <dt>@Html.DisplayName("Shipping Address")</dt>
+            <dd>@Html.DisplayFor(model => model.customerShippingAddress)</dd>
+
+            <dt>@Html.DisplayName("Billing Address")</dt>
+            <dd>@Html.DisplayFor(model => model.customerBillingAddress)</dd>
+
+            <dt>@Html.DisplayName("Date of Birth")</dt>
+            <dd>@Html.DisplayFor(model => model.customerDOB)</dd>
+
+            <dt>@Html.DisplayName("Gender")</dt>
+            <dd>@Html.DisplayFor(model => model.customerGender)</dd>
+        </dl>
+    </div>
+
+    <div class="actions">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.customerID }, new { @class = "btn btn-secondary me-1" })
+    </div>
+
+    <hr class="my-5" />
+
+    <h2 class="text-center mb-4">Customer User Details</h2>
+
+    <div>
+        <dl>
+            <dt>@Html.DisplayName("Username")</dt>
+            <dd>@Html.DisplayFor(model => model.UserPassword.FirstOrDefault().userAccountName)</dd>
+        </dl>
+    </div>
+
+    @*<div class="actions">
+        @Html.ActionLink("Edit", "Edit", "UserPasswords", new { id = Model.UserPassword.FirstOrDefault().userAccountName }, new { @class = "btn btn-secondary me-1" })
+    </div>*@
+
+    <hr class="my-5" />
+
+    <h2 class="text-center mb-4">Customer Billing Details</h2>
+
+    <div>
+        <dl>
+            <dt>@Html.DisplayName("Card Number")</dt>
+            <dd>@Html.DisplayFor(model => model.UserBilling.FirstOrDefault().cardNumber)</dd>
+        </dl>
+        <dl>
+            <dt>@Html.DisplayName("CVV")</dt>
+            <dd>@Html.DisplayFor(model => model.UserBilling.FirstOrDefault().cvv)</dd>
+        </dl>
+        <dl>
+            <dt>@Html.DisplayName("Expiration Date")</dt>
+            <dd>@Html.DisplayFor(model => model.UserBilling.FirstOrDefault().expirationDate)</dd>
+        </dl>
+    </div>
+
+    <div class="actions">
+        @Html.ActionLink("Edit", "Edit", "UserBillings", new { id = Model.UserBilling.FirstOrDefault().billingID}, new { @class = "btn btn-secondary me-1" })
+    </div>
+
+    <hr class="my-5" />
+
+    <div class="action">
+        @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-secondary me-1" })
+    </div>
+</div>
