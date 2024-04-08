@@ -145,7 +145,7 @@ CREATE TABLE ItemWrapper (
 -- OrderStatus Table
 CREATE TABLE OrderStatus (
     cartID INT PRIMARY KEY,
-    status VARCHAR(255) NOT NULL,
+    currentStatus VARCHAR(255) NOT NULL,
     statusDate DATE NOT NULL,
     FOREIGN KEY (cartID) REFERENCES ShoppingCart(cartID)
 );
@@ -418,7 +418,7 @@ VALUES(1, 6, 1),
 
 
 -- Insert Statements for OrderStatus
-insert into OrderStatus (status, statusDate, cartID)
+insert into OrderStatus (currentStatus, statusDate, cartID)
 VALUES('paid', '2024-02-25', 1),
       ('none', '2024-03-01', 2),
       ('shipped', '2024-03-17', 3),
