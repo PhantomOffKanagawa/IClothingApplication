@@ -98,7 +98,10 @@
     </div>
 
     <div class="actions">
-        @Html.ActionLink("Edit", "Edit", "UserBillings", new { id = Model.UserBilling.FirstOrDefault().billingID}, new { @class = "btn btn-secondary me-1" })
+        @{
+            var userBillingID = (Model.UserBilling.Count() == 0 ? -1 : (int)Model.UserBilling.FirstOrDefault().billingID);
+        }
+        @Html.ActionLink("Edit", "Edit", "UserBillings", new { id = userBillingID }, new { @class = "btn btn-secondary me-1" })
     </div>
 
     <hr class="my-5" />
