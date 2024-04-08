@@ -115,9 +115,9 @@ namespace IClothingApplication.Models
 
         public int passwordExpiryTime { get; set; }
 
-        [Display(Name = "Account Expiry Date")]
-        [DataType(DataType.DateTime)]
-        [DateInFuture(ErrorMessage = "Expiry date must not be in the future.")]
+        //[Display(Name = "Account Expiry Date")]
+        //[DataType(DataType.DateTime)]
+        //[DateMustBeInFuture(ErrorMessage = "Expiry date must not be in the future.")]
         public Nullable<DateTime> userAccountExpiryDate { get; set; }
     }
 
