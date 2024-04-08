@@ -15,13 +15,21 @@ namespace IClothingApplication.Controllers
         private ICLOTHINGEntities db = new ICLOTHINGEntities();
 
         // GET: Tools
-        public ActionResult AdminBillingManager()
+        public ActionResult AdminBillingManager(int allItems = 0)
         {
             if (Session["UserType"] != "admin")
             {
                 return RedirectToAction("Index", "Home");
             }
-            var shoppingCart = db.ShoppingCart.Where(s => s.OrderStatus.status == "paid").Include(s => s.Customer).Include(s => s.OrderStatus);
+
+            var shoppingCart = db.ShoppingCart.Include(s => s.Customer).Include(s => s.OrderStatus);
+            if (allItems == 0)
+            {
+                shoppingCart = shoppingCart.Where(s => s.OrderStatus.status == "paid");
+            }
+
+            ViewBag.allItems = (allItems == 1 ? 1 : 0);
+
             return View(shoppingCart.ToList());
         }
 
@@ -95,6 +103,15 @@ namespace IClothingApplication.Controllers
             orderStatus.status = "shipped";
             db.SaveChanges();
 
+            // Attach ItemDelivery
+            ItemDelivery itemDelivery = new ItemDelivery
+            {
+                stickerDate = DateTime.Now,
+                cartID = shoppingCart.cartID
+            };
+            db.ItemDelivery.Add(itemDelivery);
+            db.SaveChanges();
+
             String itemString = "";
             foreach (var item in shoppingCart.ItemWrapper)
             {
@@ -106,9 +123,17 @@ namespace IClothingApplication.Controllers
             email.emailSubject = "Your Order Has Been Confirmed";
             email.emailBody = "Your order of the following is confirmed and will be shipped shortly.\n" + itemString;
             email.customerID = shoppingCart.Customer.customerID;
-            email.adminID = (int) Session["UserID"];
+            email.adminID = (int)Session["UserID"];
             email.emailDate = DateTime.Now;
             db.Email.Add(email);
+            db.SaveChanges();
+
+            AdminEmail adminEmail = new AdminEmail();
+            adminEmail.emailDate = DateTime.Now;
+            adminEmail.emailSubject = "You Confirmed " + shoppingCart.Customer.customerName + "'s Order Was Confirmed";
+            adminEmail.emailBody = "Their order was confirmed. It Included: \n" + itemString;
+            adminEmail.adminID = (int)Session["UserID"];
+            db.AdminEmail.Add(adminEmail);
             db.SaveChanges();
 
             return RedirectToAction("AdminBillingManager");

@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AboutUsController.cs" />
+    <Compile Include="Controllers\AdminEmailsController.cs" />
     <Compile Include="Controllers\AdministratorsController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartsController.cs" />
     <Compile Include="Controllers\ToolsController.cs" />
+    <Compile Include="Controllers\UserBillingsController.cs" />
     <Compile Include="Controllers\UserCommentsController.cs" />
     <Compile Include="Controllers\UserPasswordsController.cs" />
     <Compile Include="Controllers\UserQueriesController.cs" />
@@ -151,6 +153,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AboutUs.cs">
+      <DependentUpon>ICLOTHINGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminEmail.cs">
       <DependentUpon>ICLOTHINGModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Administrator.cs">
@@ -199,6 +204,9 @@
       <DependentUpon>ICLOTHINGModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShoppingCart.cs">
+      <DependentUpon>ICLOTHINGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserBilling.cs">
       <DependentUpon>ICLOTHINGModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserComments.cs">
@@ -429,6 +437,18 @@
     <Content Include="Views\Tools\BillingDetails.cshtml" />
     <Content Include="Views\Tools\CustomerOldOrders.cshtml" />
     <Content Include="Views\Tools\CartDetails.cshtml" />
+    <Content Include="Views\UserBillings\Create.cshtml" />
+    <Content Include="Views\UserBillings\Delete.cshtml" />
+    <Content Include="Views\UserBillings\Details.cshtml" />
+    <Content Include="Views\UserBillings\Edit.cshtml" />
+    <Content Include="Views\UserBillings\Index.cshtml" />
+    <Content Include="Views\UserBillings\UserCreate.cshtml" />
+    <Content Include="Views\AdminEmails\Create.cshtml" />
+    <Content Include="Views\AdminEmails\Delete.cshtml" />
+    <Content Include="Views\AdminEmails\Details.cshtml" />
+    <Content Include="Views\AdminEmails\Edit.cshtml" />
+    <Content Include="Views\AdminEmails\Index.cshtml" />
+    <Content Include="Views\AdminEmails\PersonalIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

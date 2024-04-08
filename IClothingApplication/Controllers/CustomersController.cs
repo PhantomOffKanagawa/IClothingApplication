@@ -23,15 +23,7 @@ namespace IClothingApplication.Controllers
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Customer.Find(id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
+            Customer customer = db.Customer.Find(Session["UserID"]);
             return View(customer);
         }
 

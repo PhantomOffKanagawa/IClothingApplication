@@ -23,6 +23,25 @@ namespace IClothingApplication.Models
         }
     }
 
+    public class DateMustBeInFutureAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if (value != null)
+            {
+                DateTime dateValue = (DateTime)value;
+                DateTime maxDate = DateTime.Now.AddTicks(1);
+
+                if (dateValue < maxDate)
+                {
+                    return new ValidationResult($"The date must be in the future.");
+                }
+            }
+
+            return ValidationResult.Success;
+        }
+    }
+
     // Constraints
     [MetadataType(typeof(CustomerMetadata))]
     public partial class Customer
@@ -317,5 +336,54 @@ namespace IClothingApplication.Models
         [Required(ErrorMessage = "Sticker date is required")]
         [DataType(DataType.Date)]
         public DateTime stickerDate { get; set; }
+    }
+
+    [MetadataType(typeof(UserBillingMetadata))]
+    public partial class UserBilling
+    { }
+
+    public class UserBillingMetadata
+    {
+        [Required(ErrorMessage = "Card number is required")]
+        [CreditCard(ErrorMessage = "Must be a proper credit card format")]
+        [StringLength(20, ErrorMessage = "Card number cannot be greater than 20 characters")]
+        public int cardNumber { get; set; }
+
+        [Display(Name = "Expiration Date")]
+        [Required(ErrorMessage = "Expiration date is required")]
+        [DataType(DataType.Date)]
+        [DateMustBeInFuture(ErrorMessage = "Expiration date must be in future")]
+        public int expirationDate { get; set; }
+
+        [StringLength(5, ErrorMessage = "CVV cannot be greater than 5 characters")]
+        [Required(ErrorMessage = "CVV is required")]
+        public int cvv { get; set; }
+
+        [Display(Name = "Expiration Date")]
+        [DataType(DataType.Date)]
+        public DateTime billingDate { get; set; }
+    }
+
+    [MetadataType(typeof(AdminEmailMetadata))]
+    public partial class AdminEmail
+    { }
+
+    public class AdminEmailMetadata
+    {
+        [Display(Name = "Email Date")]
+        [Required(ErrorMessage = "Email date is required")]
+        [DataType(DataType.Date)]
+        [DateInFuture(ErrorMessage = "Email date must not be in the future.")]
+        public DateTime emailDate { get; set; }
+
+        [Required(ErrorMessage = "Email subject is required")]
+        [StringLength(255, ErrorMessage = "Email subject cannot be greater than 255 characters")]
+        public string emailSubject { get; set; }
+
+        [Required(ErrorMessage = "Email body is required")]
+        public string emailBody { get; set; }
+
+        [Required(ErrorMessage = "Admin ID is required")]
+        public int adminID { get; set; }
     }
 }
