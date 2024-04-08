@@ -287,7 +287,7 @@ namespace IClothingApplication.Models
 
         [Required(ErrorMessage = "Status is required")]
         [StringLength(255, ErrorMessage = "Status cannot be greater than 255 characters")]
-        public string status { get; set; }
+        public string currentStatus { get; set; }
 
 
         [Display(Name = "Status Date")]

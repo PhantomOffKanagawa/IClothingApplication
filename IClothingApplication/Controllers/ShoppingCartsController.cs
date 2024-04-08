@@ -298,7 +298,7 @@ namespace IClothingApplication.Controllers
 
             // Update Order Status
             OrderStatus orderStatus = db.OrderStatus.Find(shoppingCart.cartID);
-            orderStatus.status = "paid"; // Maybe "confirmed" ??
+            orderStatus.currentStatus = "paid"; // Maybe "confirmed" ??
             db.SaveChanges();
 
             // Replace Shopping Cart
@@ -313,7 +313,7 @@ namespace IClothingApplication.Controllers
             var newOrderStatus = new OrderStatus
             {
                 cartID = (int)newShoppingCart.cartID,
-                status = "none",
+                currentStatus = "none",
                 statusDate = DateTime.Now
             };
             db.OrderStatus.Add(newOrderStatus);

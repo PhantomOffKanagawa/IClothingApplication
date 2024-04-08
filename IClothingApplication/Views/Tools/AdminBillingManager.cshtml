@@ -29,7 +29,7 @@
             @Html.DisplayNameFor(model => model.OrderStatus.statusDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OrderStatus.status)
+            @Html.DisplayNameFor(model => model.OrderStatus.currentStatus)
         </th>
         <th>
             Price
@@ -52,13 +52,13 @@
                 @Html.DisplayFor(modelItem => cart.OrderStatus.statusDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => cart.OrderStatus.status)
+                @Html.DisplayFor(modelItem => cart.OrderStatus.currentStatus)
             </td>
             <td>
                 $@sum
             </td>
             <td>
-                @if (cart.OrderStatus.status == "paid")
+                @if (cart.OrderStatus.currentStatus == "paid")
                 {
                 @Html.ActionLink("Verify", "BillingDetails", new { id = cart.cartID })
                 }
