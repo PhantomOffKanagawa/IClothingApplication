@@ -238,21 +238,21 @@ VALUES(1, null, 'Rusty.Romaguera', 'qmJrzCKwNUzH8h_', 100, '2024-12-10'),
 
 -- Insert Statements for AboutUs
 insert into AboutUs (companyAddress, companyShippingPolicy, companyReturnPolicy, companyContactInfo, companyBusinessDescription, managerID)
-VALUES('93854 Lenore Springs', 'We ship things', 'We accept them', 'Contact Us @ Info', 'This is the description of iClothing', 2);
+VALUES('93854 Lenore Springs', 'At iClothing, we strive to deliver your order swiftly and efficiently. We offer worldwide shipping options to ensure that our customers can enjoy our curated selection of luxury fashion wherever they are. Shipping costs and delivery times may vary depending on your location and the selected shipping method. For more details, please contact our customer service team for assistance.', 'Your satisfaction is our priority at iClothing. If for any reason you are not completely satisfied with your purchase, you may return it within 30 days of receipt for a full refund or exchange. Items must be returned in their original condition, unworn, with tags attached, and in their original packaging. ', 'Contact Us @ Info', 'Welcome to iClothing, your premier destination for luxury fashion from the world''s most renowned brands. At iClothing, we believe that fashion is not just about clothing; it''s a statement, an expression of individuality, and a reflection of personal style. We strive to curate a diverse selection of high-quality apparel for women, men, and kids, ensuring that everyone can find something that resonates with their unique tastes.', 2);
 
 
 -- Insert Statements for UserQuery
 insert into UserQuery (queryDate, queryDescription, customerID)
-VALUES('2023-06-16', 'Adipisci debeo admoveo maxime capio capto cado umquam animi sponte.', 10),
-      ('2024-02-12', 'Civis cum vulgivagus capitulus.', 1),
-      ('2023-10-22', 'Confero denique voco defessus arbitro.', 20),
-      ('2023-12-11', 'Accusamus deduco acerbitas acies cruentus accommodo.', 15),
-      ('2023-11-23', 'Vir alter speculum optio anser nulla ustulo tabella iure nobis.', 19),
-      ('2023-08-17', 'Tui auctor vere taceo curo amet adiuvo.', 9),
-      ('2023-05-31', 'Torrens vitae crepusculum ter venio vigor tubineus.', 6),
-      ('2023-06-23', 'Articulus tabesco quibusdam ascit strenuus aliquid solio alioqui.', 4),
-      ('2023-09-21', 'Socius victus balbus defaeco trado vito cognatus cerno terminatio suscipio.', 8),
-      ('2024-03-12', 'Libero maiores molestiae curtus acquiro.', 7);
+VALUES('2023-06-16', 'I received my order, but one item seems to be missing. Can you help me track it or provide assistance in resolving the issue?', 10),
+      ('2024-02-12', 'Do you have any information about upcoming sales or promotions? I''m eyeing a few items but would like to wait for a possible discount.', 1),
+      ('2023-10-22', 'Can you provide more details about the material used in the Dolce & Gabbana sweater I''m interested in? I want to make sure it''s suitable for the upcoming season.', 20),
+      ('2023-12-11', 'Do you offer international shipping? I''m located outside the United States and would like to know if I can still place an order.', 15),
+      ('2023-11-23', 'What is your policy regarding returns and exchanges? I want to make sure I understand the process before making a purchase.', 19),
+      ('2023-08-17', 'Can you tell me if the Versace dress I''m interested in is true to size, or should I consider sizing up/down?', 9),
+      ('2023-05-31', 'I''m looking for a specific Nike shoe model, but I couldn''t find it on your website. Can you assist me in locating it or suggest a similar alternative?', 6),
+      ('2023-06-23', 'I''m interested in purchasing a Gucci handbag from iClothing, but I''m unsure about the size. Can you provide measurements or guidance on selecting the right size?', 4),
+      ('2023-09-21', 'I''m shopping for my son and daughter and would like to know if you have any special promotions or discounts for children''s clothing?', 8),
+      ('2024-03-12', 'I''m considering purchasing a Versace jacket as a gift. Do you offer gift wrapping services, and can I include a personalized message?', 7);
 
 
 -- Insert Statements for Department
@@ -299,6 +299,13 @@ VALUES('Dolce & Gabbana', null),
 -- Insert Statements for Product
 insert into Product (productName, productDescription, productPrice, productQty, categoryID, brandID)
 VALUES('Crochet Crop Top', 'Lilac crochet crop top handmade in Italy. ', 1325, 2, 16, 1),
+	('One-Piece Swimsuit With Plunging Neckline And Bluebell Print', 'Multi-colored, one-piece swimsuit with a plunging V-neck on the front and a straight back.', 795, 8, 10, 1),
+	  ('Short-Sleeved Marina-Print T-Shirt', 'The Marina line has us dreaming of the Mediterranean sea and its myriad shades of blue, while also bringing weathered sailors to mind, yet with a contemporary edge.', 875, 5, 20, 1),
+	  ('CK Sport Future Icon Cropped Mesh T-Shirt', 'Elevate your workout routine to a new level with this active mesh top designed to support dynamic movement while maintaining comfort and breathability. Cut in a slim, form-fitting silhouette with a cropped length.', 65, 10, 4, 4),
+	  ('CK Sport Future Icon Windbreaker Jacket', 'Constructed from cooling, moisture wicking fabric, this windbreaker jacket is designed to support dynamic movement while maintaining comfort and breathability. Created with a drawstring hood and snap button closures along the front.', 150, 7, 5, 4),
+	  ('Cage Yarn Chunky Sweater', 'A chunky pullover sweater, crafted from a soft cotton acrylic blend in a cage yarn knit. Designed with relaxed fit shaping and subtle decorative stitching at the crewneck, shoulders and slit cuffs.', 169, 9, 16, 4),
+	  ('Stretch Work Pant', 'Designed with a tailored slim fit, these Calvin Klein suit pants feature a refined and timeless look. Crafted from a sleek stretch blend with an interior hook clasp and multiple pockets in a clean, modern silhouette.', 129, 4, 14, 4),
+      ('Blossom Kids Swimsuit', 'A one-piece swimsuit with ruffle trims featuring a checkerboard print with blossoming flowers.', 300, 3, 12, 2),
       ('Denim and Silk Banana Tree Print Jeans', 'Loose fit, multi-colored, made in Italy', 1925, 5, 8, 1),
 	  ('5-Pocket Denim Jeans', 'Children''s 5-pocket cotton denim jeans with logo tag.', 355, 5, 9, 1),
       ('Medusa Baby Sleepsuit', 'This lovely piece for the littles ones features lace trims and a check print enhanced with a reimagined Medusa logo which appears in a repeated motif.', 205, 8, 18, 2),
@@ -321,16 +328,16 @@ VALUES('Crochet Crop Top', 'Lilac crochet crop top handmade in Italy. ', 1325, 2
 
 -- Insert Statements for UserComments
 insert into UserComments (commentDate, commentDescription, customerID)
-VALUES('2023-09-22', 'Voro quidem adsum ancilla sto sophismata temptatio dolorem tibi pecto.', 3),
-      ('2023-09-19', 'Verbera vilicus ambitus.', 3),
-      ('2023-10-24', 'Alioqui spes aiunt solium cohibeo asperiores congregatio.', 19),
-      ('2023-07-21', 'Denuo vinitor claustrum vito cauda.', 6),
-      ('2024-01-01', 'Quam theologus necessitatibus cursus dolorem dedecor.', 6),
-      ('2023-05-06', 'Animi vestigium stella spiritus acceptus curvo allatus attollo.', 16),
-      ('2023-04-18', 'Territo vomito clementia cauda credo adficio corroboro via clamo thymbra.', 5),
-      ('2024-01-17', 'Earum aspernatur administratio velit error ab assentator velum absque illum.', 15),
-      ('2024-02-13', 'Adversus suus occaecati decumbo crudelis.', 11),
-      ('2024-03-13', 'Amet vulnus ambulo.', 9);
+VALUES('2023-09-22', 'Great selection of men''s clothing! Ordered a few shirts from Nike, and they''re all fantastic quality. Highly recommend iClothing.', 3),
+      ('2023-09-19', 'Impressed with the fast delivery of my Versace jeans from iClothing. The packaging was secure, and the jeans fit perfectly.', 3),
+      ('2023-10-24', 'The shipping time for my Calvin Klein hoodie was longer than expected, but the product itself was worth the wait.', 19),
+      ('2023-07-21', 'iClothing''s attention to detail is commendable!', 6),
+      ('2024-01-01', 'The pricing at iClothing seems a bit steep compared to other retailers. While I love the quality of the Nike shirts I purchased, I wish they were more competitively priced.', 6),
+      ('2023-05-06', 'My Calvin Klein jeans were stylish and fit perfectly!', 16),
+      ('2023-04-18', 'The selection at iClothing is impressive, but I wish they offered more variety in their kid''s clothing section.', 5),
+      ('2024-01-17', 'iClothing''s commitment to customer satisfaction is evident! Had a minor issue with my order, but their responsive customer service team resolved it swiftly.', 15),
+      ('2024-02-13', 'The checkout process at iClothing was smooth, but I wish they offered more payment options. ', 11),
+      ('2024-03-13', 'Mixed feelings about iClothing''s return policy. While I appreciate the 30-day window, the process felt a bit cumbersome. Nonetheless, happy with my Dolce & Gabbana blouse.', 9);
 
 
 -- Insert Statements for ShoppingCart
@@ -410,20 +417,20 @@ VALUES('paid', '2024-02-25', 1),
 
 -- Insert Statements for Email
 insert into Email (emailDate, emailSubject, emailBody, customerID, adminID)
-VALUES('2024-04-02', 'Error denuo sol valetudo earum.', 'Statua centum beneficium quas copia celer.', 7, 6),
-      ('2024-03-12', 'Illum terga nisi delibero cresco supplanto cuius.', 'Inventore appono sed.', 9, 2),
-      ('2024-04-01', 'Arbustum caveo antea conturbo verecundia curto enim accusantium vergo.', 'Virga utrum admoneo creo decerno beatae temptatio aer sollicito volva.', 14, 6),
-      ('2024-03-28', 'Crastinus thesis verus adfero.', 'Suffoco varietas soluta modi.', 14, 5),
-      ('2024-03-05', 'Atavus aspernatur crur.', 'Aureus bestia curis amor theologus verto acsi tenax.', 7, 5),
-      ('2024-02-29', 'Tersus brevis aufero animus.', 'Sequi officia claudeo cogito.', 18, 1),
-      ('2024-03-27', 'Condico vesper socius villa aspernatur laudantium tempore vesica pariatur.', 'Pax vado dolore vallum architecto solus confugo ascisco triumphus.', 18, 6),
-      ('2024-03-14', 'Tamisium coaegresco sollers calamitas vinitor.', 'Qui timidus deserunt desidero audeo aestus abeo cubicularis eveniet cariosus.', 6, 6),
-      ('2024-03-19', 'Templum amplitudo tersus sponte arceo vel catena vulgus.', 'Officia eveniet natus denuo crux tactus ante cometes.', 6, 5),
-      ('2024-03-07', 'Speciosus cresco tabesco apud assentator asper cupiditate pauci.', 'Viriliter auxilium cattus ab adinventitias peior.', 14, 1),
-      ('2024-03-12', 'Validus concedo adeptio quam perspiciatis tres tum succurro.', 'Amoveo aiunt cursim vulticulus capitulus capillus pel utpote utrimque.', 8, 3),
-      ('2024-03-21', 'Summisse dapifer voluptates ars uterque altus demens maiores sunt adeptio.', 'Arbustum desidero sordeo.', 9, 2),
-      ('2024-02-27', 'Perspiciatis conculco ver vulnero.', 'Coniuratio thalassinus aestivus alo solutio tres ullus terminatio.', 19, 3),
-      ('2024-03-19', 'Iste cado aetas.', 'Verbum concido voluptatibus quidem vesco.', 4, 2);
+VALUES('2024-04-02', 'Confirmation of International Shipping Availability', 'Thank you for reaching out to iClothing regarding our shipping policies. We''re delighted to inform you that we do offer international shipping to customers worldwide.', 7, 6),
+      ('2024-03-12', 'Information on Material Composition for Your Dolce & Gabbana Sweater', 'Our Dolce & Gabbana sweaters typically feature a blend of high-quality materials, including wool, cashmere, and cotton. However, specific compositions may vary depending on the style and design.', 9, 2),
+      ('2024-04-01', 'Resolving the Issue of the Missing Item in Your iClothing Order', 'Rest assured, we are committed to resolving this issue promptly for you. To assist us in investigating further and expediting the process, could you please provide us with the order number and the specific item that is missing?', 14, 6),
+      ('2024-03-28', 'Help Finding Your Desired Nike Shoe Model', 'To better assist you, could you please provide us with the specific Nike shoe model you''re looking for? Alternatively, if you''re open to exploring similar alternatives, our team can offer recommendations based on your preferences.', 14, 5),
+      ('2024-03-05', 'Exclusive Updates on Upcoming Promotions at iClothing', 'We''re excited to share that we have some exciting promotions and discounts lined up for our customers, including special offers on selected items and upcoming sales events.', 7, 5),
+      ('2024-02-29', 'Thank You for Your Positive Feedback!', 'We wanted to take a moment to express our heartfelt gratitude for your recent feedback regarding your shopping experience with iClothing. Your kind words truly mean the world to us, and we''re delighted to hear that you''re satisfied with your purchase.', 18, 1),
+      ('2024-03-27', 'Adding a Personalized Touch to Your iClothing Gift Order', 'To add a personalized touch to your order, we offer complimentary gift wrapping services along with the option to include a personalized message. If you would like to include a personalized message with your gift, please provide us with the message you''d like to convey, and we''ll ensure it''s included with your order.', 18, 6),
+      ('2024-03-14', 'Addressing Your Concerns About Pricing at iClothing', 'We understand that pricing plays a significant role in the overall shopping experience, and we continuously strive to offer competitive prices while maintaining the exceptional quality and service that our customers expect from us. However, we acknowledge that there may be instances where our pricing may not fully meet your expectations.', 6, 6),
+      ('2024-03-19', 'Guidance for Navigating the iClothing Website', 'If you''re searching for specific items, we recommend using our search bar or browsing through our categories and filters to narrow down your options. Additionally, our customer service team is available to assist you with any specific inquiries or product recommendations you may have.', 6, 5),
+      ('2024-03-07', 'Your iClothing Order is Being Processed!', 'Our team is diligently working to prepare your order for shipment, and you can expect to receive a confirmation email with tracking details once your order has been dispatched.', 14, 1),
+      ('2024-03-12', 'Confirmation of Return Processing for Your iClothing Order', 'Your refund has been processed back to the original payment method used for the purchase. Depending on your financial institution, it may take several business days for the refund to reflect in your account.', 8, 3),
+      ('2024-03-21', 'Share Your Feedback with iClothing!', 'We invite you to participate in a brief customer satisfaction survey to share your thoughts and opinions about your recent experience with iClothing. Your feedback will help us identify areas for improvement and ensure that we continue to meet and exceed your expectations.', 9, 2),
+      ('2024-02-27', 'Assistance with Your Product Inquiry', 'To provide you with accurate information, could you please provide us with more details about the specific product you''re interested in? This could include the product name, model number, or any other relevant information that will help us better understand your inquiry.', 19, 3),
+      ('2024-03-19', 'Exclusive Discount Offer for Valued Customers', 'As a token of our appreciation for your continued support, we''re delighted to offer you an exclusive discount on your next iClothing purchase!', 4, 2);
 
 
 -- Insert Statements for ItemDelivery
