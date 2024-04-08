@@ -48,7 +48,7 @@ namespace IClothingApplication.Controllers
                     {
                         cartID = (int)shoppingCart.cartID,
                         status = "unattached",
-                        statusDate = new DateTime()
+                        statusDate = DateTime.Now
                     };
                     db.OrderStatus.Add(orderStatus);
                     db.SaveChanges();
@@ -85,7 +85,7 @@ namespace IClothingApplication.Controllers
                     {
                         cartID = (int)shoppingCart.cartID,
                         status = "none",
-                        statusDate = new DateTime()
+                        statusDate = DateTime.Now
                     };
                     db.OrderStatus.Add(orderStatus);
                     db.SaveChanges();

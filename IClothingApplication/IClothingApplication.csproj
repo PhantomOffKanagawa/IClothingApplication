@@ -427,6 +427,8 @@
     <Content Include="Views\ShoppingCarts\Checkout.cshtml" />
     <Content Include="Views\Tools\AdminBillingManager.cshtml" />
     <Content Include="Views\Tools\BillingDetails.cshtml" />
+    <Content Include="Views\Tools\CustomerOldOrders.cshtml" />
+    <Content Include="Views\Tools\CartDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

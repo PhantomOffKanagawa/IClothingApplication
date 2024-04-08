@@ -4,23 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Products</h2>
-
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
-
-@*<p>
-        @ViewBag.filter
-        @ViewBag.searchString
-    </p>*@
+<h1 class="text-center mt-3">Products</h1>
 
 @if (ViewBag.filter != null)
 {
-    <br />
-    <h4>
-        Filtering by @ViewBag.filterType: @ViewBag.filter
-    </h4>
+    <h2>
+        @ViewBag.filterType: @ViewBag.filter
+    </h2>
+    <h3>
+        @ViewBag.description
+    </h3>
 }
 
 <br />
@@ -120,6 +113,10 @@
 
 <div class="container">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        @if (Model.Count() == 0)
+        {
+            <h3 class="mt-4 mx-auto text-center" style="font-weight:100">No Items Found</h3>
+        }
         @foreach (var item in Model)
         {
             <div class="col mb-4">
@@ -202,14 +199,14 @@
             });
         });
 
-            $(document).click(function (event) {
-                var clickover = $(event.target);
-                var _opened = $(".collapse").hasClass("collapse show");
-                console.log(clickover.parents('.sticky-top').length);
-                if (_opened === true && clickover.parents('.sticky-top').length == 0) {
-                    $(".collapse").collapse('hide');
-                }
-            });
+        $(document).click(function (event) {
+            var clickover = $(event.target);
+            var _opened = $(".collapse").hasClass("collapse show");
+            console.log(clickover.parents('.sticky-top').length);
+            if (_opened === true && clickover.parents('.sticky-top').length == 0) {
+                $(".collapse").collapse('hide');
+            }
+        });
     };
 </script>
 

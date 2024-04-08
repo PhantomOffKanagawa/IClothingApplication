@@ -6,9 +6,11 @@
 
 @{
     Decimal sum = 0;
+    int total = 0;
     foreach (var item in Model.ItemWrapper)
     {
         sum += item.productQty * item.Product.productPrice;
+        total += item.productQty;
     }
 }
 
@@ -22,8 +24,8 @@
                 <strong>Status:</strong> @Html.DisplayFor(model => model.OrderStatus.status)<br>
                 <strong>Date:</strong> $@Html.DisplayFor(model => model.OrderStatus.statusDate)<br>
                 <strong>Payment:</strong> $@sum<br>
-                <strong>Billing Address:</strong> @Html.DisplayFor(model => model.Customer.customerBillingAddress)<br>
-                <strong>Sticker ID:</strong> @Html.DisplayFor(model => model.ItemDelivery.stickerID)
+                <strong>Quantity: </strong> @total @(total == 1 ? "Item" : "Items")<br> 
+                <strong>Sticker ID:</strong> @Html.DisplayFor(model => model.ItemDelivery.stickerID)<br />
                 <strong>Sticker Date:</strong> @Html.DisplayFor(model => model.ItemDelivery.stickerDate)
             </p>
         </div>
@@ -37,6 +39,7 @@
         @foreach (var itemWrapper in Model.ItemWrapper)
         {
             IClothingApplication.Models.Product item = itemWrapper.Product;
+
             <div class="col mb-4">
                 <div class="card" style="height: 700px">
                     <img style="height: 450px; object-fit: cover; border-radius: var(--bs-card-inner-border-radius) 0 0 var(--bs-card-inner-border-radius)" src="~/Images/@(System.IO.File.Exists(Server.MapPath("~/Images/Products/" + item.productName + ".jpg")) ? "Products/" + item.productName + ".jpg" : "placeholder.jpg")" class="card-img-top" alt="Card Image">
@@ -52,7 +55,7 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-end p-1" style="height:min-content">
                                 <span class="badge rounded-pill bg-success">$@item.productPrice</span>
-                                <span class="badge rounded-pill bg-primary">@item.productQty Bought</span>
+                                    <span class="badge rounded-pill bg-primary">@item.productQty Bought</span>
                             </div>
                         </div>
                     </div>
@@ -63,8 +66,6 @@
 </div>
 
 <div class="">
-    @Html.ActionLink("Confirm Cart", "Confirm", new { id = Model.cartID }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Deny Cart", "Deny", new { id = Model.cartID }, new { @class = "btn btn-danger" })
     @Html.ActionLink("Back to List", "AdminBillingManager", null, new { @class = "btn btn-secondary" })
 </div>
 

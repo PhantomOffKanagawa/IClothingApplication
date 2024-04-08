@@ -119,7 +119,7 @@ namespace IClothingApplication.Controllers
                     {
                         Debug.WriteLine("Started Try");
                         model.passwordExpiryTime = 100;
-                        model.userAccountExpiryDate = new DateTime().AddDays(100);
+                        model.userAccountExpiryDate = DateTime.Now.AddDays(100);
                         model.customerID = ((int?)(TempData["userType"] == "customer" ? TempData["userID"] : null));
                         model.adminID = ((int?)(TempData["userType"] == "admin" ? TempData["userID"] : null));
                         Debug.WriteLine("Filled Details");
@@ -140,7 +140,7 @@ namespace IClothingApplication.Controllers
 
                         // Update OrderStatus to be attached
                         shoppingCart.OrderStatus.status = "none";
-                        shoppingCart.OrderStatus.statusDate = new DateTime();
+                        shoppingCart.OrderStatus.statusDate = DateTime.Now;
                         db.Entry(shoppingCart.OrderStatus).State = EntityState.Modified;
 
                         //db.Entry(shoppingCart.OrderStatus).State = EntityState.Modified;

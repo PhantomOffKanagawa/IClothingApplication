@@ -17,7 +17,22 @@ namespace IClothingApplication.Controllers
         // GET: Tools
         public ActionResult AdminBillingManager()
         {
+            if (Session["UserType"] != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var shoppingCart = db.ShoppingCart.Where(s => s.OrderStatus.status == "paid").Include(s => s.Customer).Include(s => s.OrderStatus);
+            return View(shoppingCart.ToList());
+        }
+
+        public ActionResult CustomerOldOrders()
+        {
+            if (Session["UserType"] != "customer")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            int userID = (int)Session["UserID"];
+            var shoppingCart = db.ShoppingCart.Where(s => s.OrderStatus.status != "none").Where(s => s.Customer.customerID == userID).Include(s => s.Customer).Include(s => s.OrderStatus);
             return View(shoppingCart.ToList());
         }
 
@@ -30,6 +45,21 @@ namespace IClothingApplication.Controllers
 
         // GET: Tools/BillingDetails/5
         public ActionResult BillingDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ShoppingCart shoppingCart = db.ShoppingCart.Find(id);
+            if (shoppingCart == null)
+            {
+                return HttpNotFound();
+            }
+            return View(shoppingCart);
+        }
+
+        // GET: Tools/CartDetails/5
+        public ActionResult CartDetails(int? id)
         {
             if (id == null)
             {
@@ -77,7 +107,7 @@ namespace IClothingApplication.Controllers
             email.emailBody = "Your order of the following is confirmed and will be shipped shortly.\n" + itemString;
             email.customerID = shoppingCart.Customer.customerID;
             email.adminID = (int) Session["UserID"];
-            email.emailDate = new DateTime();
+            email.emailDate = DateTime.Now;
             db.Email.Add(email);
             db.SaveChanges();
 
