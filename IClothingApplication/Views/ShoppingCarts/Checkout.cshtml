@@ -3,7 +3,9 @@
 @{
     ViewBag.Title = "Change Item Quantity";
 }
-
+@{
+    decimal total = 0;
+}
 
 @using (Html.BeginForm())
 {
@@ -36,6 +38,7 @@
 
                 foreach (var item in Model)
                 {
+                    total += item.productQty * item.Product.productPrice;
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Product.productName)
@@ -55,7 +58,9 @@
                 }
             }
         </table>
-
+        <div style="text-align: right;">
+            <h3>Total: $@total</h3>
+        </div>
         <br />
         <br />
         <div>
