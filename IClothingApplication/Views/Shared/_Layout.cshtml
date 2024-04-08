@@ -20,10 +20,10 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
 
-                    @if (Session["UserType"] == "customer")
+                    <!--@if (Session["UserType"] == "customer")
                     {
                         <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
-                    }
+                    }-->
                     else
                     {
                         <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
@@ -89,8 +89,8 @@
                                 {
                                     @Html.ActionLink("My Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "dropdown-item", style ="color: #007bff" })
                                     @Html.ActionLink("Emails", "Index", "Emails", new {area = "" }, new { @class = "dropdown-item" })
-                                    @Html.ActionLink("Write a Query", "Create", "UserQueries", new {area = "" }, new { @class = "dropdown-item" })
-                                    @Html.ActionLink("Send a Comment", "Create", "UserComments", new {area = "" }, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("My Account", "Details", "Customers", new {area = "" }, new { @class = "dropdown-item" })
+
                                 }
                                 else 
                                 {

@@ -4,63 +4,62 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<style>
+    .details-container {
+        max-width: 600px;
+        margin: auto;
+    }
 
-<div>
-    <h4>Customer</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.customerName)
-        </dt>
+        .details-container h2 {
+            margin-top: 0;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.customerName)
-        </dd>
+        .details-container dl {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(150px, 1fr));
+            gap: 10px;
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.customerEmail)
-        </dt>
+            .details-container dl dt {
+                font-weight: bold;
+            }
 
-        <dd>
-            @Html.DisplayFor(model => model.customerEmail)
-        </dd>
+            .details-container dl dd {
+                margin-left: 0;
+            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.customerShippingAddress)
-        </dt>
+    .actions {
+        margin-top: 20px;
+    }
+</style>
 
-        <dd>
-            @Html.DisplayFor(model => model.customerShippingAddress)
-        </dd>
+<div class="details-container">
+    <h2>Customer Details</h2>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.customerBillingAddress)
-        </dt>
+    <div>
+        <dl>
+            <dt>@Html.DisplayName("Name")</dt>
+            <dd>@Html.DisplayFor(model => model.customerName)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.customerBillingAddress)
-        </dd>
+            <dt>@Html.DisplayName("Email")</dt>
+            <dd>@Html.DisplayFor(model => model.customerEmail)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.customerDOB)
-        </dt>
+            <dt>@Html.DisplayName("Shipping Address")</dt>
+            <dd>@Html.DisplayFor(model => model.customerShippingAddress)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.customerDOB)
-        </dd>
+            <dt>@Html.DisplayName("Billing Address")</dt>
+            <dd>@Html.DisplayFor(model => model.customerBillingAddress)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.customerGender)
-        </dt>
+            <dt>@Html.DisplayName("Date of Birth")</dt>
+            <dd>@Html.DisplayFor(model => model.customerDOB)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.customerGender)
-        </dd>
+            <dt>@Html.DisplayName("Gender")</dt>
+            <dd>@Html.DisplayFor(model => model.customerGender)</dd>
+        </dl>
+    </div>
 
-    </dl>
+    <div class="actions">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.customerID }, new { @class = "btn btn-secondary me-1" })
+        @Html.ActionLink("Back", "Index", "Home",  null,  new { @class = "btn btn-secondary me-1" })
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.customerID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
