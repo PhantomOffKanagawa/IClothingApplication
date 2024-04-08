@@ -299,6 +299,13 @@ VALUES('Dolce & Gabbana', null),
 -- Insert Statements for Product
 insert into Product (productName, productDescription, productPrice, productQty, categoryID, brandID)
 VALUES('Crochet Crop Top', 'Lilac crochet crop top handmade in Italy. ', 1325, 2, 16, 1),
+	('One-Piece Swimsuit With Plunging Neckline And Bluebell Print', 'Multi-colored, one-piece swimsuit with a plunging V-neck on the front and a straight back.', 795, 8, 10, 1),
+	  ('Short-Sleeved Marina-Print T-Shirt', 'The Marina line has us dreaming of the Mediterranean sea and its myriad shades of blue, while also bringing weathered sailors to mind, yet with a contemporary edge.', 875, 5, 20, 1),
+	  ('CK Sport Future Icon Cropped Mesh T-Shirt', 'Elevate your workout routine to a new level with this active mesh top designed to support dynamic movement while maintaining comfort and breathability. Cut in a slim, form-fitting silhouette with a cropped length.', 65, 10, 4, 4),
+	  ('CK Sport Future Icon Windbreaker Jacket', 'Constructed from cooling, moisture wicking fabric, this windbreaker jacket is designed to support dynamic movement while maintaining comfort and breathability. Created with a drawstring hood and snap button closures along the front.', 150, 7, 5, 4),
+	  ('Cage Yarn Chunky Sweater', 'A chunky pullover sweater, crafted from a soft cotton acrylic blend in a cage yarn knit. Designed with relaxed fit shaping and subtle decorative stitching at the crewneck, shoulders and slit cuffs.', 169, 9, 16, 4),
+	  ('Stretch Work Pant', 'Designed with a tailored slim fit, these Calvin Klein suit pants feature a refined and timeless look. Crafted from a sleek stretch blend with an interior hook clasp and multiple pockets in a clean, modern silhouette.', 129, 4, 14, 4),
+      ('Blossom Kids Swimsuit', 'A one-piece swimsuit with ruffle trims featuring a checkerboard print with blossoming flowers.', 300, 3, 12, 2),
       ('Denim and Silk Banana Tree Print Jeans', 'Loose fit, multi-colored, made in Italy', 1925, 5, 8, 1),
 	  ('5-Pocket Denim Jeans', 'Children''s 5-pocket cotton denim jeans with logo tag.', 355, 5, 9, 1),
       ('Medusa Baby Sleepsuit', 'This lovely piece for the littles ones features lace trims and a check print enhanced with a reimagined Medusa logo which appears in a repeated motif.', 205, 8, 18, 2),
