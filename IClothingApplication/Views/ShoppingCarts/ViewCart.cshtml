@@ -3,7 +3,9 @@
 @{
     ViewBag.Title = "View Cart";
 }
-
+@{ 
+    decimal total = 0;
+}
 <h2>Viewing Cart for @Session["UserName"]</h2>
 
 <div>
@@ -14,6 +16,9 @@
             <th>
                 @*@Html.DisplayNameFor(model => model.Product.productName)*@
                 Product Name
+            </th>
+            <th>
+                Product Price
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.productQty)*@
@@ -33,7 +38,7 @@
                     </td>
                     @if (item.productQty > item.Product.productQty)
                     {
-                        <td class="bg-danger bg-opacity-25 position-relative" title="Product Stock Currently Only @(item.Product.productQty)" >
+                        <td class="bg-danger bg-opacity-25 position-relative" title="Product Stock Currently Only @(item.Product.productQty)">
                             <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                                 <span class="visually-hidden">Cart Issue</span>
                             </span>
@@ -42,22 +47,28 @@
                     }
                     else
                     {
+                        total += item.productQty * item.Product.productPrice;
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.productPrice)
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.productQty)
                         </td>
                     }
 
                     <td>
-                        @Html.ActionLink("Edit", "EditItem", new { id = item.productID }, new { @class = "text-dark" })
+                        @Html.ActionLink("Edit", "EditItem", new { id = item.productID }, new { @class = "btn btn-secondary me-1" })
                         @*@Html.ActionLink("Details", "ItemDetails", new { id = item.productID }) |*@
-                        @Html.ActionLink("Delete", "DeleteItem", new { id = item.productID }, new { @class = "text-dark" })
+                        @Html.ActionLink("Delete", "DeleteItem", new { id = item.productID }, new { @class = "btn btn-secondary me-1" })
                     </td>
                 </tr>
             }
         }
     </table>
-
+    <div style="text-align: right;">
+        <h3>Total: $@total</h3>
+    </div>
     <div class="form-actions no-color">
-        @Html.ActionLink("Checkout", "Checkout", new { }, new { @class = "btn btn-outline-success" })
+        @Html.ActionLink("Checkout", "Checkout", new { }, new { @class = "btn btn-secondary me-1" })
     </div>
 </div>

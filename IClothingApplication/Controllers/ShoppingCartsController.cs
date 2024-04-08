@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using IClothingApplication.Models;
 
 namespace IClothingApplication.Controllers
@@ -138,7 +139,8 @@ namespace IClothingApplication.Controllers
             ShoppingCart shoppingCart = db.ShoppingCart.Find(id);
             db.ShoppingCart.Remove(shoppingCart);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            ViewBag.Message("Item deleted from cart.");
+            return View("Index");
         }
 
         // HANDLE CUSTOMER EDITING/DELETING
@@ -319,7 +321,7 @@ namespace IClothingApplication.Controllers
             db.OrderStatus.Add(newOrderStatus);
             db.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { Message = "You have successfully placed you order!" });
         }
 
         protected override void Dispose(bool disposing)

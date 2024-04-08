@@ -4,27 +4,92 @@
     ViewBag.Title = "Home Page";
 }
 
+<style>
+    .card {
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: none;
+    }
+
+    .card-img-container {
+        height: 455px;
+        overflow: hidden;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: auto;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 1rem;
+    }
+
+    .jumbotron {
+        margin-bottom: 0;
+    }
+</style>
+
+@if (ViewBag.Message == "Welcome Valued Customer!")
+{
+    <div class="alert alert-success" role="alert" style="text-align: center;">
+        @ViewBag.Message
+    </div>
+}
+
 <div style="background-color: #e2dcd5; ">
     <div class="jumbotron">
         <div style="width: 100%; height: 180px; background-color: #383636; font-size:100px; font-family:'Baskerville Old Face'; text-align:center; color: white;">
-            iclothing inc.
+            iClothing Inc.
 
             <p class="lead">iCLOTHING, Inc. is a locally owned fashion store located at @(ViewData["address"])</p>
         </div>
 
     </div>
-    <div class="row p-3 pb-5" align="center">
-        <div class="col-md-4">
-            <h2>@Html.ActionLink("Shop Women's", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Women's", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { @class = "btn btn-secondary me-1" })</h2>
-            <img src="~/Images/women1.jpg" width="250" height="400" border="2px" alt="Woman Photo" style="object-fit: cover;"/>
-        </div>
-        <div class="col-md-4">
-            <h2>@Html.ActionLink("Shop Men's", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Mens", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { @class = "btn btn-secondary me-1" })</h2>
-            <img src="~/Images/man.png" width="250" height="400" border="2px" alt="Man Photo" style="object-fit: cover;"/>
-        </div>
-        <div class="col-md-4">
-            <h2>@Html.ActionLink("Shop Kid's", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Kids", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { @class = "btn btn-secondary me-1" })</h2>
-            <img src="~/Images/kidsoutfit.jpg" width="250" height="400" border="2px" alt="Kids Photo" style="object-fit: cover;" />
+
+    <p></p>
+    <div style="margin-left: 20px; margin-right: 20px;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="~/Images/women1.jpg" class="card-img-top" alt="Woman Photo" style="object-fit: cover;">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Shop Women's</h5>
+                        <p class="card-text">Explore our collection for women.</p>
+                        @Html.ActionLink("Explore", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Women's", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true }, new { @class = "btn btn-secondary" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="~/Images/man.png" class="card-img-top" alt="Man Photo" style="object-fit: cover;">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Shop Men's</h5>
+                        <p class="card-text">Discover our collection for men.</p>
+                        @Html.ActionLink("Explore", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Mens", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true }, new { @class = "btn btn-secondary" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-img-container">
+                        <img src="~/Images/kidsoutfit.jpg" class="card-img-top" alt="Kids Photo" style="object-fit: cover;">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Shop Kid's</h5>
+                        <p class="card-text">Browse our collection for kids.</p>
+                        @Html.ActionLink("Explore", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Kids", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true }, new { @class = "btn btn-secondary" })
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
