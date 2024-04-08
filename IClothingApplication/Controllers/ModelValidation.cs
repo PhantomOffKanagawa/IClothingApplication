@@ -23,25 +23,6 @@ namespace IClothingApplication.Models
         }
     }
 
-    public class DateTooOldAttribute : ValidationAttribute
-    {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            if (value != null)
-            {
-                DateTime dateValue = (DateTime)value;
-                DateTime minDate = DateTime.Now.AddYears(-150);
-
-                if (dateValue < minDate)
-                {
-                    return new ValidationResult($"The date must be at least {minDate.ToString("MM/dd/yyyy")} or later.");
-                }
-            }
-
-            return ValidationResult.Success;
-        }
-    }
-
     // Constraints
     [MetadataType(typeof(CustomerMetadata))]
     public partial class Customer
@@ -70,7 +51,6 @@ namespace IClothingApplication.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DateInFuture(ErrorMessage = "Date of birth must not be in the future.")]
-        [DateTooOld(ErrorMessage = "Date of birth must be within 150 years.")]
         public Nullable<DateTime> customerDOB { get; set; }
 
         [StringLength(10, ErrorMessage = "Gender cannot be greater than 10 characters")]
@@ -96,7 +76,6 @@ namespace IClothingApplication.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DateInFuture(ErrorMessage = "Date of birth must not be in the future.")]
-        [DateTooOld(ErrorMessage = "Date of birth must be within 150 years.")]
         public Nullable<DateTime> dateHired { get; set; }
     }
 
@@ -119,7 +98,6 @@ namespace IClothingApplication.Models
         [Display(Name = "Account Expiry Date")]
         [DataType(DataType.DateTime)]
         [DateInFuture(ErrorMessage = "Expiry date must not be in the future.")]
-        [DateTooOld(ErrorMessage = "Expiry date must be within 150 years.")]
         public Nullable<DateTime> userAccountExpiryDate { get; set; }
     }
 
@@ -134,19 +112,15 @@ namespace IClothingApplication.Models
         public string companyAddress { get; set; }
 
         [Required(ErrorMessage = "Company shipping policy is required")]
-        [StringLength(255, ErrorMessage = "Company shipping policy cannot be greater than 255 characters")]
         public string companyShippingPolicy { get; set; }
 
         [Required(ErrorMessage = "Company return policy is required")]
-        [StringLength(255, ErrorMessage = "Company return policy cannot be greater than 255 characters")]
         public string companyReturnPolicy { get; set; }
 
         [Required(ErrorMessage = "Company contact info is required")]
-        [StringLength(255, ErrorMessage = "Company contact info cannot be greater than 255 characters")]
         public string companyContactInfo { get; set; }
 
         [Required(ErrorMessage = "Company business description is required")]
-        [StringLength(255, ErrorMessage = "Company business description cannot be greater than 255 characters")]
         public string companyBusinessDescription { get; set; }
     }
 

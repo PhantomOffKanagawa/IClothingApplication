@@ -56,10 +56,10 @@ CREATE TABLE UserPassword (
 CREATE TABLE AboutUs (
     id INT PRIMARY KEY IDENTITY(1,1),
     companyAddress VARCHAR(255) NOT NULL,
-    companyShippingPolicy VARCHAR(255) NOT NULL,
-    companyReturnPolicy VARCHAR(255) NOT NULL,
-    companyContactInfo VARCHAR(255) NOT NULL,
-    companyBusinessDescription VARCHAR(255) NOT NULL,
+    companyShippingPolicy TEXT NOT NULL,
+    companyReturnPolicy TEXT NOT NULL,
+    companyContactInfo TEXT NOT NULL,
+    companyBusinessDescription TEXT NOT NULL,
     managerID INT,
     FOREIGN KEY (managerID) REFERENCES Administrator(adminID)
 );
