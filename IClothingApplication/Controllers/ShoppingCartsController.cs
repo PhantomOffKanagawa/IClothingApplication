@@ -259,29 +259,10 @@ namespace IClothingApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CheckoutConfirmed()
         {
-            return RedirectToAction("Billing");
-        }
-
-        // GET: ShoppingCarts/Billing
-        public ActionResult Billing()
-        {
-            if (Session["UserID"] == null)
-                return RedirectToAction("Index", "Home");
-            int userID = (int)Session["UserID"];
-            UserBilling userBilling = db.UserBilling.Where(u => u.customerID == userID).FirstOrDefault();
-            return View(userBilling);
-        }
-
-        // POST: ShoppingCarts/Billing
-        [HttpPost, ActionName("Billing")]
-        [ValidateAntiForgeryToken]
-        public ActionResult BillingConfirmed()
-        {
             // Get Shopping Cart
             ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
             if (shoppingCart == null)
-                return View();
-
+                return RedirectToAction("Index", "Home");
             // Handle 0 Items
             IQueryable<ItemWrapper> itemWrapper = db.ItemWrapper.Where(s => (s.cartID.Equals(shoppingCart.cartID)));
             if (itemWrapper.Count() == 0)
@@ -295,6 +276,37 @@ namespace IClothingApplication.Controllers
                 return RedirectToAction("ViewCart", new { Message = "A Product Is Too Low On Stock" });
             }
 
+            return RedirectToAction("Billing");
+        }
+
+        // GET: ShoppingCarts/Billing
+        public ActionResult Billing()
+        {
+            if (Session["UserID"] == null)
+                return RedirectToAction("Index", "Home");
+            int userID = (int)Session["UserID"];
+            UserBilling userBilling = db.UserBilling.Where(u => u.customerID == userID).FirstOrDefault();
+
+            if (userBilling == null)
+            {
+                ViewBag.Message = "You need to add your billing information";
+                return RedirectToAction("ViewAll", "Customers");
+            }
+
+            return View(userBilling);
+        }
+
+        // POST: ShoppingCarts/Billing
+        [HttpPost, ActionName("Billing")]
+        [ValidateAntiForgeryToken]
+        public ActionResult BillingConfirmed()
+        {
+            // Get Shopping Cart
+            ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
+            if (shoppingCart == null)
+                return RedirectToAction("Index", "Home");
+
+            IQueryable<ItemWrapper> itemWrapper = db.ItemWrapper.Where(s => (s.cartID.Equals(shoppingCart.cartID)));
             // Update Product Stock
             foreach (var itemW in itemWrapper)
             {

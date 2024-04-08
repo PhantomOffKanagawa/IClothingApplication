@@ -11,11 +11,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.status)
+            @Html.DisplayNameFor(model => model.currentStatus)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.status)
+            @Html.DisplayFor(model => model.currentStatus)
         </dd>
 
         <dt>
@@ -37,6 +37,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.statusID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cartID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

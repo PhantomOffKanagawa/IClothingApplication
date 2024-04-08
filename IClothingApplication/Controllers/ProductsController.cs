@@ -88,6 +88,14 @@ namespace IClothingApplication.Controllers
                         ViewBag.description = department.departmentDescription;
                         break;
                     case "Category":
+                        //var filters = new List<String>();
+                        //filters.Add(filter);
+                        //foreach (var category in db.Category.Where(c => c.categoryName == filter).FirstOrDefault().Category1)
+                        //    filters.Add(category.categoryName);
+
+                        //products = products.Where(p => (filter.Contains(p.Category.categoryName)));
+                        //ViewBag.description = db.Category.Where(b => b.categoryName == filter).FirstOrDefault().categoryDescription;
+
                         products = products.Where(p => (p.Category.categoryName.Equals(filter)));
                         ViewBag.description = db.Category.Where(b => b.categoryName == filter).FirstOrDefault().categoryDescription;
                         break;

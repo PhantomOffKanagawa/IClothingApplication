@@ -57,7 +57,7 @@ namespace IClothingApplication.Controllers
             {
                 db.UserQuery.Add(userQuery);
                 db.SaveChanges();
-                return RedirectToAction("CustomerDashboard", "Home");
+                return RedirectToAction("Index", "Home", new { Message = "Query Received" } );
             }
 
             ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName", userQuery.customerID);

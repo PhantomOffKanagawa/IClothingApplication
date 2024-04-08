@@ -63,7 +63,7 @@
                 @*<div class="input-group-append">
                         <input type="submit" value="Filter" class="btn btn-outline-secondary" />
                     </div>*@
-                <label for="categoryFilter">Departments</label>
+                <label for="categoryFilter">Category</label>
             </div>
         }
         @using (Html.BeginForm("Index", "Products", new { sortOrder = ViewBag.sortOrder, filterType = "Brand", searchString = ViewBag.searchString, changeSort = false }, FormMethod.Post, new { id = "brandSelectForm" }))
@@ -76,7 +76,7 @@
                 @*<div class="input-group-append">
                         <input type="submit" value="Filter" class="btn btn-outline-secondary" />
                     </div>*@
-                <label for="brandFilter">Departments</label>
+                <label for="brandFilter">Brands</label>
             </div>
         }
     </div>
@@ -173,6 +173,7 @@
                 type: 'POST',
                 data: { id: $(this).data("id") },
                 success: function (result) {
+                    $('#staticBackdropLabel').html("");
                     $('#modal-body').html(result.Message);
                     $('#staticBackdrop').modal('show');
                 }

@@ -38,17 +38,32 @@
 
                 foreach (var item in Model)
                 {
-                    total += item.productQty * item.Product.productPrice;
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Product.productName)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Product.productPrice)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.productQty)
-                        </td>
+                        @if (item.productQty > item.Product.productQty)
+                        {
+                            <td>
+                                $@Html.DisplayFor(modelItem => item.Product.productPrice)
+                            </td>
+                            <td class="bg-danger bg-opacity-25 position-relative" title="Product Stock Currently Only @(item.Product.productQty)">
+                                <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                    <span class="visually-hidden">Cart Issue</span>
+                                </span>
+                                @Html.DisplayFor(modelItem => item.productQty)
+                            </td>
+                        }
+                        else
+                        {
+                            total += item.productQty * item.Product.productPrice;
+                            <td>
+                                $@Html.DisplayFor(modelItem => item.Product.productPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.productQty)
+                            </td>
+                        }
                         <td>
                             @Html.ActionLink("Edit", "EditItem", new { id = item.productID }, new { @class = "btn btn-secondary me-1" })
                             @*@Html.ActionLink("Details", "ItemDetails", new { id = item.productID }) |*@
