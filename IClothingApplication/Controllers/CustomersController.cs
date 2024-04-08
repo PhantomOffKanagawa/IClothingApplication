@@ -27,6 +27,18 @@ namespace IClothingApplication.Controllers
             return View(customer);
         }
 
+        // GET: Customers/Details/5
+        public ActionResult ViewAll(int? id)
+        {
+            if (Session["UserType"] != "customer")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            Customer customer = db.Customer.Find(Session["UserID"]);
+            return View(customer);
+        }
+
         // GET: Customers/Create
         public ActionResult Create()
         {

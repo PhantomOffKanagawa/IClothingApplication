@@ -23,7 +23,7 @@
                     <div class="col-md-6">
                         <p class="card-text">
                             <strong>Status:</strong> @Html.DisplayFor(model => model.OrderStatus.status)<br>
-                            <strong>Date:</strong> $@Html.DisplayFor(model => model.OrderStatus.statusDate)<br>
+                            <strong>Date:</strong> @Html.DisplayFor(model => model.OrderStatus.statusDate)<br>
                             <strong>Payment:</strong> $@sum<br>
                             <strong>Billing Address:</strong> @Html.DisplayFor(model => model.Customer.customerBillingAddress)<br>
                             @*<strong>Sticker ID:</strong> @Html.DisplayFor(model => model.ItemDelivery.stickerID)<br />

@@ -259,6 +259,24 @@ namespace IClothingApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CheckoutConfirmed()
         {
+            return RedirectToAction("Billing");
+        }
+
+        // GET: ShoppingCarts/Billing
+        public ActionResult Billing()
+        {
+            if (Session["UserID"] == null)
+                return RedirectToAction("Index", "Home");
+            int userID = (int)Session["UserID"];
+            UserBilling userBilling = db.UserBilling.Where(u => u.customerID == userID).FirstOrDefault();
+            return View(userBilling);
+        }
+
+        // POST: ShoppingCarts/Billing
+        [HttpPost, ActionName("Billing")]
+        [ValidateAntiForgeryToken]
+        public ActionResult BillingConfirmed()
+        {
             // Get Shopping Cart
             ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
             if (shoppingCart == null)
@@ -301,6 +319,19 @@ namespace IClothingApplication.Controllers
             // Update Order Status
             OrderStatus orderStatus = db.OrderStatus.Find(shoppingCart.cartID);
             orderStatus.currentStatus = "paid"; // Maybe "confirmed" ??
+            db.SaveChanges();
+
+            // Attach Billing Details
+            var userBilling = new UserBilling
+            {
+                customerID = null,
+                cartID = (int)shoppingCart.cartID,
+                cardNumber = shoppingCart.Customer.UserBilling.FirstOrDefault().cardNumber,
+                cvv = shoppingCart.Customer.UserBilling.FirstOrDefault().cvv,
+                expirationDate = shoppingCart.Customer.UserBilling.FirstOrDefault().expirationDate,
+                billingDate = DateTime.Now
+            };
+            db.UserBilling.Add(userBilling);
             db.SaveChanges();
 
             // Replace Shopping Cart

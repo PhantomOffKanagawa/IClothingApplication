@@ -49,6 +49,7 @@ namespace IClothingApplication.Models
 
     public class CustomerMetadata
     {
+        [Display(Name = "Customer Name")]
         [Required(ErrorMessage = "Customer name is required")]
         [StringLength(255, ErrorMessage = "Customer name cannot be greater than 255 characters")]
         public string customerName { get; set; }
@@ -109,7 +110,7 @@ namespace IClothingApplication.Models
         public string userAccountName { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
-        [StringLength(255, ErrorMessage = "Email cannot be greater than 255 characters")]
+        [StringLength(255, ErrorMessage = "Password cannot be greater than 255 characters")]
         public string userEncryptedPassword { get; set; }
 
         public int passwordExpiryTime { get; set; }
@@ -359,7 +360,7 @@ namespace IClothingApplication.Models
         [Required(ErrorMessage = "CVV is required")]
         public int cvv { get; set; }
 
-        [Display(Name = "Expiration Date")]
+        [Display(Name = "Billing Date")]
         [DataType(DataType.Date)]
         public DateTime billingDate { get; set; }
     }

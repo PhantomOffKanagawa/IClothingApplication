@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -39,8 +40,6 @@ namespace IClothingApplication.Controllers
         // GET: UserPasswords/Create
         public ActionResult Create()
         {
-            ViewBag.adminID = new SelectList(db.Administrator, "adminID", "adminName");
-            ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName");
             return View();
         }
 
@@ -64,7 +63,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: UserPasswords/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -85,14 +84,17 @@ namespace IClothingApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,customerID,adminID,userAccountName,userEncryptedPassword,passwordExpiryTime,userAccountExpiryDate")] UserPassword userPassword)
+        public ActionResult Edit([Bind(Include = "customerID,adminID,userAccountName,userEncryptedPassword,passwordExpiryTime,userAccountExpiryDate")] UserPassword userPassword)
         {
+            Debug.WriteLine("Got Edit Return");
             if (ModelState.IsValid)
             {
+            Debug.WriteLine("Got Edit Return Was Valid");
                 db.Entry(userPassword).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            Debug.WriteLine("Got Edit Failed");
             ViewBag.adminID = new SelectList(db.Administrator, "adminID", "adminName", userPassword.adminID);
             ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName", userPassword.customerID);
             return View(userPassword);
