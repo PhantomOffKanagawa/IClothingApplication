@@ -110,6 +110,8 @@ namespace IClothingApplication.Controllers
             [ValidateAntiForgeryToken]
             public ActionResult RegisterPassword(UserPassword model)
             {
+                Debug.WriteLine("Ruh Roh");
+                
                 if (ModelState.IsValid)
                 {
                     Debug.WriteLine("Returned Form");
@@ -160,9 +162,8 @@ namespace IClothingApplication.Controllers
                     }
                 }
 
-                //ViewBag.Message = "Error";
+                ViewBag.Message = "Error";
                 return View();
-
             }
 
             public ActionResult Login()
