@@ -113,13 +113,13 @@ namespace IClothingApplication.Controllers
             db.SaveChanges();
 
             // Attach ItemDelivery
-            ItemDelivery itemDelivery = new ItemDelivery
-            {
-                stickerDate = DateTime.Now,
-                cartID = shoppingCart.cartID
-            };
-            db.ItemDelivery.Add(itemDelivery);
-            db.SaveChanges();
+            //ItemDelivery itemDelivery = new ItemDelivery
+            //{
+            //    stickerDate = DateTime.Now,
+            //    cartID = shoppingCart.cartID
+            //};
+            //db.ItemDelivery.Add(itemDelivery);
+            //db.SaveChanges();
 
             String itemString = "";
             foreach (var item in shoppingCart.ItemWrapper)
