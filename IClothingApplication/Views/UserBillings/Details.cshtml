@@ -1,0 +1,66 @@
+﻿@model IClothingApplication.Models.UserBilling
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserBilling</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cardNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cardNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.expirationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.expirationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cvv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cvv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.billingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.billingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.customerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.customerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCart.cartID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCart.cartID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.billingID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

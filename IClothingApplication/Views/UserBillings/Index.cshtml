@@ -1,0 +1,63 @@
+﻿@model IEnumerable<IClothingApplication.Models.UserBilling>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cardNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.expirationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cvv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.billingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.customerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShoppingCart.cartID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.cardNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.expirationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cvv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.billingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.customerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShoppingCart.cartID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.billingID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.billingID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.billingID })
+        </td>
+    </tr>
+}
+
+</table>

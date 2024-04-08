@@ -4,8 +4,19 @@
     ViewBag.Title = "Old Orders Customers";
 }
 
-<h2>Checked Out Orders</h2>
 
+
+<div class="d-flex justify-content-between align-items-end p-1 mt-2 align-items-end" style="height:min-content">
+    <h2>Checked Out Orders</h2>
+    @if (ViewBag.allItems == 1)
+    {
+        <h6 class="text-dark">@Html.ActionLink("Only Show To Do", "AdminBillingManager", new { allItems = 0 }, new { @class = "text-dark" })</h6>
+    }
+    else
+    {
+        <h6 class="text-dark">@Html.ActionLink("Show All", "AdminBillingManager", new { allItems = 1 }, new { @class = "text-dark" })</h6>
+    }
+</div>
 
 
 
@@ -29,7 +40,8 @@
     @foreach (var cart in Model)
     {
         Decimal sum = 0;
-        foreach (var item in cart.ItemWrapper) {
+        foreach (var item in cart.ItemWrapper)
+        {
             sum += item.productQty * item.Product.productPrice;
         }
         <tr>
@@ -46,7 +58,10 @@
                 $@sum
             </td>
             <td>
+                @if (cart.OrderStatus.status == "paid")
+                {
                 @Html.ActionLink("Verify", "BillingDetails", new { id = cart.cartID })
+                }
             </td>
         </tr>
     }
