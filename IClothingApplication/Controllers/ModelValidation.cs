@@ -11,7 +11,7 @@ namespace IClothingApplication.Models
             if (value != null)
             {
                 DateTime dateValue = (DateTime)value;
-                DateTime maxDate = DateTime.Today;
+                DateTime maxDate = DateTime.Now.AddTicks(1);
 
                 if (dateValue > maxDate)
                 {
@@ -30,7 +30,7 @@ namespace IClothingApplication.Models
             if (value != null)
             {
                 DateTime dateValue = (DateTime)value;
-                DateTime minDate = DateTime.Today.AddYears(-150);
+                DateTime minDate = DateTime.Now.AddYears(-150);
 
                 if (dateValue < minDate)
                 {
@@ -117,7 +117,7 @@ namespace IClothingApplication.Models
         public int passwordExpiryTime { get; set; }
 
         [Display(Name = "Account Expiry Date")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [DateInFuture(ErrorMessage = "Expiry date must not be in the future.")]
         [DateTooOld(ErrorMessage = "Expiry date must be within 150 years.")]
         public Nullable<DateTime> userAccountExpiryDate { get; set; }

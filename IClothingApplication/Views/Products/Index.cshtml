@@ -25,79 +25,93 @@
 
 <br />
 
-@using (Html.BeginForm("Index", "Products", new { sortOrder = ViewBag.sortOrder, filter = ViewBag.filter, filterType = ViewBag.filterType, changeSort = false }))
-{
-    <nav class="navbar navbar-expand-lg navbar-light p-2 mb-1">
-        @Html.TextBox("SearchString", "", new { @class = "form-control me-sm-2", @placeholder = "Search Items By Name" })
-        <input type="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0" />
-    </nav>
-}
 
 
-@*Filter Drop-Downs*@
-@using (Html.BeginForm("Index", "Products", new { sortOrder = ViewBag.sortOrder, filterType = "Department", searchString = ViewBag.searchString, changeSort = false }, FormMethod.Post, new { id = "brandSelectForm" }))
-{
-    <div class="input-group mb-2">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Department</span>
-        </div>
-        @Html.DropDownList("filter", ViewBag.Collections_Departments as SelectList, "Select Department", new { @class = "form-control" })
-        <div class="input-group-append">
-            <input type="submit" value="Filter" class="btn btn-outline-secondary" />
-        </div>
-    </div>
-}
-@using (Html.BeginForm("Index", "Products", new { sortOrder = ViewBag.sortOrder, filterType = "Category", searchString = ViewBag.searchString, changeSort = false }, FormMethod.Post, new { id = "brandSelectForm" }))
-{
-    <div class="input-group mb-2">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Category</span>
-        </div>
-        @Html.DropDownList("filter", ViewBag.Collections_Categories as SelectList, "Select Category", new { @class = "form-control" })
-        <div class="input-group-append">
-            <input type="submit" value="Filter" class="btn btn-outline-secondary" />
-        </div>
-    </div>
-}
-@using (Html.BeginForm("Index", "Products", new { sortOrder = ViewBag.sortOrder, filterType = "Brand", searchString = ViewBag.searchString, changeSort = false }, FormMethod.Post, new { id = "brandSelectForm" }))
-{
-    <div class="input-group mb-2">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Brand</span>
-        </div>
-        @Html.DropDownList("filter", ViewBag.Collections_Brands as SelectList, "Select Brand", new { @class = "form-control" })
-        <div class="input-group-append">
-            <input type="submit" value="Filter" class="btn btn-outline-secondary" />
-        </div>
-    </div>
-}
+<br />
 
-<table class="table">
+<div class="pt-1 sticky-top bg-white">
+    <div class="d-flex justify-content-between align-items-end p-1 mt-2 align-items-center" style="height:min-content">
+        <a class="h6 text-dark" data-bs-toggle="collapse" href="#filterCollapse" role="button" aria-expanded="false" aria-controls="filterCollapse">
+            Filters
+        </a>
+        @using (Html.BeginForm("Index", "Products", new { sortOrder = ViewBag.sortOrder, filter = ViewBag.filter, filterType = ViewBag.filterType, changeSort = false }, FormMethod.Post, new { @class = "flex-grow-1 px-5" }))
+        {
+            <nav class="navbar navbar-expand p-0">
+                @Html.TextBox("SearchString", "", new { @class = "form-control me-sm-2", @placeholder = "Search Items By Name" })
+                <input type="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0" />
+            </nav>
+        }
+
+        <h6>@Model.Count() @(Model.Count() == 1 ? "Product" : "Products")</h6>
+    </div>
+
+    <div class="collapse" id="filterCollapse">
+        @*Filter Drop-Downs*@
+        @using (Html.BeginForm("Index", "Products", new { sortOrder = ViewBag.sortOrder, filterType = "Department", searchString = ViewBag.searchString, changeSort = false }, FormMethod.Post, new { id = "brandSelectForm" }))
+        {
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Department</span>
+                </div>
+                @Html.DropDownList("filter", ViewBag.Collections_Departments as SelectList, "Select Department", new { @class = "form-control" })
+                <div class="input-group-append">
+                    <input type="submit" value="Filter" class="btn btn-outline-secondary" />
+                </div>
+            </div>
+        }
+        @using (Html.BeginForm("Index", "Products", new { sortOrder = ViewBag.sortOrder, filterType = "Category", searchString = ViewBag.searchString, changeSort = false }, FormMethod.Post, new { id = "brandSelectForm" }))
+        {
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Category</span>
+                </div>
+                @Html.DropDownList("filter", ViewBag.Collections_Categories as SelectList, "Select Category", new { @class = "form-control" })
+                <div class="input-group-append">
+                    <input type="submit" value="Filter" class="btn btn-outline-secondary" />
+                </div>
+            </div>
+        }
+        @using (Html.BeginForm("Index", "Products", new { sortOrder = ViewBag.sortOrder, filterType = "Brand", searchString = ViewBag.searchString, changeSort = false }, FormMethod.Post, new { id = "brandSelectForm" }))
+        {
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Brand</span>
+                </div>
+                @Html.DropDownList("filter", ViewBag.Collections_Brands as SelectList, "Select Brand", new { @class = "form-control" })
+                <div class="input-group-append">
+                    <input type="submit" value="Filter" class="btn btn-outline-secondary" />
+                </div>
+            </div>
+        }
+    </div>
+
+<table class="table border-0 mb-0" style="height:min-content">
     <tr class="text-center">
-        <th style="width: 20%">
+        <th class="border-0" style="width: 20%">
             @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = true }, new { @class = "text-dark" })
             @(ViewBag.sortOrder == null ? "▼" : ViewBag.sortOrder == "name_desc" ? "▲" : "")
         </th>
-        <th style="width: 20%">
+        <th class="border-0" style="width: 20%">
             @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = true }, new { @class = "text-dark" })
             @(ViewBag.sortOrder == "Price" ? "▲" : ViewBag.sortOrder == "price_desc" ? "▼" : "")
         </th>
-        <th style="width: 20%">
+        <th class="border-0" style="width: 20%">
             @Html.ActionLink("Quantity", "Index", new { sortOrder = ViewBag.QuantitySortParm, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = true }, new { @class = "text-dark" })
             @(ViewBag.sortOrder == "Quantity" ? "▲" : ViewBag.sortOrder == "quantity_desc" ? "▼" : "")
         </th>
-        <th style="width: 20%">
+        <th class="border-0" style="width: 20%">
             @Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = true }, new { @class = "text-dark" })
             @(ViewBag.sortOrder == "Brand" ? "▲" : ViewBag.sortOrder == "brand_desc" ? "▼" : "")
         </th>
-        <th style="width: 20%">
+        <th class="border-0" style="width: 20%">
             @Html.ActionLink("Category", "Index", new { sortOrder = ViewBag.CategorySortParm, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = true }, new { @class = "text-dark" })
             @(ViewBag.sortOrder == "Category" ? "▲" : ViewBag.sortOrder == "category_desc" ? "▼" : "")
         </th>
     </tr>
 </table>
+<hr style="height: min-content" class="mt-0 mb-3" />
+</div>
 
-<br />
 
 @{const int maxLength = 60;}
 
@@ -107,7 +121,7 @@
         {
             <div class="col mb-4">
                 <div class="card" style="height: 700px">
-                    <img style="height: 450px; object-fit: cover" src="~/Images/@(System.IO.File.Exists(Server.MapPath("~/Images/Products/" + item.productName + ".jpg")) ? "Products/" + item.productName + ".jpg" : "placeholder.jpg")" class="card-img-top" alt="Card Image">
+                    <img style="height: 450px; object-fit: cover; border-radius: var(--bs-card-inner-border-radius) 0 0 var(--bs-card-inner-border-radius)" src="~/Images/@(System.IO.File.Exists(Server.MapPath("~/Images/Products/" + item.productName + ".jpg")) ? "Products/" + item.productName + ".jpg" : "placeholder.jpg")" class="card-img-top" alt="Card Image">
                     <div class="card-body d-grid">
                         @*<h5 class="card-title">@Html.ActionLink(item.productName, "Details", new { id = item.productID }, new { @class = "text-dark" })</h5>*@
                         <h5 class="card-title"><a class="detailsButton text-dark" href="#;" data-id=@item.productID>@item.productName</a></h5>
@@ -186,11 +200,6 @@
         });
     };
 </script>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal">
-    Launch Product Modal
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">

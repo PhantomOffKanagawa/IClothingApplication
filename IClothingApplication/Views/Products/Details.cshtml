@@ -9,7 +9,7 @@
     <div class="card w-75 mx-auto my-4">
         <div class="row no-gutters">
             <div class="col-md-4">
-                <img src="~/Images/@(System.IO.File.Exists(Server.MapPath("~/Images/Products/" + Model.productName + ".jpg")) ? "Products/" + Model.productName + ".jpg" : "placeholder.jpg")" class="card-img" alt="Card Image">
+                <img style="border-radius: var(--bs-card-inner-border-radius) 0 0 var(--bs-card-inner-border-radius)" src="~/Images/@(System.IO.File.Exists(Server.MapPath("~/Images/Products/" + Model.productName + ".jpg")) ? "Products/" + Model.productName + ".jpg" : "placeholder.jpg")" class="card-img" alt="Card Image">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
