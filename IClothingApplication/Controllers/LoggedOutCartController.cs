@@ -47,7 +47,7 @@ namespace IClothingApplication.Controllers
                     var orderStatus = new OrderStatus
                     {
                         cartID = (int)shoppingCart.cartID,
-                        status = "unattached",
+                        currentStatus = "unattached",
                         statusDate = DateTime.Now
                     };
                     db.OrderStatus.Add(orderStatus);
@@ -67,7 +67,7 @@ namespace IClothingApplication.Controllers
             {
                 Debug.WriteLine("Returning Cart By UserID");
                 int userID = (int)Session["UserID"];
-                ShoppingCart shoppingCart = db.ShoppingCart.Where(s => s.customerID != null && s.customerID == userID).Where(c => c.OrderStatus.status.Equals("none")).FirstOrDefault();
+                ShoppingCart shoppingCart = db.ShoppingCart.Where(s => s.customerID != null && s.customerID == userID).Where(c => c.OrderStatus.currentStatus.Equals("none")).FirstOrDefault();
 
                 if (shoppingCart == null)
                 {
@@ -84,7 +84,7 @@ namespace IClothingApplication.Controllers
                     var orderStatus = new OrderStatus
                     {
                         cartID = (int)shoppingCart.cartID,
-                        status = "none",
+                        currentStatus = "none",
                         statusDate = DateTime.Now
                     };
                     db.OrderStatus.Add(orderStatus);

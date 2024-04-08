@@ -1,0 +1,48 @@
+﻿@model IClothingApplication.Models.UserBilling
+
+@{
+    ViewBag.Title = "User Billing";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container my-4">
+        <h2>Is This Billing Information Correct?</h2>
+        <br />
+        <div class="card w-75 mx-auto my-auto">
+            <div class="card-body">
+                <h4 class="card-title text-center">Billing Details</h4>
+                <hr />
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="card-text">
+                                <strong>Name:</strong> @Html.DisplayFor(model => model.Customer.customerName)<br>
+                                <strong>Billing Address:</strong> @Html.DisplayFor(model => model.Customer.customerBillingAddress)<br>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="card-text">
+                                <strong>Card Number:</strong> @Html.DisplayFor(model => model.cardNumber)<br>
+                                <strong>Expiration Date:</strong> $@Html.DisplayFor(model => model.expirationDate)<br>
+                                <strong>CVV:</strong> @Html.DisplayFor(model => model.cvv)<br>
+                                <strong>Billing Date:</strong> @Html.DisplayFor(model => model.billingDate)<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Confirm" class="btn btn-outline-success" /> |
+            @Html.ActionLink("Change Details", "ViewAll", "Customers", new { }, new { @class = "text-dark" })
+        </div>
+    </div>
+}

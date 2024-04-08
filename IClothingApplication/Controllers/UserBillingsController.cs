@@ -39,6 +39,10 @@ namespace IClothingApplication.Controllers
         // GET: UserBillings/Create
         public ActionResult Create()
         {
+            if (Session["UserType"] == "customer")
+            {
+                ViewBag.customerIDVal = (int)Session["UserID"];
+            }
             ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName");
             ViewBag.cartID = new SelectList(db.ShoppingCart, "cartID", "cartID");
             return View();
@@ -55,7 +59,14 @@ namespace IClothingApplication.Controllers
             {
                 db.UserBilling.Add(userBilling);
                 db.SaveChanges();
+                if (Session["UserType"] == "customer")
+                    return RedirectToAction("ViewAll", "Customers");
                 return RedirectToAction("Index");
+            }
+
+            if (Session["UserType"] == "customer")
+            {
+                ViewBag.customerIDVal = (int)Session["UserID"];
             }
 
             ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName", userBilling.customerID);
@@ -73,8 +84,23 @@ namespace IClothingApplication.Controllers
             UserBilling userBilling = db.UserBilling.Find(id);
             if (userBilling == null)
             {
-                return HttpNotFound();
+                int userID = (int)Session["UserID"];
+                if (Session["UserType"] == "customer")
+                {
+                    ViewBag.customerIDVal = (int)Session["UserID"];
+                    return RedirectToAction("Create");
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
             }
+
+            if (Session["UserType"] == "customer")
+            {
+                ViewBag.customerIDVal = (int)Session["UserID"];
+            }
+
             ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName", userBilling.customerID);
             ViewBag.cartID = new SelectList(db.ShoppingCart, "cartID", "cartID", userBilling.cartID);
             return View(userBilling);
@@ -93,6 +119,12 @@ namespace IClothingApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            if (Session["UserType"] == "customer")
+            {
+                ViewBag.customerIDVal = (int)Session["UserID"];
+            }
+
             ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName", userBilling.customerID);
             ViewBag.cartID = new SelectList(db.ShoppingCart, "cartID", "cartID", userBilling.cartID);
             return View(userBilling);

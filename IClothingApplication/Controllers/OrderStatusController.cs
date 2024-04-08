@@ -48,7 +48,7 @@ namespace IClothingApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "statusID,status,statusDate,cartID")] OrderStatus orderStatus)
+        public ActionResult Create([Bind(Include = "statusID,currentStatus,statusDate,cartID")] OrderStatus orderStatus)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace IClothingApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "statusID,status,statusDate,cartID")] OrderStatus orderStatus)
+        public ActionResult Edit([Bind(Include = "statusID,currentStatus,statusDate,cartID")] OrderStatus orderStatus)
         {
             if (ModelState.IsValid)
             {

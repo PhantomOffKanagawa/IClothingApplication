@@ -11,7 +11,8 @@
     }
 
         .details-container h2 {
-            margin-top: 0;
+            margin-top: 2rem;
+            margin-bottom: 4rem;
         }
 
         .details-container dl {
@@ -34,7 +35,7 @@
 </style>
 
 <div class="details-container">
-    <h2>Customer Details</h2>
+    <h2 class="text-center mb-4">Customer Details</h2>
 
     <div>
         <dl>
@@ -60,7 +61,52 @@
 
     <div class="actions">
         @Html.ActionLink("Edit", "Edit", new { id = Model.customerID }, new { @class = "btn btn-secondary me-1" })
-        @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-secondary me-1" })
+    </div>
+
+    <hr class="my-5" />
+
+    <h2 class="text-center mb-4">Customer User Details</h2>
+
+    <div>
+        <dl>
+            <dt>@Html.DisplayName("Username")</dt>
+            <dd>@Html.DisplayFor(model => model.UserPassword.FirstOrDefault().userAccountName)</dd>
+        </dl>
+    </div>
+
+    @*<div class="actions">
+        @Html.ActionLink("Edit", "Edit", "UserPasswords", new { id = Model.UserPassword.FirstOrDefault().userAccountName }, new { @class = "btn btn-secondary me-1" })
+    </div>*@
+
+    <hr class="my-5" />
+
+    <h2 class="text-center mb-4">Customer Billing Details</h2>
+
+    <div>
+        <dl>
+            <dt>@Html.DisplayName("Card Number")</dt>
+            <dd>@Html.DisplayFor(model => model.UserBilling.FirstOrDefault().cardNumber)</dd>
+        </dl>
+        <dl>
+            <dt>@Html.DisplayName("CVV")</dt>
+            <dd>@Html.DisplayFor(model => model.UserBilling.FirstOrDefault().cvv)</dd>
+        </dl>
+        <dl>
+            <dt>@Html.DisplayName("Expiration Date")</dt>
+            <dd>@Html.DisplayFor(model => model.UserBilling.FirstOrDefault().expirationDate)</dd>
+        </dl>
+    </div>
+
+    <div class="actions">
+        @{
+            var userBillingID = (Model.UserBilling.Count() == 0 ? -1 : (int)Model.UserBilling.FirstOrDefault().billingID);
+        }
+        @Html.ActionLink("Edit", "Edit", "UserBillings", new { id = userBillingID }, new { @class = "btn btn-secondary me-1" })
+    </div>
+
+    <hr class="my-5" />
+
+    <div class="action">
         @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-secondary me-1" })
     </div>
 </div>

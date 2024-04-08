@@ -243,6 +243,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\popper.min.js" />
     <Content Include="Content\Scripts\bootstrap.bundle.js" />
     <Content Include="Content\Scripts\bootstrap.bundle.min.js" />
     <Content Include="Content\Scripts\bootstrap.esm.js" />
@@ -449,6 +450,10 @@
     <Content Include="Views\AdminEmails\Edit.cshtml" />
     <Content Include="Views\AdminEmails\Index.cshtml" />
     <Content Include="Views\AdminEmails\PersonalIndex.cshtml" />
+    <Content Include="Views\Customers\ViewAll.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\ShoppingCarts\Billing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

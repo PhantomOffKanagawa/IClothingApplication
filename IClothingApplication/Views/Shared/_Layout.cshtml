@@ -7,10 +7,10 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/css")
-    <script src="https://unpkg.com/@("@")popperjs/core@2"></script>
+    <script src="~/Content/popper.min.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark" style="z-index: 2;">
         <div class="container">
             @Html.ActionLink("iClothing", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
@@ -20,18 +20,16 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
 
-                    <!--@if (Session["UserType"] == "customer")
-                    {
-                        <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
-                    }-->
-                    else
-                    {
-                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
-                    }
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     @*<span class="navbar-text mx-2"></span>*@
-                    @if (Session["UserType"] == "customer")
+                    @if (Session["UserType"] == "admin")
                     {
+                        <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
+                    }
+                    else
+                    {
+
                         if (Session["departments"] != null)
                         {
                             <li class="dropdown show">
@@ -46,24 +44,17 @@
                                     }
                                 </div>
                             </li>
+
                         }
-                        <li>@Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "nav-link text-light" })</li>
-                    }
-                    else if (Session["UserType"] == "admin")
-                    {
-                        <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
-                    }
-                    else
-                    {
 
                         <li>@Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
 
                     @*<li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-        <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-        <li>@Html.ActionLink("Departments", "Departments", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-        <li>@Html.ActionLink("Categories", "Categories", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-        <li>@Html.ActionLink("All Products", "All Products", "Home", new { area = "" }, new { @class = "nav-link" })</li>*@
+                        <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Departments", "Departments", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Categories", "Categories", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("All Products", "All Products", "Home", new { area = "" }, new { @class = "nav-link" })</li>*@
 
                 </ul>
             </div>
@@ -85,16 +76,16 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                @if(Session["UserType"] == "customer") 
+                                @if (Session["UserType"] == "customer")
                                 {
-                                    @Html.ActionLink("My Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "dropdown-item", style ="color: #007bff" })
-                                    @Html.ActionLink("Emails", "Index", "Emails", new {area = "" }, new { @class = "dropdown-item" })
-                                    @Html.ActionLink("My Account", "Details", "Customers", new {area = "" }, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("My Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "dropdown-item", style = "color: #007bff" })
+                                    @Html.ActionLink("Emails", "Index", "Emails", new { area = "" }, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("My Account", "ViewAll", "Customers", new { area = "" }, new { @class = "dropdown-item" })
 
                                 }
-                                else 
+                                else
                                 {
-                                    @Html.ActionLink("Emails", "Index", "Emails", new {area = "" }, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Emails", "Index", "Emails", new { area = "" }, new { @class = "dropdown-item" })
                                 }
                                 @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "dropdown-item" })
                             </div>
@@ -122,15 +113,15 @@
             <!-- Grid container -->
             @if (Session["UserType"] == "customer")
             {
-            <div class="container p-4 pb-0">
-                <!-- Section: CTA -->
-                <section class="">
-                    <p class="d-flex justify-content-center align-items-center">
-                        @Html.ActionLink("Send a Query", "Create", "UserQueries", new { area = "" }, new { @class = "btn btn-outline-light btn-rounded me-2" })
-                        @Html.ActionLink("Send a Comment", "Create", "UserComments", new { area = "" }, new { @class = "btn btn-outline-light btn-rounded ms-2" })
-                    </p>
-                </section>
-            </div>
+                <div class="container p-4 pb-0">
+                    <!-- Section: CTA -->
+                    <section class="">
+                        <p class="d-flex justify-content-center align-items-center">
+                            @Html.ActionLink("Send a Query", "Create", "UserQueries", new { area = "" }, new { @class = "btn btn-outline-light btn-rounded me-2" })
+                            @Html.ActionLink("Send a Comment", "Create", "UserComments", new { area = "" }, new { @class = "btn btn-outline-light btn-rounded ms-2" })
+                        </p>
+                    </section>
+                </div>
             }
             <!-- Grid container -->
             <!-- Copyright -->

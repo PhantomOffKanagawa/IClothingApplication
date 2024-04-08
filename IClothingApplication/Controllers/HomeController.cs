@@ -140,7 +140,7 @@ namespace IClothingApplication.Controllers
                         Debug.WriteLine("Saved Shopping Cart");
 
                         // Update OrderStatus to be attached
-                        shoppingCart.OrderStatus.status = "none";
+                        shoppingCart.OrderStatus.currentStatus = "none";
                         shoppingCart.OrderStatus.statusDate = DateTime.Now;
                         db.Entry(shoppingCart.OrderStatus).State = EntityState.Modified;
 
