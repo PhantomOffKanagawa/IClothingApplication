@@ -19,7 +19,7 @@ namespace IClothingApplication.Controllers
         {
             private ICLOTHINGEntities db = new ICLOTHINGEntities();
 
-            public ActionResult Index()
+            public ActionResult Index(string Message)
             {
                 var aboutUs = db.AboutUs.Include(a => a.Administrator);
                 ViewData["address"] = aboutUs.ToList().ElementAt(0).companyAddress;
@@ -28,6 +28,7 @@ namespace IClothingApplication.Controllers
                 // Pass Departments to Temp Data for Nav Bar
                 Session["departments"] = db.Department.ToList();
 
+                ViewBag.Message = Message;
                 return View(product.ToList());
             }
 
