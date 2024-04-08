@@ -115,9 +115,9 @@ namespace IClothingApplication.Models
 
         public int passwordExpiryTime { get; set; }
 
-        [Display(Name = "Account Expiry Date")]
-        [DataType(DataType.DateTime)]
-        [DateInFuture(ErrorMessage = "Expiry date must not be in the future.")]
+        //[Display(Name = "Account Expiry Date")]
+        //[DataType(DataType.DateTime)]
+        //[DateMustBeInFuture(ErrorMessage = "Expiry date must not be in the future.")]
         public Nullable<DateTime> userAccountExpiryDate { get; set; }
     }
 
@@ -152,8 +152,8 @@ namespace IClothingApplication.Models
     {
 
         [Display(Name = "Query Date")]
-        [DataType(DataType.Date)]
-        [DateInFuture(ErrorMessage = "Query date must not be in the future.")]
+        //[DataType(DataType.Date)]
+        //[DateInFuture(ErrorMessage = "Query date must not be in the future.")]
         public Nullable<DateTime> queryDate { get; set; }
 
         [Required(ErrorMessage = "Query is required")]
@@ -239,8 +239,8 @@ namespace IClothingApplication.Models
     public class UserCommentsMetadata
     {
         [Display(Name = "Comment Date")]
-        [Required(ErrorMessage = "Comment date is required")]
-        [DataType(DataType.Date)]
+        //[Required(ErrorMessage = "Comment date is required")]
+        //[DataType(DataType.Date)]
         [DateInFuture(ErrorMessage = "Expiry date must not be in the future.")]
         public DateTime commentDate { get; set; }
 

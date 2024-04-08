@@ -54,7 +54,7 @@ namespace IClothingApplication.Controllers
             {
                 db.UserComments.Add(userComments);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home", new { Message = "Comment Received" });
             }
 
             ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName", userComments.customerID);

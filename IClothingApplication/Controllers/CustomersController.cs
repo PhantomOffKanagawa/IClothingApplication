@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using IClothingApplication.Models;
 
 namespace IClothingApplication.Controllers
@@ -28,12 +29,14 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: Customers/Details/5
-        public ActionResult ViewAll(int? id)
+        public ActionResult ViewAll(int? id, string Message)
         {
             if (Session["UserType"] != "customer")
             {
                 return RedirectToAction("Index", "Home");
             }
+
+            ViewBag.Message = Message;
 
             Customer customer = db.Customer.Find(Session["UserID"]);
             return View(customer);
