@@ -4,6 +4,13 @@
     ViewBag.Title = "Home Page";
 }
 
+@if (ViewBag.Message == "Welcome Valued Customer!")
+{
+    <div class="alert alert-success" role="alert" style="text-align: center;">
+        @ViewBag.Message
+    </div>
+}
+
 <div style="background-color: #e2dcd5; ">
     <div class="jumbotron">
         <div style="width: 100%; height: 180px; background-color: #383636; font-size:100px; font-family:'Baskerville Old Face'; text-align:center; color: white;">
@@ -13,14 +20,16 @@
         </div>
 
     </div>
+
+
     <div class="row p-3 pb-5" align="center">
         <div class="col-md-4">
             <h2>@Html.ActionLink("Shop Women's", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Women's", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { @class = "btn btn-secondary me-1" })</h2>
-            <img src="~/Images/women1.jpg" width="250" height="400" border="2px" alt="Woman Photo" style="object-fit: cover;"/>
+            <img src="~/Images/women1.jpg" width="250" height="400" border="2px" alt="Woman Photo" style="object-fit: cover;" />
         </div>
         <div class="col-md-4">
             <h2>@Html.ActionLink("Shop Men's", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Mens", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { @class = "btn btn-secondary me-1" })</h2>
-            <img src="~/Images/man.png" width="250" height="400" border="2px" alt="Man Photo" style="object-fit: cover;"/>
+            <img src="~/Images/man.png" width="250" height="400" border="2px" alt="Man Photo" style="object-fit: cover;" />
         </div>
         <div class="col-md-4">
             <h2>@Html.ActionLink("Shop Kid's", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Kids", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true, }, new { @class = "btn btn-secondary me-1" })</h2>
