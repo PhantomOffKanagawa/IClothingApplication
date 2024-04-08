@@ -25,7 +25,7 @@ namespace IClothingApplication.Controllers
             var shoppingCart = db.ShoppingCart.Include(s => s.Customer).Include(s => s.OrderStatus);
             if (allItems == 0)
             {
-                shoppingCart = shoppingCart.Where(s => s.OrderStatus.status == "paid");
+                shoppingCart = shoppingCart.Where(s => s.OrderStatus.currentStatus == "paid");
             }
 
             ViewBag.allItems = (allItems == 1 ? 1 : 0);
@@ -40,7 +40,7 @@ namespace IClothingApplication.Controllers
                 return RedirectToAction("Index", "Home");
             }
             int userID = (int)Session["UserID"];
-            var shoppingCart = db.ShoppingCart.Where(s => s.OrderStatus.status != "none").Where(s => s.Customer.customerID == userID).Include(s => s.Customer).Include(s => s.OrderStatus);
+            var shoppingCart = db.ShoppingCart.Where(s => s.OrderStatus.currentStatus != "none").Where(s => s.Customer.customerID == userID).Include(s => s.Customer).Include(s => s.OrderStatus);
             return View(shoppingCart.ToList());
         }
 
@@ -100,7 +100,16 @@ namespace IClothingApplication.Controllers
 
             // Update Order Status
             OrderStatus orderStatus = db.OrderStatus.Find(shoppingCart.cartID);
-            orderStatus.status = "shipped";
+            orderStatus.currentStatus = "shipped";
+            db.SaveChanges();
+
+            // Attach ItemDelivery
+            ItemDelivery itemDelivery = new ItemDelivery
+            {
+                stickerDate = DateTime.Now,
+                cartID = shoppingCart.cartID
+            };
+            db.ItemDelivery.Add(itemDelivery);
             db.SaveChanges();
 
             // Attach ItemDelivery
@@ -161,7 +170,7 @@ namespace IClothingApplication.Controllers
 
             // Update Order Status
             OrderStatus orderStatus = db.OrderStatus.Find(shoppingCart.cartID);
-            orderStatus.status = "denied";
+            orderStatus.currentStatus = "denied";
             db.SaveChanges();
 
             return RedirectToAction("AdminBillingManager");

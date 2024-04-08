@@ -4,51 +4,29 @@
 }
 
 <h2>AdminDashboard</h2>
-<h4>YOU ARE NOW LOGGED IN AS AN ADMIN @Session["UserName"] w/ ID: @Session["UserID"]</h4>
 <div class="row">
     <div class="col-md-4">
-        <h2>@Html.ActionLink("Manage Billing", "AdminBillingManager", "Tools")</h2>
+        <h2>@Html.ActionLink("Manage Billing", "AdminBillingManager", "Tools", null, new { @class = "btn btn-secondary me-1" })</h2>
         <p>Manage the billing of orders</p>
     </div>
 
     <div class="col-md-4">
-        <h2>@Html.ActionLink("Manage Database", "AdminManagementDashboard", "Home")</h2>
+        <h2>@Html.ActionLink("Manage Database", "AdminManagementDashboard", "Home", null, new { @class = "btn btn-secondary me-1" })</h2>
         <p>Links to Manage the Database Tables</p>
     </div>
 
     <div class="col-md-4">
-        <h2>@Html.ActionLink("Customer Queries", "Index", "UserQueries")</h2>
+        <h2>@Html.ActionLink("Customer Queries", "Index", "UserQueries", null, new { @class = "btn btn-secondary me-1" })</h2>
         <p>Review Queries</p>
     </div>
 
     <div class="col-md-4">
-        <h2>@Html.ActionLink("Administrators", "Index", "Administrators")</h2>
+        <h2>@Html.ActionLink("Administrators", "Index", "Administrators", null, new { @class = "btn btn-secondary me-1" })</h2>
         <p>Administrators Basic Information.</p>
     </div>
 
     <div class="col-md-4">
-        <h2>@Html.ActionLink("Manage Brands", "Index", "Brands")</h2>
-        <p>Brands Basic Information.</p>
-    </div>
-
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Manage Categories", "Index", "Categories")</h2>
-        <p>Categories Basic Information.</p>
-    </div>
-
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Manage Departments", "Index", "Departments")</h2>
-        <p>Departments Basic Information.</p>
-    </div>
-
-    <div class="col-md-4">
-        <img src="~/Images/mail.jpg" width="120" height="120" alt="Mail Photo" />
-        <h2>@Html.ActionLink("Your Emails", "PersonalIndex", "AdminEmails")</h2>
+        <h2>@Html.ActionLink("Your Emails", "PersonalIndex", "AdminEmails", null, new { @class = "btn btn-secondary me-1" })</h2>
         <p>Emails sent to you</p>
-    </div>
-
-    <div class="col-md-4">
-        <h2>@Html.ActionLink("Manage AboutUs", "Index", "AboutUs")</h2>
-        <p>Emails Basic Information.</p>
     </div>
 </div>
