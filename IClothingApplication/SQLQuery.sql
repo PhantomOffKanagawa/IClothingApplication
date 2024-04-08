@@ -1,5 +1,7 @@
 -- * Wipe Tables
 DROP TABLE ItemWrapper;
+DROP TABLE UserBilling;
+DROP TABLE AdminEmail;
 DROP TABLE ItemDelivery;
 DROP TABLE Email;
 DROP TABLE OrderStatus;
@@ -163,9 +165,33 @@ CREATE TABLE Email (
 -- ItemDelivery Table
 CREATE TABLE ItemDelivery (
     cartID INT PRIMARY KEY,
-    stickerID  INT IDENTITY(1,1),
+    stickerID INT IDENTITY(1,1),
     stickerDate DATE NOT NULL,
     FOREIGN KEY (cartID) REFERENCES ShoppingCart(cartID)
+);
+
+-- UserBilling Table
+CREATE TABLE UserBilling (
+    billingID INT PRIMARY KEY IDENTITY(1,1),
+    customerID INT,
+    cartID INT, 
+    cardNumber VARCHAR(20),
+    expirationDate DATE,
+    cvv VARCHAR(5),
+    billingDate DATE,
+    FOREIGN KEY (customerID) REFERENCES Customer(customerID),
+    FOREIGN KEY (cartID) REFERENCES ShoppingCart(cartID),
+    CHECK ((customerID IS NULL AND cartID IS NOT NULL) OR (customerID IS NOT NULL AND cartID IS NULL)),
+);
+
+-- AdminEmail Table
+CREATE TABLE AdminEmail (
+    emailNo  INT PRIMARY KEY IDENTITY(1,1),
+    emailDate DATE NOT NULL,
+    emailSubject VARCHAR(255) NOT NULL,
+    emailBody TEXT NOT NULL,
+    adminID INT NOT NULL,
+    FOREIGN KEY (adminID) REFERENCES Administrator(adminID)
 );
 
 -- SQL Queries to create the dummy data
@@ -435,17 +461,38 @@ VALUES('2024-04-02', 'Confirmation of International Shipping Availability', 'Tha
 
 -- Insert Statements for ItemDelivery
 insert into ItemDelivery (stickerDate, cartID)
-VALUES('2024-03-28', 1),
-      ('2024-03-31', 2),
-      ('2024-03-28', 3),
+VALUES('2024-03-28', 3),
       ('2024-03-22', 4),
-      ('2024-03-14', 6),
       ('2024-03-06', 7),
-      ('2024-03-22', 8),
-      ('2024-02-27', 10),
       ('2024-03-04', 14),
-      ('2024-03-15', 15),
-      ('2024-03-24', 16),
-      ('2024-03-02', 17),
-      ('2024-03-07', 18),
       ('2024-03-24', 20);
+
+INSERT INTO UserBilling (customerID, cartID, cardNumber, expirationDate, cvv, billingDate)
+VALUES(1, null, 1234567890123456, '2024-01-01', '123', GETDATE()),
+      (3, null, 2234567890123456, '2024-02-01', '456', GETDATE()),
+      (4, null, 3234567890123456, '2024-03-01', '789', GETDATE()),
+      (6, null, 4234567890123456, '2024-04-01', '101', GETDATE()),
+      (7, null, 5234567890123456, '2024-04-01', '112', GETDATE()),
+      (8, null, 6234567890123456, '2024-05-01', '134', GETDATE()),
+      (14, null, 7234567890123456, '2024-06-01', '156', GETDATE()),
+      (15, null, 8234567890123456, '2024-07-01', '178', GETDATE()),
+      (20, null, 9234567890123456, '2024-08-01', '192', GETDATE()),
+      (null, 1, 1234567890123456, '2024-01-01', '123', GETDATE()),
+      (null, 3, 2234567890123456, '2024-02-01', '456', GETDATE()),
+      (null, 4, 3234567890123456, '2024-03-01', '789', GETDATE()),
+      (null, 6, 4234567890123456, '2024-04-01', '101', GETDATE()),
+      (null, 7, 5234567890123456, '2024-04-01', '112', GETDATE()),
+      (null, 8, 6234567890123456, '2024-05-01', '134', GETDATE()),
+      (null, 14, 7234567890123456, '2024-06-01', '156', GETDATE()),
+      (null, 15, 8234567890123456, '2024-07-01', '178', GETDATE()),
+      (null, 20, 9234567890123456, '2024-08-01', '192', GETDATE());
+
+      
+-- Insert Statements for AdminEmail
+insert into AdminEmail (emailDate, emailSubject, emailBody, adminID)
+VALUES('2024-04-02', 'Item Out of Stock', 'Medusa Baby Sleepsuit is out of stock', 1),
+      ('2024-04-02', 'Item Out of Stock', 'Medusa Baby Sleepsuit is out of stock', 2),
+      ('2024-04-02', 'Item Out of Stock', 'Medusa Baby Sleepsuit is out of stock', 3),
+      ('2024-04-02', 'Item Out of Stock', 'Medusa Baby Sleepsuit is out of stock', 4),
+      ('2024-04-02', 'Item Out of Stock', 'Medusa Baby Sleepsuit is out of stock', 5),
+      ('2024-04-02', 'Item Out of Stock', 'Medusa Baby Sleepsuit is out of stock', 6);

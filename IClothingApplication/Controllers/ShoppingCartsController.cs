@@ -281,9 +281,20 @@ namespace IClothingApplication.Controllers
                 itemW.Product.productQty -= itemW.productQty;
                 if (itemW.Product.productQty <= 0)
                 {
-                    // ! Send Admin Email
+                    foreach (var admin in db.Administrator)
+                    {
+                        AdminEmail adminEmail = new AdminEmail
+                        {
+                            emailDate = DateTime.Now,
+                            emailSubject = $"Item Out Of Stock Alert ({itemW.Product.productName})",
+                            emailBody = $"The {itemW.Product.productName} is out of stock.\nBrand: {itemW.Product.Brand.brandName}\nCategory: {itemW.Product.Category.categoryName}",
+                            adminID = admin.adminID
+                        };
+                        db.AdminEmail.Add(adminEmail);
+                    }
                 }
             }
+            db.SaveChanges();
 
             // Update Order Status
             OrderStatus orderStatus = db.OrderStatus.Find(shoppingCart.cartID);
