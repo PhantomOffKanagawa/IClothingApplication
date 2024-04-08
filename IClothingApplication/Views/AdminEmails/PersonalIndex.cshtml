@@ -1,0 +1,39 @@
+﻿@model IEnumerable<IClothingApplication.Models.AdminEmail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.emailDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emailSubject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emailBody)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.emailDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emailSubject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emailBody)
+        </td>
+    </tr>
+}
+
+</table>
