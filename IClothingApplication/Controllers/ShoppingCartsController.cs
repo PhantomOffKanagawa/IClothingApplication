@@ -279,7 +279,6 @@ namespace IClothingApplication.Controllers
             foreach (var itemW in itemWrapper)
             {
                 itemW.Product.productQty -= itemW.productQty;
-                db.SaveChanges();
                 if (itemW.Product.productQty <= 0)
                 {
                     // ! Send Admin Email
@@ -304,7 +303,7 @@ namespace IClothingApplication.Controllers
             {
                 cartID = (int)newShoppingCart.cartID,
                 status = "none",
-                statusDate = new DateTime()
+                statusDate = DateTime.Now
             };
             db.OrderStatus.Add(newOrderStatus);
             db.SaveChanges();

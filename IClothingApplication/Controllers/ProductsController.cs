@@ -85,12 +85,15 @@ namespace IClothingApplication.Controllers
                             var categoryIds = childCategories.Select(c => c.categoryID).ToList();
                             products = products.Where(p => categoryIds.Any(c => p.categoryID.Equals(c)));
                         }
+                        ViewBag.description = department.departmentDescription;
                         break;
                     case "Category":
                         products = products.Where(p => (p.Category.categoryName.Equals(filter)));
+                        ViewBag.description = db.Category.Where(b => b.categoryName == filter).FirstOrDefault().categoryDescription;
                         break;
                     case "Brand":
                         products = products.Where(p => (p.Brand.brandName.Equals(filter)));
+                        ViewBag.description = db.Brand.Where(b => b.brandName == filter).FirstOrDefault().brandDescription;
                         break;
                 }
             }
