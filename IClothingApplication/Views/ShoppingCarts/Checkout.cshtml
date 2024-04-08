@@ -22,6 +22,9 @@
                     Product Name
                 </th>
                 <th>
+                    Product Price
+                </th>
+                <th>
                     @*@Html.DisplayNameFor(model => model.productQty)*@
                     Product Quantity
                 </th>
@@ -38,12 +41,15 @@
                             @Html.DisplayFor(modelItem => item.Product.productName)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Product.productPrice)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.productQty)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "EditItem", new { id = item.productID }, new { @class = "text-dark" })
+                            @Html.ActionLink("Edit", "EditItem", new { id = item.productID }, new { @class = "btn btn-secondary me-1" })
                             @*@Html.ActionLink("Details", "ItemDetails", new { id = item.productID }) |*@
-                            @Html.ActionLink("Delete", "DeleteItem", new { id = item.productID }, new { @class = "text-dark" })
+                            @Html.ActionLink("Delete", "DeleteItem", new { id = item.productID }, new { @class = "btn btn-secondary me-1" })
                         </td>
                     </tr>
                 }
