@@ -8,6 +8,13 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/css")
     <script src="~/Content/popper.min.js"></script>
+    <style>
+        #searchBox::placeholder{
+            color: white;
+            opacity: 60%;
+        }
+    </style>
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark" style="z-index: 2;">
@@ -62,11 +69,17 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         @using (Html.BeginForm("Index", "Products", FormMethod.Post, new { @class = "form-inline me-2" }))
-                        {
-                            <input type="text" name="searchString" placeholder="Search Items" class="form-control" style="background: rgba(150,150,150,0.1); border: none; color: white;" />
-                            @*<input type="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0" />*@
+                        {                                  
+                                <input type="text" name="searchString" placeholder="Search Items" class="form-control" id="searchBox" style="background: rgba(150,150,150,0.2); border: none; color: white;" />
+                                @*<input type="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0" />*@
                         }
                     </li>
+
+                    @if(Session["UserType"] == "customer")
+                        {
+                            <li>@Html.ActionLink("My Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "nav-link text-info", style = "color: #007bff" })</li>
+
+                        }
                     @if (Session["UserID"] != null)
                     {
                         string username = @Session["UserName"].ToString();
@@ -74,7 +87,7 @@
                             <a class="nav-link dropdown-toggle text-light" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Welcome @username
                             </a>
-
+                            
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 @if (Session["UserType"] == "customer")
                                 {

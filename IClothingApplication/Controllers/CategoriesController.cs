@@ -51,16 +51,26 @@ namespace IClothingApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "categoryID,categoryName,categoryDescription,parentCategoryID,parentDepartmentID")] Category category)
         {
-            if (ModelState.IsValid)
-            {
-                db.Category.Add(category);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            try {
+                if (ModelState.IsValid)
+                {
+                    db.Category.Add(category);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.parentCategoryID = new SelectList(db.Category, "categoryID", "categoryName", category.parentCategoryID);
-            ViewBag.parentDepartmentID = new SelectList(db.Department, "departmentID", "departmentName", category.parentDepartmentID);
-            return View(category);
+                ViewBag.parentCategoryID = new SelectList(db.Category, "categoryID", "categoryName", category.parentCategoryID);
+                ViewBag.parentDepartmentID = new SelectList(db.Department, "departmentID", "departmentName", category.parentDepartmentID);
+                return View(category);
+            }
+            catch
+            {
+                ViewBag.Message = "Category can only have one parent (Department or Category)";
+                ViewBag.parentCategoryID = new SelectList(db.Category, "categoryID", "categoryName", category.parentCategoryID);
+                ViewBag.parentDepartmentID = new SelectList(db.Department, "departmentID", "departmentName", category.parentDepartmentID);
+                return View(category);
+            }
+            
         }
 
         // GET: Categories/Edit/5
