@@ -55,27 +55,38 @@ namespace IClothingApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "billingID,customerID,cartID,cardNumber,expirationDate,cvv,billingDate")] UserBilling userBilling)
         {
-            if (ModelState.IsValid)
-            {
-                db.UserBilling.Add(userBilling);
-                db.SaveChanges();
-                if (TempData.ContainsKey("ActionName"))
+            try {
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction((string)TempData["ActionName"], (string)TempData["ControllerName"]);
+                    db.UserBilling.Add(userBilling);
+                    db.SaveChanges();
+                    if (Session["UserType"] == "customer")
+                        return RedirectToAction("ViewAll", "Customers");
+                    return RedirectToAction("Index");
                 }
+
                 if (Session["UserType"] == "customer")
-                    return RedirectToAction("ViewAll", "Customers");
-                return RedirectToAction("Index");
-            }
+                {
+                    ViewBag.customerIDVal = (int)Session["UserID"];
+                }
 
-            if (Session["UserType"] == "customer")
+                ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName", userBilling.customerID);
+                ViewBag.cartID = new SelectList(db.ShoppingCart, "cartID", "cartID", userBilling.cartID);
+                return View(userBilling);
+            }
+            catch
             {
-                ViewBag.customerIDVal = (int)Session["UserID"];
+                ViewBag.Message = "UserBilling can only have one parent (CustomerID or CartID)";
+                if (Session["UserType"] == "customer")
+                {
+                    ViewBag.customerIDVal = (int)Session["UserID"];
+                }
+
+                ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName", userBilling.customerID);
+                ViewBag.cartID = new SelectList(db.ShoppingCart, "cartID", "cartID", userBilling.cartID);
+                return View(userBilling);
             }
 
-            ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName", userBilling.customerID);
-            ViewBag.cartID = new SelectList(db.ShoppingCart, "cartID", "cartID", userBilling.cartID);
-            return View(userBilling);
         }
 
         // GET: UserBillings/Edit/5

@@ -31,18 +31,18 @@
                 @{
                     int? nullableCustomerID = ViewBag.customerIDValue as int?;
                 }
-                @Html.DropDownList("customerID", null, "Select Customer", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("customerID", null, "none", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.customerID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.cartID, "cartID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.cartID, "cartID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @{
                     int? nullableCartID = ViewBag.cartIDValue as int?;
                 }
-                @Html.DropDownList("cartID", null, "Select Cart", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("cartID", null, "none", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.cartID, "", new { @class = "text-danger" })
             </div>
         </div>
