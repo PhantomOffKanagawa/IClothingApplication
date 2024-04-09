@@ -40,6 +40,8 @@ namespace IClothingApplication.Controllers
         // GET: UserPasswords/Create
         public ActionResult Create()
         {
+            ViewBag.adminID = new SelectList(db.Administrator, "adminID", "adminName");
+            ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName");
             return View();
         }
 
@@ -50,16 +52,27 @@ namespace IClothingApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,customerID,adminID,userAccountName,userEncryptedPassword,passwordExpiryTime,userAccountExpiryDate")] UserPassword userPassword)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.UserPassword.Add(userPassword);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.UserPassword.Add(userPassword);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.adminID = new SelectList(db.Administrator, "adminID", "adminName", userPassword.adminID);
+                ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName", userPassword.customerID);
+                return View(userPassword);
+            }
+            catch
+            {
+                ViewBag.Message = "UserPassword can only have one parent (CustomerID or AdminID)";
+                ViewBag.adminID = new SelectList(db.Administrator, "adminID", "adminName", userPassword.adminID);
+                ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName", userPassword.customerID);
+                return View(userPassword);
             }
 
-            ViewBag.adminID = new SelectList(db.Administrator, "adminID", "adminName", userPassword.adminID);
-            ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName", userPassword.customerID);
-            return View(userPassword);
         }
 
         // GET: UserPasswords/Edit/5

@@ -90,5 +90,12 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @if (Session["UserType"] == "customer")
+    {
+        @Html.ActionLink("Back to List", "ViewAll", "Customers")
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "Index")
+    }
 </div>
