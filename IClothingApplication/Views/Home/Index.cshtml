@@ -60,10 +60,10 @@
                     <div class="card-img-container">
                         <img src="~/Images/women1.jpg" class="card-img-top" alt="Woman Photo" style="object-fit: cover;">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body d-grid">
                         <h5 class="card-title">Shop Women's</h5>
                         <p class="card-text">Explore our collection for women.</p>
-                        @Html.ActionLink("Explore", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Women's", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true }, new { @class = "btn btn-secondary" })
+                        @Html.ActionLink("Explore", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Women's", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true }, new { @class = "btn btn-secondary mt-3" })
                     </div>
                 </div>
             </div>
@@ -72,10 +72,10 @@
                     <div class="card-img-container">
                         <img src="~/Images/man.png" class="card-img-top" alt="Man Photo" style="object-fit: cover;">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body d-grid">
                         <h5 class="card-title">Shop Men's</h5>
                         <p class="card-text">Discover our collection for men.</p>
-                        @Html.ActionLink("Explore", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Mens", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true }, new { @class = "btn btn-secondary" })
+                        @Html.ActionLink("Explore", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Mens", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true }, new { @class = "btn btn-secondary mt-3" })
                     </div>
                 </div>
             </div>
@@ -84,10 +84,10 @@
                     <div class="card-img-container">
                         <img src="~/Images/kidsoutfit.jpg" class="card-img-top" alt="Kids Photo" style="object-fit: cover;">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body d-grid">
                         <h5 class="card-title">Shop Kid's</h5>
                         <p class="card-text">Browse our collection for kids.</p>
-                        @Html.ActionLink("Explore", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Kids", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true }, new { @class = "btn btn-secondary" })
+                        @Html.ActionLink("Explore", "Index", "Products", new { sortOrder = ViewBag.PriceSortParm, filter = "Kids", filterType = "Department", searchString = ViewBag.searchString, changeFilter = true }, new { @class = "btn btn-secondary mt-3" })
                     </div>
                 </div>
             </div>

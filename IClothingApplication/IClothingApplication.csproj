@@ -454,6 +454,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\ShoppingCarts\Billing.cshtml" />
+    <Content Include="Views\Tools\AdminShippingManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

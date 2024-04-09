@@ -92,11 +92,12 @@ namespace IClothingApplication.Controllers
         // GET: UserBillings/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            UserBilling userBilling = null;
+            if (id != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                userBilling = db.UserBilling.Find(id);
             }
-            UserBilling userBilling = db.UserBilling.Find(id);
+            
             if (userBilling == null)
             {
                 int userID = (int)Session["UserID"];
@@ -132,6 +133,10 @@ namespace IClothingApplication.Controllers
             {
                 db.Entry(userBilling).State = EntityState.Modified;
                 db.SaveChanges();
+                if (TempData.ContainsKey("ActionName"))
+                {
+                    return RedirectToAction((string) TempData["ActionName"], (string) TempData["ControllerName"]);
+                }
                 return RedirectToAction("Index");
             }
 

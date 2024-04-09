@@ -4,14 +4,14 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Add Billing Info</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>UserBilling</h4>
+    @*<h4>UserBilling</h4>*@
     <hr />
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
@@ -81,13 +81,16 @@
     </div>
 
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
+        <div class="col-md-offset-2 col-md-10 mt-3">
             <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
 </div>
 }
 
+@if (Session["UserType"] == "admin")
+{
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+}

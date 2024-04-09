@@ -1,0 +1,69 @@
+﻿@model IEnumerable<IClothingApplication.Models.ShoppingCart>
+
+@{
+    ViewBag.Title = "Old Orders Customers";
+}
+
+
+
+<div class="d-flex justify-content-between align-items-end p-1 mt-2 align-items-end" style="height:min-content">
+    <h2>Checked Out Orders</h2>
+    @if (ViewBag.allItems == 1)
+    {
+        <h6 class="text-dark">@Html.ActionLink("Only Show To Do", "AdminShippingManager", new { allItems = 0 }, new { @class = "text-dark" })</h6>
+    }
+    else
+    {
+        <h6 class="text-dark">@Html.ActionLink("Show All", "AdminShippingManager", new { allItems = 1 }, new { @class = "text-dark" })</h6>
+    }
+</div>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.customerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderStatus.statusDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderStatus.currentStatus)
+        </th>
+        <th>
+            Price
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var cart in Model)
+    {
+        Decimal sum = 0;
+        foreach (var item in cart.ItemWrapper)
+        {
+            sum += item.productQty * item.Product.productPrice;
+        }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => cart.Customer.customerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cart.OrderStatus.statusDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cart.OrderStatus.currentStatus)
+            </td>
+            <td>
+                $@sum
+            </td>
+            <td>
+                @if (cart.OrderStatus.currentStatus == "processing")
+                {
+                @Html.ActionLink("Ship Item", "ShipItem", new { id = cart.cartID })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

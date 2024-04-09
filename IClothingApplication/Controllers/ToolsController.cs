@@ -33,6 +33,56 @@ namespace IClothingApplication.Controllers
             return View(shoppingCart.ToList());
         }
 
+        // GET: Tools
+        public ActionResult AdminShippingManager(int allItems = 0)
+        {
+            if (Session["UserType"] != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var shoppingCart = db.ShoppingCart.Include(s => s.Customer).Include(s => s.OrderStatus);
+            if (allItems == 0)
+            {
+                shoppingCart = shoppingCart.Where(s => s.OrderStatus.currentStatus == "processing");
+            }
+
+            ViewBag.allItems = (allItems == 1 ? 1 : 0);
+
+            return View(shoppingCart.ToList());
+        }
+
+        // POST: Tools
+        public ActionResult ShipItem(int? id)
+        {
+            if (Session["UserType"] != "admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var shoppingCart = db.ShoppingCart.Find(id);
+            if (shoppingCart.OrderStatus.currentStatus != "processing")
+            {
+                return RedirectToAction("AdminShippingManager", "Tools", new { Message = "The order wasn't processing" });
+            }
+
+            // Update Order Status
+            OrderStatus orderStatus = db.OrderStatus.Find(shoppingCart.cartID);
+            orderStatus.currentStatus = "shipped";
+            db.SaveChanges();
+
+            // Attach ItemDelivery
+            ItemDelivery itemDelivery = new ItemDelivery
+            {
+                stickerDate = DateTime.Now,
+                cartID = shoppingCart.cartID
+            };
+            db.ItemDelivery.Add(itemDelivery);
+            db.SaveChanges();
+
+            return RedirectToAction("AdminShippingManager", "Tools");
+        }
+
         public ActionResult CustomerOldOrders()
         {
             if (Session["UserType"] != "customer")
@@ -100,16 +150,7 @@ namespace IClothingApplication.Controllers
 
             // Update Order Status
             OrderStatus orderStatus = db.OrderStatus.Find(shoppingCart.cartID);
-            orderStatus.currentStatus = "shipped";
-            db.SaveChanges();
-
-            // Attach ItemDelivery
-            ItemDelivery itemDelivery = new ItemDelivery
-            {
-                stickerDate = DateTime.Now,
-                cartID = shoppingCart.cartID
-            };
-            db.ItemDelivery.Add(itemDelivery);
+            orderStatus.currentStatus = "processing";
             db.SaveChanges();
 
             // Attach ItemDelivery
