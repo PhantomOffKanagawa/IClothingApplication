@@ -72,7 +72,7 @@ This project involves the development of a web application for iCLOTHING company
 
 1. Unzip the project file.
 2. Open the project in Visual Studio.
-3. Build and run the application.
+3. Build and run the application using the backup database file.
 4. Access the functionalities through the user interface.
 
 ## Contributors
