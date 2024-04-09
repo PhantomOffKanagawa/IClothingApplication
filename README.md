@@ -70,7 +70,7 @@ This project involves the development of a web application for iCLOTHING company
 
 ## Instructions
 
-1. Clone the repository.
+1. Unzip the project file.
 2. Open the project in Visual Studio.
 3. Build and run the application.
 4. Access the functionalities through the user interface.
