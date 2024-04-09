@@ -29,7 +29,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: Customers/Details/5
-        public ActionResult ViewAll(int? id, string Message)
+        public ActionResult ViewAll(int? id, string Message, string ActionName, string ControllerName)
         {
             if (Session["UserType"] != "customer")
             {

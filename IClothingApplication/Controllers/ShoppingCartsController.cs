@@ -290,7 +290,9 @@ namespace IClothingApplication.Controllers
             if (userBilling == null)
             {
                 ViewBag.Message = "You need to add your billing information";
-                return RedirectToAction("ViewAll", "Customers");
+                TempData["ActionName"] = "ViewCart";
+                TempData["ControllerName"] = "ShoppingCarts";
+                return RedirectToAction("Edit", "UserBillings");
             }
 
             return View(userBilling);
