@@ -1,4 +1,5 @@
 # iCLOTHING Web Application
+
 > CS-4320 Group 16 Project 2 \
 > Team Members: Harrison Surma, Samantha Whitaker, Kendra Minch
 
@@ -20,22 +21,40 @@ This project was an assignment for a Software Engineering class, the course nor 
 
 1. Ensure you have Visual Studio installed with the ASP.NET development workload.
 2. Run the following command to start the SQL Server container:
-   ```bash
-   docker-compose up -d
+  ```bash
+  docker-compose up -d
+  ```
+
+  > You can then connect with the following connection string:
+
+  ```bash
+   metadata=res://*/Models.ICLOTHINGModel.csdl|res://*/Models.ICLOTHINGModel.ssdl|res://*/Models.ICLOTHINGModel.msl;provider=System.Data.SqlClient;provider connection string='Data Source=localhost,1433;Initial Catalog=ICLOTHING;User ID=sa;Password=Your_password123;Encrypt=False;TrustServerCertificate=True;MultipleActiveResultSets=True'
    ```
 
-   > You can then connect with the following connection string:
-
-   ```bash
-    metadata=res://*/Models.ICLOTHINGModel.csdl|res://*/Models.ICLOTHINGModel.ssdl|res://*/Models.ICLOTHINGModel.msl;provider=System.Data.SqlClient;provider connection string='Data Source=localhost,1433;Initial Catalog=ICLOTHING;User ID=sa;Password=Your_password123;Encrypt=False;TrustServerCertificate=True;MultipleActiveResultSets=True'
-    ```
-
-   > This will start a SQL Server container with the database initialized with the seeded data.   
-   > If not using the docker-compose file, you can create a new SQL Server database and run the `init.sql` script to seed the data. You must include the seed data in the database for the application to work correctly.
+  > This will start a SQL Server container with the database initialized with the seeded data.   
+  > If not using the docker-compose file, you can create a new SQL Server database and run the `init.sql` script to seed the data. You must include the seed data in the database for the application to work correctly.
 3. Clone the repository to your local machine.
 4. Open the solution file (`iCLOTHING.sln`) in Visual Studio.
 5. Build the solution to restore dependencies and compile the code.
 6. Run the application using the built-in web server (IIS Express) or your local IIS server or by debugging it.
+
+## Screenshots
+
+![Home Page](./screenshots/home.png)
+> Home Page
+
+![Product Page](./screenshots/products.gif)
+> Product Page
+
+![Product Filtering](./screenshots/filters.gif)
+> Product Filtering
+
+![Cart Page](./screenshots/cart.gif)
+> Cart Flow
+
+![Admin Page](./screenshots/admin.gif)
+> Admin Page
+
 
 ## Functionalities Implemented
 
@@ -61,13 +80,13 @@ This project was an assignment for a Software Engineering class, the course nor 
 
 **Administrator Features**:
   - Admins have additional functionalities:
-    - Editing product catalog.
-    - Viewing customer feedback and queries.
-    - Managing shopping carts and order status.
-    - Sending emails to customers.
-    - Managing customer and admin accounts.
-    - Adding new categories, departments, and products.
-    - Full database management privileges.
+   - Editing product catalog.
+   - Viewing customer feedback and queries.
+   - Managing shopping carts and order status.
+   - Sending emails to customers.
+   - Managing customer and admin accounts.
+   - Adding new categories, departments, and products.
+   - Full database management privileges.
 
 **Search and Filter**:
   - Users can search all products.
@@ -117,31 +136,32 @@ This project was an assignment for a Software Engineering class, the course nor 
 - Option 2: Set in Web.config
   - Open the `Web.config` file in your project.
   - Edit the following line near the bottom of the `<configuration>` section:
-    ```xml
-    <connectionStrings>
-      <add name="ICLOTHINGEntities"
-          connectionString="REPLACED_WITH_ENV_VAR_ICLOTHING_DB_CONN"
-          providerName="System.Data.EntityClient" />
-    </connectionStrings>
-    ```
+   ```xml
+   <connectionStrings>
+    <add name="ICLOTHINGEntities"
+       connectionString="REPLACED_WITH_ENV_VAR_ICLOTHING_DB_CONN"
+       providerName="System.Data.EntityClient" />
+   </connectionStrings>
+   ```
   - Replace `REPLACED_WITH_ENV_VAR_ICLOTHING_DB_CONN` with your actual connection string.
   - Save the changes.
   - This will be used as the default connection string for the application and overriden by the environment variable if set.
 - Option 3: Set in Terminal
   - Open a terminal window.
   - Set the environment variable and run vstudio from the same terminal session:
-    ```bash
-    # For Windows Command Prompt
-    set ICLOTHING_DB_CONN=your_connection_string_here
-    start devenv
-    ```
-    ```powershell
-    # For Windows PowerShell
-    $env:ICLOTHING_DB_CONN="your_connection_string_here"; Start-Process devenv
-    ```
+   ```bash
+   # For Windows Command Prompt
+   set ICLOTHING_DB_CONN=your_connection_string_here
+   start devenv
+   ```
+   ```powershell
+   # For Windows PowerShell
+   $env:ICLOTHING_DB_CONN="your_connection_string_here"; Start-Process devenv
+   ```
 
 ## Contributors
 
 - Harrison Surma
 - Samantha Whitaker
 - Kendra Minch
+
