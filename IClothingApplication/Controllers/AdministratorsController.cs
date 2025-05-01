@@ -10,9 +10,11 @@ using IClothingApplication.Models;
 
 namespace IClothingApplication.Controllers
 {
+
+    [AdminAuthorize]
     public class AdministratorsController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: Administrators
         public ActionResult Index()
@@ -38,7 +40,8 @@ namespace IClothingApplication.Controllers
         // GET: Administrators/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new IClothingApplication.Models.Administrator();
+            return View(model);
         }
 
         // POST: Administrators/Create

@@ -10,9 +10,10 @@ using IClothingApplication.Models;
 
 namespace IClothingApplication.Controllers
 {
+    [AdminAuthorize]
     public class CategoriesController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: Categories
         public ActionResult Index()
@@ -41,7 +42,8 @@ namespace IClothingApplication.Controllers
         {
             ViewBag.parentCategoryID = new SelectList(db.Category, "categoryID", "categoryName");
             ViewBag.parentDepartmentID = new SelectList(db.Department, "departmentID", "departmentName");
-            return View();
+            var model = new IClothingApplication.Models.Category();
+            return View(model);
         }
 
         // POST: Categories/Create

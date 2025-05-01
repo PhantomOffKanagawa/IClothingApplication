@@ -15,7 +15,7 @@
     <hr />
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
-    @if (Session["UserType"] == "customer")
+    @if ((string)Session["UserType"] == "customer")
     {
         <div class="form-group">
             <input class="" id="customerID" name="customerID" type="hidden" value="@ViewBag.customerIDVal">
@@ -88,7 +88,7 @@
 </div>
 }
 
-@if (Session["UserType"] == "admin")
+@if ((string)Session["UserType"] == "admin")
 {
 <div>
     @Html.ActionLink("Back to List", "Index")

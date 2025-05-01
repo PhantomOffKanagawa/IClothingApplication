@@ -10,9 +10,10 @@ using IClothingApplication.Models;
 
 namespace IClothingApplication.Controllers
 {
+
     public class EmailsController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: Emails
         public ActionResult Index()
@@ -22,6 +23,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: Emails/Details/5
+        [AdminAuthorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,7 +43,8 @@ namespace IClothingApplication.Controllers
         {
             ViewBag.adminID = new SelectList(db.Administrator, "adminID", "adminName");
             ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName");
-            return View();
+            var model = new IClothingApplication.Models.Email();
+            return View(model);
         }
 
         // POST: Emails/Create
@@ -64,6 +67,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: Emails/Edit/5
+        [AdminAuthorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -85,6 +89,7 @@ namespace IClothingApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult Edit([Bind(Include = "emailNo,emailDate,emailSubject,emailBody,customerID,adminID")] Email email)
         {
             if (ModelState.IsValid)
@@ -99,6 +104,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: Emails/Delete/5
+        [AdminAuthorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -116,6 +122,7 @@ namespace IClothingApplication.Controllers
         // POST: Emails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Email email = db.Email.Find(id);

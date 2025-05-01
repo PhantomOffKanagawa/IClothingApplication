@@ -16,7 +16,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.billingID)
 
-    @if (Session["UserType"] == "customer")
+    @if ((string)Session["UserType"] == "customer")
     {
         <div class="form-group">
             <input class="" id="customerID" name="customerID" type="hidden" value="@ViewBag.customerIDVal">
@@ -90,7 +90,7 @@
 }
 
 <div>
-    @if (Session["UserType"] == "customer")
+    @if ((string)Session["UserType"] == "customer")
     {
         @Html.ActionLink("Back to List", "ViewAll", "Customers")
     }

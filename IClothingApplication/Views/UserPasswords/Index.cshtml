@@ -47,10 +47,16 @@
             @Html.DisplayFor(modelItem => item.userAccountExpiryDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Administrator.adminName)
+            @{
+                var adminName = item.Administrator?.adminName ?? "";
+            }
+            @adminName
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Customer.customerName)
+            @{
+                var customerName = item.Customer?.customerName ?? "";
+            }
+            @customerName
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.userAccountName }) |

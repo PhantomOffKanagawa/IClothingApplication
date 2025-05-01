@@ -10,9 +10,10 @@ using IClothingApplication.Models;
 
 namespace IClothingApplication.Controllers
 {
+    [AdminAuthorize]
     public class AdminEmailsController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: AdminEmails
         public ActionResult Index()
@@ -25,7 +26,7 @@ namespace IClothingApplication.Controllers
         public ActionResult PersonalIndex()
         {
             int adminID = (int)Session["UserID"];
-            if (Session["UserType"] != "admin")
+            if ((string)Session["UserType"] != "admin")
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -53,7 +54,8 @@ namespace IClothingApplication.Controllers
         public ActionResult Create()
         {
             ViewBag.adminID = new SelectList(db.Administrator, "adminID", "adminName");
-            return View();
+            var model = new IClothingApplication.Models.AdminEmail();
+            return View(model);
         }
 
         // POST: AdminEmails/Create

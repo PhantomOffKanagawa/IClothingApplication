@@ -12,10 +12,11 @@ namespace IClothingApplication.Controllers
 {
     public class UserQueriesController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: UserQueries
         // Index should only be used for Admin to see all the options
+        [AdminAuthorize]
         public ActionResult Index()
         {
             var userQuery = db.UserQuery.Include(u => u.Customer);
@@ -23,6 +24,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: UserQueries/Details/5
+        [AdminAuthorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -42,7 +44,8 @@ namespace IClothingApplication.Controllers
         public ActionResult Create()
         {
             ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName");
-            return View();
+            var model = new IClothingApplication.Models.UserQuery();
+            return View(model);
         }
 
         // POST: UserQueries/Create
@@ -65,6 +68,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: UserQueries/Edit/5
+        [AdminAuthorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -85,6 +89,7 @@ namespace IClothingApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult Edit([Bind(Include = "queryNo,queryDate,queryDescription,customerID")] UserQuery userQuery)
         {
             if (ModelState.IsValid)
@@ -98,6 +103,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: UserQueries/Delete/5
+        [AdminAuthorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -115,6 +121,7 @@ namespace IClothingApplication.Controllers
         // POST: UserQueries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
             UserQuery userQuery = db.UserQuery.Find(id);

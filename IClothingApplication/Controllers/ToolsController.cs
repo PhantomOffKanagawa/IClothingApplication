@@ -12,12 +12,13 @@ namespace IClothingApplication.Controllers
 {
     public class ToolsController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: Tools
+        [AdminAuthorize]
         public ActionResult AdminBillingManager(int allItems = 0)
         {
-            if (Session["UserType"] != "admin")
+            if ((string)Session["UserType"] != "admin")
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -34,9 +35,10 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: Tools
+        [AdminAuthorize]
         public ActionResult AdminShippingManager(int allItems = 0)
         {
-            if (Session["UserType"] != "admin")
+            if ((string)Session["UserType"] != "admin")
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -53,9 +55,10 @@ namespace IClothingApplication.Controllers
         }
 
         // POST: Tools
+        [AdminAuthorize]
         public ActionResult ShipItem(int? id)
         {
-            if (Session["UserType"] != "admin")
+            if ((string)Session["UserType"] != "admin")
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -85,7 +88,7 @@ namespace IClothingApplication.Controllers
 
         public ActionResult CustomerOldOrders()
         {
-            if (Session["UserType"] != "customer")
+            if ((string)Session["UserType"] != "customer")
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -132,9 +135,10 @@ namespace IClothingApplication.Controllers
         }
 
         // Confirm Billing
+        [AdminAuthorize]
         public ActionResult Confirm(int? id)
         {
-            if (Session["UserType"] != "admin")
+            if ((string)Session["UserType"] != "admin")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
@@ -190,6 +194,7 @@ namespace IClothingApplication.Controllers
         }
 
         // Confirm Billing
+        [AdminAuthorize]
         public ActionResult Deny(int? id)
         {
             if (id == null)

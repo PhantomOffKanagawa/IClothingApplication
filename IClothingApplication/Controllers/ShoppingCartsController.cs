@@ -14,9 +14,10 @@ namespace IClothingApplication.Controllers
 {
     public class ShoppingCartsController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: ShoppingCarts
+        [AdminAuthorize]
         public ActionResult Index()
         {
             var shoppingCart = db.ShoppingCart.Include(s => s.Customer);
@@ -29,7 +30,7 @@ namespace IClothingApplication.Controllers
             ViewBag.Message = Message;
 
             // If user isn an admin return to home
-            if (Session["UserType"] == "admin")
+            if ((string)Session["UserType"] == "admin")
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -38,12 +39,17 @@ namespace IClothingApplication.Controllers
             ShoppingCart shoppingCart = LoggedOutCartController.getCart(Session);
 
             if (shoppingCart == null)
-                return View();
+            {
+                var model = new IClothingApplication.Models.ShoppingCart();
+                return View(model);
+            }
+
             IQueryable<ItemWrapper> itemWrapper = db.ItemWrapper.Where(s => (s.cartID.Equals(shoppingCart.cartID))).Include(p => p.Product);
             return View(itemWrapper.ToList());
         }
 
         // GET: ShoppingCarts/Details/5
+        [AdminAuthorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -59,10 +65,12 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: ShoppingCarts/Create
+        [AdminAuthorize]
         public ActionResult Create()
         {
             ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName");
-            return View();
+            var model = new IClothingApplication.Models.ShoppingCart();
+            return View(model);
         }
 
         // POST: ShoppingCarts/Create
@@ -70,6 +78,7 @@ namespace IClothingApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult Create([Bind(Include = "cartID,customerID")] ShoppingCart shoppingCart)
         {
             if (ModelState.IsValid)
@@ -84,6 +93,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: ShoppingCarts/Edit/5
+        [AdminAuthorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -104,6 +114,7 @@ namespace IClothingApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult Edit([Bind(Include = "cartID,customerID")] ShoppingCart shoppingCart)
         {
             if (ModelState.IsValid)
@@ -117,6 +128,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: ShoppingCarts/Delete/5
+        [AdminAuthorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -134,6 +146,7 @@ namespace IClothingApplication.Controllers
         // POST: ShoppingCarts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
             ShoppingCart shoppingCart = db.ShoppingCart.Find(id);
@@ -202,7 +215,7 @@ namespace IClothingApplication.Controllers
             Debug.WriteLine("ID is " + id);
             Debug.WriteLine("UserType is " + (string)Session["UserType"]);
 
-            if (id == null || (string)Session["UserType"] == "admin")
+            if (id == null || (string)(string)Session["UserType"] == "admin")
             {
                 Debug.WriteLine("Did land in 404 tho");
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -249,7 +262,11 @@ namespace IClothingApplication.Controllers
 
             // Handle Shopping Cart
             if (shoppingCart == null)
-                return View();
+            {
+                var model = new IClothingApplication.Models.ShoppingCart();
+                return View(model);
+            }
+
             IQueryable<ItemWrapper> itemWrapper = db.ItemWrapper.Where(s => (s.cartID.Equals(shoppingCart.cartID))).Include(p => p.Product);
             return View(itemWrapper.ToList());
         }

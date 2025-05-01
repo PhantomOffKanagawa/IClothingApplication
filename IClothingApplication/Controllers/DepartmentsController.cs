@@ -10,9 +10,11 @@ using IClothingApplication.Models;
 
 namespace IClothingApplication.Controllers
 {
+
+    [AdminAuthorize]
     public class DepartmentsController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: Departments
         public ActionResult Index()
@@ -24,7 +26,8 @@ namespace IClothingApplication.Controllers
         public ActionResult FilteredDepartments(int departmentId)
         {
             //var filteredDepartments = // Logic to get filtered departments based on departmentId
-            return View();
+            var model = new IClothingApplication.Models.Department();
+            return View(model);
         }
 
         // GET: Departments/Details/5
@@ -45,7 +48,8 @@ namespace IClothingApplication.Controllers
         // GET: Departments/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new IClothingApplication.Models.Department();
+            return View(model);
         }
 
         // POST: Departments/Create

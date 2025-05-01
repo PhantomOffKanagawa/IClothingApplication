@@ -10,9 +10,10 @@ using IClothingApplication.Models;
 
 namespace IClothingApplication.Controllers
 {
+    [AdminAuthorize]
     public class AboutUsController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: AboutUs
         public ActionResult Index()
@@ -40,7 +41,8 @@ namespace IClothingApplication.Controllers
         public ActionResult Create()
         {
             ViewBag.managerID = new SelectList(db.Administrator, "adminID", "adminName");
-            return View();
+            var model = new IClothingApplication.Models.AboutUs();
+            return View(model);
         }
 
         // POST: AboutUs/Create

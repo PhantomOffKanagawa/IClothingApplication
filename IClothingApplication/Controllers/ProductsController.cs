@@ -16,7 +16,7 @@ namespace IClothingApplication.Controllers
 {
     public class ProductsController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
         private bool IsChildOfDepartment(Category category, int departmentID)
         {
             if (category.parentDepartmentID == departmentID)
@@ -196,11 +196,13 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: Products/Create
+        [AdminAuthorize]
         public ActionResult Create()
         {
             ViewBag.brandID = new SelectList(db.Brand, "brandID", "brandName");
             ViewBag.categoryID = new SelectList(db.Category, "categoryID", "categoryName");
-            return View();
+            var model = new IClothingApplication.Models.Product();
+            return View(model);
         }
 
         // POST: Products/Create
@@ -208,6 +210,7 @@ namespace IClothingApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult Create([Bind(Include = "productID,productName,productDescription,productPrice,productQty,categoryID,brandID")] Product product)
         {
             if (ModelState.IsValid)
@@ -223,6 +226,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: Products/Edit/5
+        [AdminAuthorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -244,6 +248,7 @@ namespace IClothingApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult Edit([Bind(Include = "productID,productName,productDescription,productPrice,productQty,categoryID,brandID")] Product product)
         {
             if (ModelState.IsValid)
@@ -258,6 +263,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: Products/Delete/5
+        [AdminAuthorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -275,6 +281,7 @@ namespace IClothingApplication.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Product.Find(id);

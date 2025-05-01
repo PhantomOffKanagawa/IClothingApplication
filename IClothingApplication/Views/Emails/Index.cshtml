@@ -33,7 +33,7 @@
 
 <h2>My Emails</h2>
 
-@if (Session["UserType"] == "admin")
+@if ((string)Session["UserType"] == "admin")
 { 
     <p>
         @Html.ActionLink("Create New", "Create", null,  new { @class = "btn btn-secondary me-1" })
@@ -52,7 +52,7 @@
         <tbody>
             @{
                 int userType;
-                if (Session["UserType"] == "customer")
+                if ((string)Session["UserType"] == "customer")
                 {
                     userType = 2;
                 }

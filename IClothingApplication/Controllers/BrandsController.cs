@@ -10,9 +10,11 @@ using IClothingApplication.Models;
 
 namespace IClothingApplication.Controllers
 {
+
+    [AdminAuthorize]
     public class BrandsController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: Brands
         public ActionResult Index()
@@ -38,7 +40,8 @@ namespace IClothingApplication.Controllers
         // GET: Brands/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new IClothingApplication.Models.Brand();
+            return View(model);
         }
 
         // POST: Brands/Create

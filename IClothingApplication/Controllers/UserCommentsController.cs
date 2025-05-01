@@ -12,9 +12,10 @@ namespace IClothingApplication.Controllers
 {
     public class UserCommentsController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: UserComments
+        [AdminAuthorize]
         public ActionResult Index()
         {
             var userComments = db.UserComments.Include(u => u.Customer);
@@ -22,6 +23,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: UserComments/Details/5
+        [AdminAuthorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,7 +42,8 @@ namespace IClothingApplication.Controllers
         public ActionResult Create()
         {
             ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName");
-            return View();
+            var model = new IClothingApplication.Models.UserComments();
+            return View(model);
         }
 
         // POST: UserComments/Create
@@ -62,6 +65,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: UserComments/Edit/5
+        [AdminAuthorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,6 +86,7 @@ namespace IClothingApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult Edit([Bind(Include = "commentNo,commentDate,commentDescription,customerID")] UserComments userComments)
         {
             if (ModelState.IsValid)
@@ -94,7 +99,8 @@ namespace IClothingApplication.Controllers
             return View(userComments);
         }
 
-        // GET: UserComments/Delete/5
+        // GET: UserComments/Delete/
+        [AdminAuthorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -112,6 +118,7 @@ namespace IClothingApplication.Controllers
         // POST: UserComments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
             UserComments userComments = db.UserComments.Find(id);

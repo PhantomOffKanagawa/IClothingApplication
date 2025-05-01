@@ -11,9 +11,10 @@ using IClothingApplication.Models;
 
 namespace IClothingApplication.Controllers
 {
+    [AdminAuthorize]
     public class UserPasswordsController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: UserPasswords
         public ActionResult Index()
@@ -42,7 +43,8 @@ namespace IClothingApplication.Controllers
         {
             ViewBag.adminID = new SelectList(db.Administrator, "adminID", "adminName");
             ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName");
-            return View();
+            var model = new IClothingApplication.Models.UserPassword();
+            return View(model);
         }
 
         // POST: UserPasswords/Create

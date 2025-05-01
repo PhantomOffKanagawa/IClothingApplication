@@ -16,7 +16,7 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    @if (Session["UserType"] == "admin")
+    @if ((string)Session["UserType"] == "admin")
     {
         <div class="form-group">
             @Html.LabelFor(model => model.customerID, "customerID", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -72,7 +72,7 @@
 </div>
 }
 
-@if (Session["UserType"] == "admin")
+@if ((string)Session["UserType"] == "admin")
 {
     <div>
         @Html.ActionLink("Back to List", "Index")

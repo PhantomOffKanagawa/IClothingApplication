@@ -35,10 +35,16 @@
             @Html.DisplayFor(modelItem => item.categoryDescription)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Category2.categoryName)
+            @{
+                var category2 = item.Category2?.categoryName ?? "";
+            }
+            @category2
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Department.departmentName)
+            @{
+                var deparment = item.Department?.departmentName ?? "";
+            }
+            @deparment
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.categoryID }) |

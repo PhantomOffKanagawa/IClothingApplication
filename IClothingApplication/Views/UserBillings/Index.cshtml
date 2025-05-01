@@ -47,10 +47,16 @@
             @Html.DisplayFor(modelItem => item.billingDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Customer.customerName)
+            @{
+                var customerName = item.Customer?.customerName ?? "";
+            }
+            @customerName
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ShoppingCart.cartID)
+            @{ 
+                var cartID = item.ShoppingCart?.cartID.ToString() ?? "";
+            }
+            @cartID
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.billingID }) |

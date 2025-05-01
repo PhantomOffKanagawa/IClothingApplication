@@ -21,7 +21,7 @@
 <br />
 
 <div class="pt-1 sticky-top bg-white" style="z-index:1">
-    @if (Session["UserType"] == "admin")
+    @if ((string)Session["UserType"] == "admin")
     {
         @Html.ActionLink("Add Product", "Create", null, new { @class = "btn btn-primary mx-2 w-100" })
 
@@ -123,7 +123,7 @@
         @foreach (var item in Model)
         {
             <div class="col mb-4">
-                <div class="card" style="height: @(Session["UserType"] == "admin" ? 725 : 700)px">
+                <div class="card" style="height: @((string)Session["UserType"] == "admin" ? 725 : 700)px">
                     <img style="height: 450px; object-fit: cover; border-radius: var(--bs-card-inner-border-radius) 0 0 var(--bs-card-inner-border-radius)" src="~/Images/@(System.IO.File.Exists(Server.MapPath("~/Images/Products/" + item.productName + ".jpg")) ? "Products/" + item.productName + ".jpg" : "placeholder.jpg")" class="card-img-top" alt="Card Image">
                     <div class="card-body d-grid">
                         @*<h5 class="card-title">@Html.ActionLink(item.productName, "Details", new { id = item.productID }, new { @class = "text-dark" })</h5>*@
@@ -146,13 +146,13 @@
                                     <span class="badge rounded-pill bg-warning">Out Of Stock</span>
                                 }
                             </div>
-                            @if (Session["UserType"] == "admin")
+                            @if ((string)Session["UserType"] == "admin")
                             {
                                 @Html.ActionLink("Edit", "Edit", new { id = item.productID }, new { @class = "btn btn-secondary mt-2" })
                                 @Html.ActionLink("Delete", "Delete", new { id = item.productID }, new { @class = "btn btn-secondary mt-2" })
                             }
                             @*@Html.ActionLink("Details", "Details", new { id = item.productID }, new { @class = "text-dark" })*@
-                            @if (Session["UserType"] != "admin")
+                            @if ((string)Session["UserType"] != "admin")
                             {
                                 <button class="addToCartButton btn btn-primary mt-2" data-id=@item.productID>Add To Cart</button>
                                 @*@Html.ActionLink("Add To Cart", "Add", new { id = item.productID, sortOrder = ViewBag.sortOrder, filter = ViewBag.filter, filterType = ViewBag.filterType, searchString = ViewBag.searchString, changeSort = false }, new { @class = "btn btn-primary mt-2" })*@

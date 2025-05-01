@@ -12,9 +12,10 @@ namespace IClothingApplication.Controllers
 {
     public class UserBillingsController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: UserBillings
+        [AdminAuthorize]
         public ActionResult Index()
         {
             var userBilling = db.UserBilling.Include(u => u.Customer).Include(u => u.ShoppingCart);
@@ -22,6 +23,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: UserBillings/Details/5
+        [AdminAuthorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,13 +41,14 @@ namespace IClothingApplication.Controllers
         // GET: UserBillings/Create
         public ActionResult Create()
         {
-            if (Session["UserType"] == "customer")
+            if ((string)Session["UserType"] == "customer")
             {
                 ViewBag.customerIDVal = (int)Session["UserID"];
             }
             ViewBag.customerID = new SelectList(db.Customer, "customerID", "customerName");
             ViewBag.cartID = new SelectList(db.ShoppingCart, "cartID", "cartID");
-            return View();
+            var model = new IClothingApplication.Models.UserBilling();
+            return View(model);
         }
 
         // POST: UserBillings/Create
@@ -60,12 +63,12 @@ namespace IClothingApplication.Controllers
                 {
                     db.UserBilling.Add(userBilling);
                     db.SaveChanges();
-                    if (Session["UserType"] == "customer")
+                    if ((string)Session["UserType"] == "customer")
                         return RedirectToAction("ViewAll", "Customers");
                     return RedirectToAction("Index");
                 }
 
-                if (Session["UserType"] == "customer")
+                if ((string)Session["UserType"] == "customer")
                 {
                     ViewBag.customerIDVal = (int)Session["UserID"];
                 }
@@ -77,7 +80,7 @@ namespace IClothingApplication.Controllers
             catch
             {
                 ViewBag.Message = "UserBilling can only have one parent (CustomerID or CartID)";
-                if (Session["UserType"] == "customer")
+                if ((string)Session["UserType"] == "customer")
                 {
                     ViewBag.customerIDVal = (int)Session["UserID"];
                 }
@@ -101,7 +104,7 @@ namespace IClothingApplication.Controllers
             if (userBilling == null)
             {
                 int userID = (int)Session["UserID"];
-                if (Session["UserType"] == "customer")
+                if ((string)Session["UserType"] == "customer")
                 {
                     ViewBag.customerIDVal = (int)Session["UserID"];
                     return RedirectToAction("Create");
@@ -112,7 +115,7 @@ namespace IClothingApplication.Controllers
                 }
             }
 
-            if (Session["UserType"] == "customer")
+            if ((string)Session["UserType"] == "customer")
             {
                 ViewBag.customerIDVal = (int)Session["UserID"];
             }
@@ -140,7 +143,7 @@ namespace IClothingApplication.Controllers
                 return RedirectToAction("Index");
             }
 
-            if (Session["UserType"] == "customer")
+            if ((string)Session["UserType"] == "customer")
             {
                 ViewBag.customerIDVal = (int)Session["UserID"];
             }
@@ -151,6 +154,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: UserBillings/Delete/5
+        [AdminAuthorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -168,6 +172,7 @@ namespace IClothingApplication.Controllers
         // POST: UserBillings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
             UserBilling userBilling = db.UserBilling.Find(id);

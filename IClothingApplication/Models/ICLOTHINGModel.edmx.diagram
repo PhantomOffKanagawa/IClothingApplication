@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5efdfa0e0e954bcfa44fe389811374b5" Name="Diagram1" ZoomLevel="61">
+        <EntityTypeShape EntityType="ICLOTHINGModel.AboutUs" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.AdminEmail" Width="1.5" PointX="3" PointY="4.875" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.Administrator" Width="1.5" PointX="0.75" PointY="8.25" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.Brand" Width="1.5" PointX="0.75" PointY="33.75" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.Category" Width="1.5" PointX="0.75" PointY="25.25" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.Customer" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.Department" Width="1.5" PointX="1.5" PointY="30.75" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.Email" Width="1.5" PointX="3" PointY="12.25" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.ItemDelivery" Width="1.5" PointX="5.25" PointY="29.5" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.ItemWrapper" Width="1.5" PointX="5.25" PointY="21.875" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.OrderStatus" Width="1.5" PointX="5.25" PointY="27" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.Product" Width="1.5" PointX="3" PointY="26.5" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.ShoppingCart" Width="1.5" PointX="3" PointY="21.75" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.UserBilling" Width="1.5" PointX="5.25" PointY="16.625" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.UserComments" Width="1.5" PointX="3" PointY="8.625" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.UserPassword" Width="1.5" PointX="6" PointY="12.25" />
+        <EntityTypeShape EntityType="ICLOTHINGModel.UserQuery" Width="1.5" PointX="3" PointY="18" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__AboutUs__manager__2D27B809" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__AdminEmai__admin__571DF1D5" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__Email__adminID__4CA06362" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__UserPassw__admin__2A4B4B5E" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__Product__brandID__3C69FB99" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__Category__parent__35BCFE0A" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__Category__parent__36B12243" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__Product__categor__3B75D760" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__Email__customerI__4BAC3F29" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__ShoppingC__custo__4222D4EF" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__UserBilli__custo__52593CB8" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__UserComme__custo__3F466844" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__UserPassw__custo__29572725" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__UserQuery__custo__300424B4" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__ItemDeliv__cartI__4F7CD00D" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__ItemWrapp__cartI__45F365D3" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__ItemWrapp__produ__44FF419A" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__OrderStat__cartI__48CFD27E" />
+        <AssociationConnector Association="ICLOTHINGModel.FK__UserBilli__cartI__534D60F1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

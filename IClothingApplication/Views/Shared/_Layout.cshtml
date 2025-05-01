@@ -30,7 +30,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     @*<span class="navbar-text mx-2"></span>*@
-                    @if (Session["UserType"] == "admin")
+                    @if ((string)Session["UserType"] == "admin")
                     {
                         <li>@Html.ActionLink("Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link text-light" })</li>
                     }
@@ -75,7 +75,7 @@
                         }
                     </li>
 
-                    @if(Session["UserType"] == "customer")
+                    @if((string)Session["UserType"] == "customer")
                         {
                             <li>@Html.ActionLink("My Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "nav-link text-info", style = "color: #007bff" })</li>
 
@@ -89,7 +89,7 @@
                             </a>
                             
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                @if (Session["UserType"] == "customer")
+                                @if ((string)Session["UserType"] == "customer")
                                 {
                                     @Html.ActionLink("My Cart", "ViewCart", "ShoppingCarts", new { area = "" }, new { @class = "dropdown-item", style = "color: #007bff" })
                                     @Html.ActionLink("Emails", "Index", "Emails", new { area = "" }, new { @class = "dropdown-item" })
@@ -124,7 +124,7 @@
         <!-- Footer -->
         <footer class="footer mt-auto text-center text-white" style="background-color: rgb(33, 37, 41, 0.8);">
             <!-- Grid container -->
-            @if (Session["UserType"] == "customer")
+            @if ((string)Session["UserType"] == "customer")
             {
                 <div class="container p-4 pb-0">
                     <!-- Section: CTA -->

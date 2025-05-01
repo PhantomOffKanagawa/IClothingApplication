@@ -1,8 +1,13 @@
 {
   "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
     "mssql1": {
-      "ignored": "true",
-      "type": "mssql"
+      "secretStore": "LocalSecretsFile",
+      "type": "mssql.local",
+      "connectionId": "ConnectionStrings:DatabaseConnection",
+      "dynamicId": null
     }
   }
 }

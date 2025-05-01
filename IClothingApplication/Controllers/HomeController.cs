@@ -13,11 +13,10 @@ using System.Diagnostics;
 
 namespace IClothingApplication.Controllers
 {
-    namespace IClothingApplication.Models
-    {
+    using IClothingApplication.Models;
         public class HomeController : Controller
         {
-            private ICLOTHINGEntities db = new ICLOTHINGEntities();
+            private ICLOTHINGEntities db = DbContextFactory.Create();
 
             public ActionResult Index(string Message)
             {
@@ -56,11 +55,11 @@ namespace IClothingApplication.Controllers
             // GET: Dashboard
             public ActionResult Dashboard()
             {
-                if (Session["UserType"] == "customer")
+                if ((string)Session["UserType"] == "customer")
                 {
                     return RedirectToAction("CustomerDashboard");
                 }
-                else if (Session["UserType"] == "admin")
+                else if ((string)Session["UserType"] == "admin")
                 {
                     return RedirectToAction("AdminDashboard");
                 }
@@ -78,8 +77,9 @@ namespace IClothingApplication.Controllers
                     ViewBag.Message = Message;
                 }
 
-                return View();
-            }
+                var model = new IClothingApplication.Models.Customer(); // Initialize the model
+                return View(model);
+        }
 
             [HttpPost]
             [AllowAnonymous]
@@ -96,15 +96,17 @@ namespace IClothingApplication.Controllers
                 }
 
                 ViewBag.Message = "Error";
-                return View("Register");
+                return View(model);
 
             }
 
             [AllowAnonymous]
             public ActionResult RegisterPassword()
             {
-                return View();
-            }
+            var model = new IClothingApplication.Models.UserPassword();
+                    
+            return View(model);
+        }
 
             [HttpPost]
             [AllowAnonymous]
@@ -121,8 +123,8 @@ namespace IClothingApplication.Controllers
                         Debug.WriteLine("Started Try");
                         model.passwordExpiryTime = 100;
                         model.userAccountExpiryDate = DateTime.Now.AddDays(100);
-                        model.customerID = ((int?)(TempData["userType"] == "customer" ? TempData["userID"] : null));
-                        model.adminID = ((int?)(TempData["userType"] == "admin" ? TempData["userID"] : null));
+                        model.customerID = ((int?)((string)TempData["userType"] == "customer" ? TempData["userID"] : null));
+                        model.adminID = ((int?)((string)TempData["userType"] == "admin" ? TempData["userID"] : null));
                         Debug.WriteLine("Filled Details");
                         Debug.WriteLine(model.customerID);
                         db.UserPassword.Add(model);
@@ -151,7 +153,7 @@ namespace IClothingApplication.Controllers
 
                         // Write Message to User
                         ViewBag.Message = "Successful Registration";
-                        return View("Login");
+                        return View("Login", model);
                     } catch (Exception ex)
                     {
                         Debug.WriteLine(ex.Message);
@@ -164,12 +166,14 @@ namespace IClothingApplication.Controllers
                 }
 
                 ViewBag.Message = "Error";
-                return View();
+                return View(model);
             }
 
             public ActionResult Login()
             {
-                return View();
+                Debug.WriteLine("Hitting Login");
+                var model = new IClothingApplication.Models.UserPassword(); // Initialize the model
+                return View(model);
             }
 
             [HttpPost]
@@ -209,14 +213,14 @@ namespace IClothingApplication.Controllers
                 Session.Clear();
                 ViewBag.Title = "Logged Out";
                 ViewBag.Message = "Successfully Logged Out";
-                return View("Login");
+                return RedirectToAction("Login");
             }
 
             public ActionResult AdminDashboard()
             {
-                if (Session["UserType"] != null && Session["UserType"] == "admin")
+                if (Session["UserType"] != null && (string)Session["UserType"] == "admin")
                 {
-                    return View();
+                    return View(); // Acceptable View()
                 }
                 else
                 {
@@ -226,9 +230,9 @@ namespace IClothingApplication.Controllers
 
             public ActionResult AdminManagementDashboard()
             {
-                if (Session["UserType"] != null && Session["UserType"] == "admin")
+                if (Session["UserType"] != null && (string)Session["UserType"] == "admin")
                 {
-                    return View();
+                    return View(); // Acceptable View()
                 }
                 else
                 {
@@ -238,15 +242,14 @@ namespace IClothingApplication.Controllers
 
             public ActionResult CustomerDashboard()
             {
-                if (Session["UserType"] != null && Session["UserType"] == "customer")
+                if (Session["UserType"] != null && (string)Session["UserType"] == "customer")
                 {
-                    return View();
-                }
+                    return View(); // Acceptable View()
+            }
                 else
                 {
                     return RedirectToAction("Login");
                 }
             }
         }
-    }
 }

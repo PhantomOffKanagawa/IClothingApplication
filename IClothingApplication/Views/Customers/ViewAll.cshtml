@@ -85,15 +85,24 @@
     <div>
         <dl>
             <dt>@Html.DisplayName("Card Number")</dt>
-            <dd>@Html.DisplayFor(model => model.UserBilling.FirstOrDefault().cardNumber)</dd>
+            @{
+                var cardNumber = Model.UserBilling?.FirstOrDefault()?.cardNumber ?? "No card number available";
+            }
+            <dd>@cardNumber</dd>
         </dl>
         <dl>
             <dt>@Html.DisplayName("CVV")</dt>
-            <dd>@Html.DisplayFor(model => model.UserBilling.FirstOrDefault().cvv)</dd>
+            @{
+                var cvv = Model.UserBilling?.FirstOrDefault()?.cvv ?? "No cvv available";
+            }
+            <dd>@cvv</dd>
         </dl>
         <dl>
             <dt>@Html.DisplayName("Expiration Date")</dt>
-            <dd>@Html.DisplayFor(model => model.UserBilling.FirstOrDefault().expirationDate)</dd>
+            @{
+                var expirationDate = Model.UserBilling?.FirstOrDefault()?.expirationDate.ToString() ?? "No expiration date available";
+            }
+            <dd>@expirationDate</dd>
         </dl>
     </div>
 

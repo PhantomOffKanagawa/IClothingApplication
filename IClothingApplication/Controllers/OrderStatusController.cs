@@ -10,9 +10,11 @@ using IClothingApplication.Models;
 
 namespace IClothingApplication.Controllers
 {
+
+    [AdminAuthorize]
     public class OrderStatusController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: OrderStatus
         public ActionResult Index()
@@ -40,7 +42,8 @@ namespace IClothingApplication.Controllers
         public ActionResult Create()
         {
             ViewBag.cartID = new SelectList(db.ShoppingCart, "cartID", "cartID");
-            return View();
+            var model = new IClothingApplication.Models.OrderStatus();
+            return View(model);
         }
 
         // POST: OrderStatus/Create

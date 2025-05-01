@@ -11,17 +11,20 @@ using IClothingApplication.Models;
 
 namespace IClothingApplication.Controllers
 {
+
     public class CustomersController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: Customers
+        [AdminAuthorize]
         public ActionResult Index()
         {
             return View(db.Customer.ToList());
         }
 
         // GET: Customers/Details/5
+        [AdminAuthorize]
         public ActionResult Details(int? id)
         {
             Customer customer = db.Customer.Find(Session["UserID"]);
@@ -31,7 +34,7 @@ namespace IClothingApplication.Controllers
         // GET: Customers/Details/5
         public ActionResult ViewAll(int? id, string Message, string ActionName, string ControllerName)
         {
-            if (Session["UserType"] != "customer")
+            if ((string)Session["UserType"] != "customer")
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -43,9 +46,11 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: Customers/Create
+        [AdminAuthorize]
         public ActionResult Create()
         {
-            return View();
+            var model = new IClothingApplication.Models.Customer();
+            return View(model);
         }
 
         // POST: Customers/Create
@@ -53,6 +58,7 @@ namespace IClothingApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult Create([Bind(Include = "customerID,customerName,customerEmail,customerShippingAddress,customerBillingAddress,customerDOB,customerGender")] Customer customer)
         {
             if (ModelState.IsValid)
@@ -97,6 +103,7 @@ namespace IClothingApplication.Controllers
         }
 
         // GET: Customers/Delete/5
+        [AdminAuthorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -114,6 +121,7 @@ namespace IClothingApplication.Controllers
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AdminAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Customer customer = db.Customer.Find(id);

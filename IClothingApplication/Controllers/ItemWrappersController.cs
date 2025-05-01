@@ -10,9 +10,11 @@ using IClothingApplication.Models;
 
 namespace IClothingApplication.Controllers
 {
+
+    [AdminAuthorize]
     public class ItemWrappersController : Controller
     {
-        private ICLOTHINGEntities db = new ICLOTHINGEntities();
+        private ICLOTHINGEntities db = DbContextFactory.Create();
 
         // GET: ItemWrappers
         public ActionResult Index()
@@ -38,7 +40,8 @@ namespace IClothingApplication.Controllers
         // GET: ItemWrappers/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new IClothingApplication.Models.ItemWrapper();
+            return View(model);
         }
 
         // POST: ItemWrappers/Create
